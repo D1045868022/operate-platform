@@ -29,6 +29,4 @@ public interface LoansituationMapper {
     @Select("select * from maintenancestaff")
     List<Maintenancestaff> queryAll2();
 
-
-
 }

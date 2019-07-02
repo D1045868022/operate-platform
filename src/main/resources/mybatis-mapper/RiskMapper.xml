@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zr.riskmanagement.mapper.RiskMapper">
+    <select id="queryPage" parameterType="com.zr.riskmanagement.pojo.RiskReserveSelectVo" resultType="com.zr.riskmanagement.pojo.RiskReserveShowVo">
+        select m.merchantName, r.remeId,r.riskReserve,r.lineCredit,rc.capitalSide from riskreserve r
+        LEFT JOIN mechant m on r.remeId=m.id
+        LEFT JOIN riskreserve_capitalside_middle rcm on r.id=rcm.riskreserveId
+        LEFT JOIN riskreserve_capitalside rc on rcm.capitalsideId=rc.id
+        WHERE 1=1
+        <if test="merchantName!=null and merchantName!=''">
+            and merchantName =#{merchantName}
+        </if>
+        <if test="id!=null ">
+            and id=#{id}
+        </if>
+        <if test="key!=null ">
+            and key  = #{key}
+        </if>
+        <if test="status!=null ">
+          and  #{status} =status
+        </if>
+        limit #{offset},#{pageSize}
+    </select>
+
+
+    <!--总条数-->
+    <select id="queryCount" parameterType="com.zr.riskmanagement.pojo.RiskReserveSelectVo" resultType="java.lang.Integer">
+        select count(m.merchantName)
+        from riskreserve r
+        LEFT JOIN mechant m on r.remeId=m.id
+        LEFT JOIN riskreserve_capitalside_middle rcm on r.id=rcm.riskreserveId
+        LEFT JOIN riskreserve_capitalside rc on rcm.capitalsideId=rc.id
+        WHERE 1=1
+        <if test="merchantName!=null and merchantName!=''">
+            and merchantName =#{merchantName}
+        </if>
+        <if test="id!=null ">
+            and id=#{id}
+        </if>
+        <if test="key!=null ">
+            and key = #{key}
+        </if>
+        <if test="status!=null ">
+            and  #{status} =status
+        </if>
+    </select>
+
+    <select id="queryByremeId" parameterType="java.lang.Integer" resultType="com.zr.riskmanagement.pojo.RiskReserveShowIdVo">
+        select m.merchantName,m.merchantName merchantNameShort,r.id, r.remeId,r.riskReserve,r.lineCredit,r.lineCredit lineCredit3 ,r.lineCredit lineCredit4 ,r.reserveCoefficient from riskreserve r
+        LEFT JOIN mechant m on r.remeId=m.id
+        LEFT JOIN riskreserve_capitalside_middle rcm on r.id=rcm.riskreserveId
+        LEFT JOIN riskreserve_capitalside rc on rcm.capitalsideId=rc.id
+        where m.id= #{remeId}
+    </select>
+
+</mapper>
+
+

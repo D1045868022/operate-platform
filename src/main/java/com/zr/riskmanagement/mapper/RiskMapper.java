@@ -1,11 +1,10 @@
 package com.zr.riskmanagement.mapper;
 
-import com.zr.riskmanagement.pojo.RiskReserve;
-import com.zr.riskmanagement.pojo.RiskReserveZiliao;
-import com.zr.riskmanagement.pojo.RiskreserveCapitalside;
-import com.zr.riskmanagement.pojo.RiskreserveCapitalsideMiddle;
+import com.zr.riskmanagement.pojo.*;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * Created by 94818 on 2019/6/22.
@@ -30,4 +29,13 @@ public interface RiskMapper {
     @Insert(" insert into riskreserve_ziliao (pic,riskReserve_id ) values (#{pic},#{riskReserveId}) " )
     @Options(useGeneratedKeys = true, keyProperty = "id")
     int addRiskZiliao(RiskReserveZiliao riskReserveZiliao);
+
+    @Select(" select * from maintenancestaff")
+    List<Maintenancestaff> queryMainenancestaff();
+
+    List<RiskReserveShowVo> queryPage(RiskReserveSelectVo riskReserveSelectVo);
+
+    int queryCount(RiskReserveSelectVo riskReserveSelectVo);
+
+    RiskReserveShowIdVo queryByremeId(Integer remeId);
 }

@@ -3,19 +3,23 @@ package com.zr.riskmanagement.service.impl;
 import com.zr.riskmanagement.mapper.RiskMapper;
 import com.zr.riskmanagement.pojo.*;
 import com.zr.riskmanagement.service.RiskMangamentService;
+import com.zr.util.AllRecords;
 import com.zr.util.ResultVO;
 import com.zr.util.ResultVOBuilder;
+import com.zr.xinshenstatistics.util.ResultBuildVo;
+import com.zr.xinshenstatistics.util.ResultVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
+
+import java.util.List;
 
 /**
  * Created by 94818 on 2019/6/22.
  */
 @Service
-public class RiskMangamentServiceImpl implements RiskMangamentService {
+public class RiskMangamentServiceImpl implements RiskMangamentService{
     @Autowired
     private RiskMapper riskMapper;
 
@@ -52,5 +56,33 @@ public class RiskMangamentServiceImpl implements RiskMangamentService {
         }
 
         return ResultVOBuilder.success(riskReserveAddVo);
+    }
+
+    @Override
+    public ResultVO queryMainenancestaff() {
+        List<Maintenancestaff> maintenancestaffs = riskMapper.queryMainenancestaff();
+        return ResultVOBuilder.success(maintenancestaffs);
+    }
+
+    @Override
+    public ResultVO<AllRecords> queryPage(RiskReserveSelectVo riskReserveSelectVo) {
+        //查询数据
+        List<RiskReserveShowVo> riskReserveShowVoList = riskMapper.queryPage(riskReserveSelectVo);
+        //查询数量
+        int count =  riskMapper.queryCount(riskReserveSelectVo);
+        //把当前页、每页大小、总页数、总条数、数据统一放入到AllRecords返回
+        AllRecords allRecords = new AllRecords();
+        allRecords.setPageIndex(riskReserveSelectVo.getPageIndex());
+        allRecords.setPageSize(riskReserveSelectVo.getPageSize());
+        allRecords.setTotalNumber(count);
+        allRecords.resetTotalNumber(count);
+        allRecords.setDataList(riskReserveShowVoList);
+        return ResultVOBuilder.success(allRecords);
+    }
+
+    @Override
+    public ResultVo<RiskReserveShowIdVo> queryByremeId(Integer remeId) {
+        RiskReserveShowIdVo riskReserveShowIdVos = riskMapper.queryByremeId(remeId);
+        return ResultBuildVo.success(riskReserveShowIdVos);
     }
 }

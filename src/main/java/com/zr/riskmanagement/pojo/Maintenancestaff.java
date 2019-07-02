@@ -1,4 +1,4 @@
-package com.zr.loansituation.pojo;
+package com.zr.riskmanagement.pojo;
 
 import lombok.Data;
 
@@ -8,5 +8,5 @@ import lombok.Data;
 @Data
 public class Maintenancestaff {
     private Integer id;
-    private String maintenanceStaff;
+    private String mainStaff;
 }
