@@ -8,5 +8,6 @@ import lombok.Data;
 @Data
 public class Maintenancestaff {
     private Integer id;
-    private String maintenanceStaff;
+
+    private String mainStaff;
 }
