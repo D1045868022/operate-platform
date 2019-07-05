@@ -183,7 +183,7 @@
             <ol class="breadcrumb">
                 <li class="active">商户列表</li>
             </ol>
-            <div id="loanDetail" class="col-lg-12 col-md-12 col-sm-12">
+            <div class="loanDetail" class="col-lg-12 col-md-12 col-sm-12">
                 <div class="col-lg-3 col-md-3 col-sm-3"><span class="wd_60">商户名称&nbsp;&nbsp;</span><input type="text" name="name" id="name"></div>
                 <div class="col-lg-3 col-md-3 col-sm-3"><span class="wd_60">渠道维护&nbsp;&nbsp;</span><select id="channelManagerId">
                     <option value="">---请选择---</option>
@@ -242,7 +242,7 @@
                     </table>
                     <div class="bottom">
                         <div class="dataTables_info" id="bizList_info" role="status" aria-live="polite">
-                            显示第 1 - 10 条记录，共739 条
+
                         </div>
                         <div class="common_page"></div>
 
@@ -253,8 +253,8 @@
             <!--正文内容end-->
         </div>
 
-
-        <form id="saveForm" class="form-horizontal hidden1" action="/hd/biz/saveBiz/" method="post">
+        <!--修改start-->
+        <form id="saveForm" class="form-horizontal hidden1" action="" method="post">
             <div class="content">
                 <!--面包屑导航start-->
                 <ol class="breadcrumb">
@@ -310,15 +310,18 @@
                         <div class="contacts">
                             <div class="col-lg-12 col-sm-12 col-md-12 pt_15">
                                 <table class="table table-bordered ta_bm">
-                                    <tbody><tr>
-                                        <th class="text-center">序号</th>
-                                        <th class="text-center">资方</th>
-                                        <th class="text-center">描述</th>
-                                        <th class="text-center">状态</th>
-                                        <th class="text-center">机构码</th>
-                                        <th class="text-center">操作</th>
-                                    </tr>
-                                </tbody></table>
+                                    <thead>
+                                       <tr>
+                                            <th class="text-center">序号</th>
+                                            <th class="text-center">资方</th>
+                                            <th class="text-center">描述</th>
+                                            <th class="text-center">状态</th>
+                                            <th class="text-center">机构码</th>
+                                            <th class="text-center">操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
                             </div>
                         </div>
                         <div class="clear"></div>
@@ -356,8 +359,8 @@
                                         <option value="1">代理</option> </select></p>
                                 <p class="col-lg-6 col-sm-6"><span class="shenXinSpan">是否有门店:</span>
                                     <select class="selec" style="min-width: 370px" name="shopFlag" id="shopFlag">
-                                        <option value="0">是</option>
-                                        <option value="1" selected="">否</option></select></p>
+                                        <option value="1">是</option>
+                                        <option value="0" selected="">否</option></select></p>
                                 <div class="clear"></div>
                                 <p class="col-lg-6 col-sm-6"><span class="shenXinSpan">是否能自建门店:</span>
                                     <select class="selec" style="min-width: 370px" name="createShopFlag" id="createShopFlag">
@@ -491,18 +494,79 @@
                 <input type="hidden" id="latitude" name="latitude">
                 <!--复审意见-->
                 <div class="findingsAudit wt_100" style="height: 100px;">
-                    <button type="button" class="btn btn-primary nextStep" style="left: 50%" onclick="saveBiz(this)">提交</button>
+                    <button type="button" class="btn btn-primary nextStep add_bus" onclick="saveBiz(this)">提交</button>
                 </div>
             </div>
         </form>
+        <!--修改end-->
+
+        <!--添加门店start-->
+        <div class="content hidden1" id="set-shop">
+            <!--面包屑导航start-->
+            <ol class="breadcrumb">
+                <li class="active">商户门店列表</li>
+            </ol>
+            <div class="loanDetail" class="col-lg-12 col-md-12 col-sm-12">
+
+                <div class="col-lg-3 col-md-3 col-sm-3"><span class="wd_60">门店名称&nbsp;&nbsp;</span><input type="text" name="name" id="name"></div>
+
+                <div class="col-lg-3 col-md-3 col-sm-3"><span class="wd_60">门店状态&nbsp;&nbsp;</span><select id="status">
+                    <option value="">---请选择---</option>
+                    <option value="0">未启用</option>
+                    <option value="1">已启用</option>
+                    <option value="2">已过期</option>
+                </select></div>
+                <div class="col-lg-3 col-md-3 col-sm-3 ta_r">
+                    <button class="btn btn-primary btn-sm search_btn" type="button" id="btn-search">查询</button>
+                    <button class="btn btn-primary btn-sm search_btn mr_25" id="addBizShop" type="button">添加门店</button>
+                    <button class="btn btn-primary btn-sm search_btn mr_25" type="button" id="btn-import">导入</button>
+
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="table-responsive">
+                <div id="bizShopList_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer"><div class="top"><div class="clear"></div></div><div id="bizShopList_processing" class="dataTables_processing panel panel-default" style="display: none;">处理中...</div><table id="bizShopList" style="width: 100%;" class="table table-bordered table-striped table-hover bg_wt dataTable no-footer" role="grid" aria-describedby="bizShopList_info">
+                    <thead style="border-bottom: 0;background-color: #fff;">
+                    <tr role="row"><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 124px;">商户名称</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 98px;">所在地</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 125px;">业务类型</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 125px;">渠道维护</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 177px;">合作开始日期</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 177px;">合作结束日期</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 126px;">商户状态</th><th class="text-center sorting_disabled" rowspan="1" colspan="1" style="width: 72px;">操作</th></tr>
+                    </thead>
+                    <tbody><tr class="odd"><td valign="top" colspan="8" class="dataTables_empty">没有符合您搜索条件的信息</td></tr></tbody></table><div class="bottom"><div class="dataTables_info" id="bizShopList_info" role="status" aria-live="polite">显示第 0 至 0 项结果，共 0 项</div><div class="dataTables_length" id="bizShopList_length"><label> <select name="bizShopList_length" aria-controls="bizShopList" class="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> </label></div><div class="dataTables_paginate paging_full_numbers" id="bizShopList_paginate"><ul class="pagination"><li class="paginate_button first disabled" id="bizShopList_first"><a href="javascript:void(0);" aria-controls="bizShopList" data-dt-idx="0" tabindex="0">首页</a></li><li class="paginate_button previous disabled" id="bizShopList_previous"><a href="javascript:void(0);" aria-controls="bizShopList" data-dt-idx="1" tabindex="0">上页</a></li><li class="paginate_button next disabled" id="bizShopList_next"><a href="javascript:void(0);" aria-controls="bizShopList" data-dt-idx="2" tabindex="0">下页</a></li><li class="paginate_button last disabled" id="bizShopList_last"><a href="javascript:void(0);" aria-controls="bizShopList" data-dt-idx="3" tabindex="0">末页</a></li></ul></div><div class="clear"></div></div></div>
+            </div>
+            <!--正文内容end-->
+        </div>
+        <!--添加门店 end-->
     </div>
- 
+
 </body>
 <script src="js/jquery-2.1.1.min.js"></script>
  <script src="js/layer.js"></script>
  <script src="js/common.js"></script>
+ <script src="js/bussess_handle.js"></script>
+ <script src="js/bootstrap-datetimepicker.js"></script>
+
  <script type="text/javascript">
+
      $(function () {
+         $("#startDate").datetimepicker({
+             format: 'yyyy-mm-dd',//显示格式
+             todayHighlight: 1,//今天高亮
+             minView: "month",//设置只显示到月份
+             startView:2,
+             forceParse: 0,
+             showMeridian: 1,
+             todayBtn:1,
+             autoclose: 1
+         });
+
+         $("#endDate").datetimepicker({
+             format: 'yyyy-mm-dd',//显示格式
+             todayHighlight: 1,//今天高亮
+             minView: "month",//设置只显示到月份
+             startView:2,
+             forceParse: 0,
+             showMeridian: 1,
+             todayBtn:1,
+             autoclose: 1
+         });
          //    查询
          var merchantName ,channelMaintenance,status;
          _search();
@@ -512,27 +576,96 @@
         $("#saveForm").show();
     });
     // 点击修改按钮
-    $("#bizList tr td:last-child button:first-child").click(function(){
+    $("#bizList").on("click",".btn-edit",function(){
         // console.log(this)
          $(".shanghulist").hide();
          $("#saveForm").show();
     })
     // 点击配置方案
-    $("#bizList tr td:last-child button:nth-child(2)").click(function(){
-       // layer.open({
-       //    type: 2,
-       //    title: '配置方案',
-       //    shadeClose: true,
-       //    shade: 0.8,
-       //    area: ['1150px', '670px'],
-       //    content: 'peizhizhuanan.html' //iframe的url
-       //  });
-         
+    $("#bizList").on("click"," .btn-set",function(){
+        $("#set-idea", window.parent.document).show();
     })
-    //页面点击进来默认页面
+     $("#set-idea .layui-layer-close",window.parent.document).click(function () {
+         $("#set-idea", window.parent.document).hide();
+     })
+    //点击配置门店
+     $("#bizList").on("click"," .btn-shop",function(){
+         $(".shanghulist").hide();
+         $("#set-shop").show();
+     });
+    //点击配置门店
 
+     $("#addBizShop").click(function () {
+         $(".shanghulist,#set-shop").hide();
+         $("#saveForm").show();
+     })
+     //初始化商品
+     $("#bizList").on("click"," .btn-shops",function(){
+         $("#set-shops", window.parent.document).show();
+     })
+     $("#set-shops .layui-layer-close,#set-shops .layui-layer-btn1",window.parent.document).click(function () {
+         $("#set-shops", window.parent.document).hide();
+     })
+    //添加资方详情
+     $("#addCapital").click(function(){
+         $("#zifang", window.parent.document).show();
+     })
+     $("#zifang .layui-layer-close,#zifang .layui-layer-btn2",window.parent.document).click(function () {
+         $("#zifang", window.parent.document).hide();
+     })
 
+     var _code,_status,_zicode,_dec,_statusName;
+     $("#zifang .layui-layer-btn0",window.parent.document).click(function(){
+          _code = $("#capitalCode",window.parent.document).val();
+          _status = $("#capitalStatus",window.parent.document).val();
+        if(_status == "0"){
+            _statusName = "未启用";
+        }else if(_status == "1"){
+            _statusName = "启用";
+        }else if(_status=="2"){
+            _statusName = "已到期";
+        }
+          _zicode = $("#capitalBchCode",window.parent.document).val();
+          _dec = $("#capitalDesc",window.parent.document).val();
+         var i = 1;
+         if(_code!=""&&_status!=""&&_zicode!=""&&_dec!=""){
+             var _htm = "<tr class=''>"+
+                     "<td>"+i+"</td>"+
+                     "<td>"+_code+"</td>"+
+                     "<td>"+_dec+"</td>"+
+                     "<td status = "+_status+">"+_statusName+"</td>"+
+                    "<td>"+_zicode+"</td>"+
+                     "<td><div class='layui-layer-btn'><a class='edit_btn'>修改</a><a class='del_btn'>删除</a> </div></td>"+
+                 "</tr>";
+            $(".ta_bm").append(_htm);
+            i++;
+             $("#zifang", window.parent.document).hide();
 
+         }else{
+             alert("不能为空");
+         }
+     })
+     //删除资方
+    $("#saveForm").on("click",".del_btn",function(){
+        $(this).parent().parent().parent().remove();
+        i--;
+    })
+     //添加资方详情end
+//     添加圖片
+     function  contractImg(_this){
+        var _value =  _this.value;
+        var _imghtm = "<div class='col-lg-3 col-sm-3 imgBox'>" +
+                "<img class='contractImg' src='"+_this.value+"'>"+
+            "</div>"
+        $(_this).parent().parent().prev(_imghtm);
+     }
+     function otherImg(_this) {
+         var _imghtm = "<div class='col-lg-3 col-sm-3 imgBox'>" +
+             "<img class='contractImg' src='"+_this.value+"'>"+
+         "</div>"
+         $(_this).parent().parent().prev(_imghtm);
+     }
+     //查询
     $("#btn-search").click(function () {
 
         _search();
@@ -594,10 +727,10 @@
                                 "<td>"+_list[i].endTime+"</td>" +
                                 "<td>"+_list[i].statusName+"</td>" +
                                 "<td class=' td_align_left'>"+
-                                "<button type='button' class='btn btn-primary btn-sm' name='biz-modify'>修改</button>"+
-                                "&nbsp;&nbsp;<button type='button'  class='btn btn-primary btn-sm ' name='add-case'>配置专案</button>"+
-                                "&nbsp;&nbsp;<button type='button' class='btn btn-primary btn-sm ' name='add-shop'>配置门店</button>"+
-                                "&nbsp;&nbsp;<button type='button'  class='btn btn-primary btn-sm ' name='init-commodity'>初始化商品</button>&nbsp;&nbsp;"+
+                                "<button type='button' class='btn btn-primary btn-sm btn-edit' name='biz-modify'>修改</button>"+
+                                "&nbsp;&nbsp;<button type='button'  class='btn btn-primary btn-sm btn-set ' name='add-case'>配置专案</button>"+
+                                "&nbsp;&nbsp;<button type='button' class='btn btn-primary btn-sm btn-shop' name='add-shop'>配置门店</button>"+
+                                "&nbsp;&nbsp;<button type='button'  class='btn btn-primary btn-sm btn-shops' name='init-commodity'>初始化商品</button>&nbsp;&nbsp;"+
                                 "</td>" +
                                 "</tr>"
                         }

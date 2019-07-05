@@ -1,0 +1,101 @@
+.blacklist_dialog{
+    display:none;
+    position:absolute;
+    left: 50%;
+    top: 50%;
+    width:50%;
+    z-index:100;
+}
+.square_icon,.square_icon1,.square_icon2,.square_icon3{
+    margin-left: 35%;
+    width:0;
+    height:0;
+    border-left:30px solid transparent;  /* left arrow slant */
+    border-right:30px solid transparent; /* right arrow slant */
+    border-bottom:40px solid #4a4a4a; /* bottom, add background color here */
+    font-size:0;
+    line-height:0;
+}
+.square_icon3{
+    margin-left:85%;
+}
+.square_icon1{
+    margin-left: 60%;
+    border-left:20px solid transparent;  /* left arrow slant */
+    border-right:20px solid transparent; /* right arrow slant */
+    border-bottom:30px solid #e5e7e9; /* bottom, add background color here */
+}
+.square_icon2{
+    margin-left: 88%;
+    border-left:20px solid transparent;  /* left arrow slant */
+    border-right:20px solid transparent; /* right arrow slant */
+    border-bottom:30px solid rgb(186,190,195); /* bottom, add background color here */
+}
+.blacklist_box{
+    padding:10px 1%;
+    width:98%;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    background:#4a4a4a;
+    overflow: hidden;
+}
+.blacklist_box_list{
+    float:left;
+    width:50%;
+    font-size:16px;
+    font-family: "榛戜綋";
+    color:#fff;
+}
+.m30{
+    margin-bottom:30px;
+}
+.blacklist_box_list tbody tr td{
+    /*padding:15px 0;*/
+    text-align: left;
+    vertical-align: top;
+    color:#fff!important;
+    padding-left: 0!important;
+    font-weight: normal;
+}
+
+.agency_dialog,.details_dialog{
+    margin-bottom: 30px;
+    width:100%;
+}
+/*.details_dialog{
+    position:absolute;
+    left:0;
+    top:10px;
+    z-index:100;
+}*/
+.agency_box,.details_box{
+    padding:10px 0;
+    width:100%;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    background:#e5e7e9;
+    overflow: hidden;
+    position:relative;
+}
+.agency_box_list,.details_box_list{
+    margin:0 1%;
+    width:98%;
+}
+.agency_box_list thead tr th,.agency_box_list tbody tr td,.details_box_list thead tr th,.details_box_list tbody tr td{
+    padding:20px 0;
+    text-align: left;
+    font-size:16px;
+    color:#999;
+}
+.agency_box_list tbody tr td,.details_box_list tbody tr td{
+    color:#000;
+    font-weight: bold;
+}
+.details_box{
+    background:rgb(186,190,195);
+}
+.details_box_list thead tr th{
+    color:#fff;
+}
