@@ -1,9 +1,6 @@
 ﻿body{
     height:100%; overflow:hidden;
 }
-.hidden1{
-    display: none;
-}
 /*NAV*/
 #warp #nav {
     height: 50px;
@@ -32,9 +29,6 @@
     color: #fff;
     font-size: 16px;
     margin-left: 10px;
-}
-.iframe{
-    margin-left: 180px;
 }
 #warp .sidebar{
     position: absolute;
@@ -198,7 +192,7 @@
     cursor: pointer;
 }
 /*#content .sidebar li:hover{*/
-    /*background-color: #394555;*/
+/*background-color: #394555;*/
 /*}*/
 #content .sidebar .sidebarIcon{
     display: inline-block;
@@ -230,9 +224,11 @@
 /*SIDEBAR*/
 
 /*content*/
-.content{
+#warp .content{
     float: right;
-    width: 100%;
+    width: calc(100% - 180px);
+    width: -moz-calc(100% - 180px);
+    width: -webkit-calc(100% - 180px);
     padding:15px 15px;
     margin-bottom: 40px;
     background-color: #F2F4F8;
@@ -685,7 +681,7 @@
     margin-right: 10px;
 }
 .fs_13{
- font-size: 12px;
+    font-size: 12px;
 }
 .bg_wt{
     font-size: 12px;
@@ -905,8 +901,8 @@
     vertical-align:middle;
 }
 .shenXin{
-padding-left: 0;
- }
+    padding-left: 0;
+}
 .shenXin p{
     height: 30px;
     line-height: 30px;
@@ -948,7 +944,7 @@ padding-left: 0;
 }
 
 .shenXin .ht_50{
- height: 65px;
+    height: 65px;
 }
 .ml_20{
     margin-left: 20px;
@@ -1410,8 +1406,7 @@ padding-left: 0;
 .content1{
     position: absolute;
     right: 0;
-    /* top: 50px;*/
-    top: 0;
+    top: 50px;
     width: 100%;
     height: calc(100% - 50px);
     height: -moz-calc(100% - 50px);
@@ -1466,8 +1461,8 @@ padding-left: 0;
     font-weight: 400;
 }
 #auditList tr td{
-padding: 6px 8px;
- }
+    padding: 6px 8px;
+}
 #reviewList tr td{
     min-width: 100px;
     border-left-width: 0;
@@ -1699,13 +1694,13 @@ padding: 6px 8px;
     cursor: pointer;
 }
 ._uploadArea{
- opacity: 1;
+    opacity: 1;
 }
 .addPicBtn{
     display: inline-block;
     width: 113px;
     height: 113px;
-    background-image: url("../images/addPic.png");
+    background-image: url("../images/addpic.png");
     background-size: 113px 113px;
     margin: 0 auto;
 }
@@ -1740,10 +1735,9 @@ padding: 6px 8px;
     position: absolute;
     top: 0px;
     right: 0px;
-    background-image: url("../img/closeBtn1.png");
+    background-image: url("../images/closeBtn1.png");
     width: 17px;
     height: 17px;
     z-index: 1000;
     cursor: pointer;
 }
-

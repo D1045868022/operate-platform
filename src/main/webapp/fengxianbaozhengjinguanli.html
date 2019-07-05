@@ -13,7 +13,7 @@
  </head>
  <body>
 	<div class="content1">
-		<div class="content zhunbeijin hidden1">
+		<div class="content zhunbeijin ">
             <!--面包屑导航start-->
             <ol class="breadcrumb">
                 <li class="active">风险准备金管理列表</li>
@@ -67,7 +67,7 @@
             </div>
             <!--正文内容end-->
         </div>
-        <div class="content zhunbeijinguanli ">
+        <div class="content zhunbeijinguanli hidden1 ">
                <!--面包屑导航start-->
     <ol class="breadcrumb">
         <li class="active">风险准备金详情</li>
@@ -131,34 +131,10 @@
 <script>
     var formData = new FormData();
     $(function(){
-        // var dt = $("#bizRiskDetailList").dataTable({
-        //     "sDom":'<"top"<"clear">>rt<"bottom"ilp<"clear">>',
-        //     bProcessing:true,
-        //     searching: false, // 禁用dataTables自带的查询框
-        //     ordering: false, // 禁用排序
-        //     firstIndex: 0,
-        //     pageSize: 10,
-        //     ajax: {
-        //         type: "POST",
-        //         url: "/hd/biz/bizRiskDetailList",
-        //         data:function(d) {
-        //             d.hdBussinessCustomerId = '6531783008843260929';
-        //         }
-        //     },
-        //     columns: [
-        //         {data:"operDate", default:''},
-        //         {data:"type", default:''},
-        //         {data:"bailAmount", default:'' },
-        //         {data:"beforeBailAmount", default:'' },
-        //         {data:"afterBailAmount", default:''},
-        //         {data:"riskRate", default:''},
-        //         {data:"fundSource", default:''},
-        //         {data:"creditAmount", default:''},
-        //         {data:"beforeCreditAmount", default:''},
-        //         {data:"afterCreditAmount", default:''},
-        //         {data:"remarks", default:''}
-        //     ]
-        // });
+        $(".btn-sm").click(function () {
+            $(".zhunbeijinguanli").show();
+            $(".zhunbeijin").hide();
+        })
         
         
         $("#addRisk").on("click",function(e){           

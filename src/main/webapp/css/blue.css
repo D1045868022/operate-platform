@@ -35,3 +35,18 @@
     background-image: url("../../images/qun5.png");
     background-size: 16px 16px;
 }
+.otherInfoStatusRadio{
+    padding-left: 30px;
+}
+.identityMsgStatusRadio input{
+    position: absolute; top: -100%; left: -100%; display: block; width: 300%; height: 300%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;
+}
+.identityMsgStatusRadio{
+    overflow: hidden;
+}
+.identityMsgStatusRadio .ul_li{
+    cursor: pointer;
+    width: 200px;
+    margin: 8px 0;
+    float: left;
+}

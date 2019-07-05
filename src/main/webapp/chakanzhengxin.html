@@ -1,0 +1,2049 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>用户征信报告</title>
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-store">
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/credit_report_data.css">
+    <link rel="stylesheet" type="text/css" href="css/dialog.css">
+    <link rel="stylesheet" type="text/css" href="css/blacklist_details.css">
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <style>
+        .tab_box tbody tr, .tab_box_c6 tbody tr{
+            font-size: 15px !important;
+            line-height:28px !important;
+        }
+        body{
+            font-size: 15px !important;
+            line-height:28px !important;
+        }
+        .taobao_table tbody tr td{
+            border: 1px solid #ddd;
+        }
+        .content{
+            background-color: white;
+        }
+        .loading{
+            display:block;
+            margin:0 auto;
+            text-align:center;
+            width:50px
+        }
+        .applyDetailsContainer .details_box{
+            background: rgb(230,231,233);
+        }
+        .applyDetailsContainer .details_box th{
+            color: rgb(168, 163, 168);
+        }
+        .applyDetailsContainer .square_icon2{
+            border-bottom: 30px solid rgb(230,231,233);
+        }
+        .td1{
+            width: 120px;
+        }
+        .td2{
+            width: 250px;
+        }
+        .td4{
+            width:120px;
+        }
+        .hu{
+            color:#000;
+            font-weight:bold;
+        }
+        .chu{
+        }
+        .kk{
+            display:none;
+        }
+        .cece{
+            height: 60px;
+            line-height: 60px;
+            border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            background: #a7adb3;
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            text-align: left;
+            letter-spacing: 2px;
+            text-indent:10px;
+            font-family: "宋体";
+        }
+        .container-fluid{
+            padding-left:0px;
+        }
+        .fenText{
+
+            font-size: 15px;
+            padding-left: 10px;
+            color: #666;
+        }
+        .tab_box_c6{
+            width: 100%;
+        }
+        .fenAnd{
+            font-size: 15px;
+            font-weight: bold;
+            color:#000;
+        }
+    </style>
+    <script src="js/lib/jquery-2.1.4.min.js"></script>
+    <script src="js/lib/angular.min.js"></script>
+    <script src="js/lib/bootstrap.min.js"></script>
+
+</head>
+<body ng-controller="creditReport" class="ng-scope">
+
+<div class="content">
+    <!--基本信息-->
+    <div id="baseInfomation"><div class="personal_info">
+        <div class="personal_name">
+            <a class="personal_img"><img src="image/pic.jpg" alt=""></a>
+            <em class="personal_txt"></em>
+        </div>
+        <div class="credit_val">信用值 <span>未出额度</span></div>
+        <div class="guest_group">客群标签 <span>无</span></div>
+        <div class="risk">风险标签 <span><b style="font-style:normal;font-weight: normal;color:#000">无</b></span></div>
+        <div class="risk"><button id="fetchDataButton" style="padding: 10px 25px;outline: none;border: 0 none;font-size: 16px;color: rgb(0, 0, 0);font-family: 黑体;border-radius: 20px;background-color: #71a5df;color: #fff;cursor: pointer;">获取数据</button></div>
+    </div>
+        <!--导航-->
+        <ul class="base_info">
+            <li class="info_list"><a href="#essentialInfo">基本信息</a></li>
+            <li class="info_list"><a href="#dataS">数据源</a></li>
+            <li class="info_list communication"><a class="down_icon" href="javascript:void(0)">通讯信息</a>
+                <div class="communicationInfo">
+                    <div class="sanjiao_icon"></div>
+                    <div class="communication_list">
+                        <a href="#yys">运营商</a>
+                        <a href="#txl">通讯录</a>
+                    </div>
+                </div>
+            </li>
+            <li class="info_list"><a class="down_icon" href="javascript:void(0)">消费信息</a></li>
+            <li class="info_list"><a class="down_icon" href="javascript:void(0)">金融产品</a></li>
+            <li class="info_list"><a class="down_icon" href="javascript:void(0)">社交网络</a></li>
+            <li class="info_list"><a class="down_icon" href="javascript:void(0)">交叉认证</a></li>
+        </ul>
+        <!--基本信息-->
+        <div class="content_detail" id="only_id_for_loading_base">
+            <h2 id="essentialInfo" class="s_h2">基本信息</h2>
+            <div class="content_detail_list">
+                <div class="tab_box clearfix">
+                    <table class="tab_box_left">
+                        <thead>
+                        <tr><th colspan="5">个人信息</th>
+                        </tr></thead>
+                        <tbody>
+                        <tr>
+                            <td>姓名</td>
+                            <td><span></span></td>
+                            <td>常用邮箱</td>
+                            <td><span>未获取</span></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>性别</td>
+                            <td><span>女</span></td>
+                            <td>手机号</td>
+                            <td><span></span></td>
+
+                        </tr>
+                        <tr>
+                            <td>年龄</td>
+                            <td><span></span></td>
+                            <td>身份证号</td>
+                            <td><span></span></td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <table class="tab_box_right">
+                        <thead>
+                        <tr><th colspan="6">黑名单信息</th>
+                        </tr></thead>
+                        <tbody>
+                        <tr>
+
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="content_detail_list">
+                <div class="tab_box clearfix">
+                    <table class="tab_box_left">
+                        <thead>
+                        <tr><th colspan="4">教育信息/学历查询</th>
+                        </tr></thead>
+                        <tbody>
+                        <tr>
+                            <td>院校名称</td>
+                            <td><span></span></td>
+                            <td>入学时间</td>
+                            <td><span></span></td>
+                        </tr>
+                        <tr>
+                            <td>专业名称</td>
+                            <td><span></span></td>
+                            <td>学制</td>
+                            <td><span>年</span></td>
+                        </tr>
+                        <tr>
+                            <td>学历</td>
+                            <td><span></span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <table class="tab_box_right">
+                        <thead>
+                        <tr><th colspan="2">职业信息/工薪</th>
+                        </tr></thead>
+                        <tbody>
+                        <tr>
+                            <td>工作单位</td>
+                            <td><span></span></td>
+                        </tr>
+                        <tr>
+                            <td>职称</td>
+                            <td><span></span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div></div>
+    <!--打分卡拒绝原因-->
+    <div id="gradeInformation">
+        <h2 id="gradeInfo" class="s_h2">打分卡拒绝原因</h2>
+        <div class="content_detail_list clearfix" ng-show="isGradeDone">
+            <table class="tab_box">
+                <thead>
+                <tr><th>拒绝原因</th>
+                </tr></thead>
+                <tbody>
+
+                <!-- ngRepeat: i in refuseReasons -->
+                </tbody>
+            </table>
+        </div>
+        <div class="content_detail_list ng-hide" ng-hide="isGradeDone">
+            <img src="images/loading.gif" class="loading">
+        </div>
+    </div>
+    <!--策略信息-->
+    <div>
+        <h2 class="s_h2">风险评估</h2>
+        <div class="container-fluid">
+            <div class="page-border">
+                <div id="form1">
+                    <br>
+                    <h4 class="cece">策略信息</h4>
+                    <table>
+                        <tbody><tr>
+                            <td class="td1 fenText"><label for="textbox1$text">风险分数</label></td>
+                            <td class="td2 fenAnd" id="finalScore">38</td>
+                            <td class="td1 fenText"><label for="textbox1$text">决策结果</label></td>
+                            <td class="td2 fenAnd" id="finalDecision">低风险，审查</td>
+                        </tr>
+                        <tr>
+                            <td class="td1 fenText"><label for="textbox1$text">风险类型</label></td>
+                            <td class="td2 fenAnd" id="riskType">异常借款</td>
+                            <td class="td1 fenText"><label for="textbox1$text">策略模式</label></td>
+                            <td class="td2 fenAnd" id="policyMode">权重模式</td>
+                        </tr>
+                        </tbody></table>
+                    <br>
+                    <h4 class="cece">命中规则</h4>
+                    <div id="rules"><div class="panel-group" id="accordion" role="tablist"><div class="panel panel-default"><div class="panel-heading" role="tab" id="headin0One"><h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse0One" aria-expanded="true" aria-controls="collapse0One">身份证命中同盾欺诈中级灰名单</a></h4></div><div id="collapse0One" class="panel-collapse in" role="tabpanel" aria-labelledby="heading0One"><div class="panel-body"><span style="font-size: 15px;color: #666;font-weight:700;font-family: '宋体'">命中分数&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#000">5</span></span><hr style="border:0.5px dashed gay; margin-top:10px;margin-bottom:10px; "><span style="font-size: 15px;color: #666;font-weight:700;font-family: '宋体'">描述&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#000">验证匹配字段是否在欺诈灰名单中</span></span><br><hr style="margin-top:10px;margin-bottom:10px;"><h5>借款人身份证</h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 14px;">风险等级&nbsp;:&nbsp;中</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 14px;">欺诈类型&nbsp;:&nbsp;异常借款</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 14px;">借款人身份证&nbsp;:&nbsp;450721199408155503</span><br></div></div></div><div class="panel panel-default"><div class="panel-heading" role="tab" id="headin1One"><h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse1One" aria-expanded="true" aria-controls="collapse1One">3个月内身份证关联多个申请信息</a></h4></div><div id="collapse1One" class="panel-collapse in" role="tabpanel" aria-labelledby="heading1One"><div class="panel-body"><span style="font-size: 15px;color: #666;font-weight:700;font-family: '宋体'">命中分数&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#000">6</span></span><hr style="border:0.5px dashed gay; margin-top:10px;margin-bottom:10px; "><span style="font-size: 15px;color: #666;font-weight:700;font-family: '宋体'">描述&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#000">3个月身份证关联家庭地址数</span></span><br><span style="font-size: 15px;color: #666;font-weight:700;font-family: '宋体'">借款人身份证关联家庭地址数目&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#000">0</span></span><br><hr style="margin-top:10px;margin-bottom:10px;"><h5>关联家庭地址列表</h5><span style="font-size: 15px;color: #666;font-weight:700;font-family: '宋体'">描述&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#000">3月内_身份证_手机号码_关联个数_全局</span></span><br><hr style="margin-top:10px;margin-bottom:10px;"><h5>关联借款人手机列表</h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 14px;">19858979028&nbsp;:&nbsp;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 14px;">158※※※※1859&nbsp;:&nbsp;</span><br><hr style="margin-top:10px;margin-bottom:10px;"><span style="font-size: 14px;">借款人身份证关联借款人手机数目&nbsp;:&nbsp;2</span><br></div></div></div><div class="panel panel-default"><div class="panel-heading" role="tab" id="headin2One"><h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse2One" aria-expanded="true" aria-controls="collapse2One">7天内申请人在多个平台申请借款</a></h4></div><div id="collapse2One" class="panel-collapse in" role="tabpanel" aria-labelledby="heading2One"><div class="panel-body"><span style="font-size: 15px;color: #666;font-weight:700;font-family: '宋体'">命中分数&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#000">10</span></span><hr style="border:0.5px dashed gay; margin-top:10px;margin-bottom:10px; "><span style="font-size: 15px;color: #666;font-weight:700;font-family: '宋体'">描述&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#000">7天内申请人在多个平台申请借款</span></span><br><span style="font-size: 15px;color: #666;font-weight:700;font-family: '宋体'">借款人身份证个数&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#000">2</span></span><br><hr style="margin-top:10px;margin-bottom:10px;"><h5>借款人身份证详情</h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 14px;">一般消费分期平台&nbsp;:&nbsp;1</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 14px;">信用卡中心&nbsp;:&nbsp;1</span><br><hr style="margin-top:10px;margin-bottom:10px;"><h5>详情</h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 14px;">一般消费分期平台&nbsp;:&nbsp;1</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 14px;">信用卡中心&nbsp;:&nbsp;1</span><br><hr style="margin-top:10px;margin-bottom:10px;"><span style="font-size: 14px;">借款人手机个数&nbsp;:&nbsp;1</span><br><span style="font-size: 15px;color: #666;font-weight:700;font-family: '宋体'">个数&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#000">2</span></span><br><hr style="margin-top:10px;margin-bottom:10px;"><h5>借款人手机详情</h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 14px;">一般消费分期平台&nbsp;:&nbsp;1</span><br></div></div></div><div class="panel panel-default"><div class="panel-heading" role="tab" id="headin3One"><h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse3One" aria-expanded="true" aria-controls="collapse3One">1个月内申请人在多个平台申请借款</a></h4></div><div id="collapse3One" class="panel-collapse in" role="tabpanel" aria-labelledby="heading3One"><div class="panel-body"><span style="font-size: 15px;color: #666;font-weight:700;font-family: '宋体'">命中分数&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#000">3</span></span><hr style="border:0.5px dashed gay; margin-top:10px;margin-bottom:10px; "><span style="font-size: 15px;color: #666;font-weight:700;font-family: '宋体'">描述&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#000">1个月内申请人在多个平台申请借款</span></span><br><span style="font-size: 15px;color: #666;font-weight:700;font-family: '宋体'">借款人身份证个数&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#000">3</span></span><br><hr style="margin-top:10px;margin-bottom:10px;"><h5>借款人身份证详情</h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 14px;">一般消费分期平台&nbsp;:&nbsp;1</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 14px;">直销银行&nbsp;:&nbsp;1</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 14px;">信用卡中心&nbsp;:&nbsp;1</span><br><hr style="margin-top:10px;margin-bottom:10px;"><h5>详情</h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 14px;">一般消费分期平台&nbsp;:&nbsp;1</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 14px;">直销银行&nbsp;:&nbsp;1</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 14px;">信用卡中心&nbsp;:&nbsp;1</span><br><hr style="margin-top:10px;margin-bottom:10px;"><span style="font-size: 14px;">借款人手机个数&nbsp;:&nbsp;1</span><br><span style="font-size: 15px;color: #666;font-weight:700;font-family: '宋体'">个数&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#000">3</span></span><br><hr style="margin-top:10px;margin-bottom:10px;"><h5>借款人手机详情</h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 14px;">一般消费分期平台&nbsp;:&nbsp;1</span><br></div></div></div><div class="panel panel-default"><div class="panel-heading" role="tab" id="headin4One"><h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse4One" aria-expanded="true" aria-controls="collapse4One">3个月内申请人在多个平台申请借款</a></h4></div><div id="collapse4One" class="panel-collapse in" role="tabpanel" aria-labelledby="heading4One"><div class="panel-body"><span style="font-size: 15px;color: #666;font-weight:700;font-family: '宋体'">命中分数&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#000">14</span></span><hr style="border:0.5px dashed gay; margin-top:10px;margin-bottom:10px; "><span style="font-size: 15px;color: #666;font-weight:700;font-family: '宋体'">描述&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#000">3个月内申请人在多个平台申请借款</span></span><br><span style="font-size: 15px;color: #666;font-weight:700;font-family: '宋体'">借款人身份证个数&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#000">7</span></span><br><hr style="margin-top:10px;margin-bottom:10px;"><h5>借款人身份证详情</h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 14px;">一般消费分期平台&nbsp;:&nbsp;2</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 14px;">直销银行&nbsp;:&nbsp;1</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 14px;">信用卡中心&nbsp;:&nbsp;1</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 14px;">网上银行&nbsp;:&nbsp;1</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 14px;">小额贷款公司&nbsp;:&nbsp;1</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 14px;">P2P网贷&nbsp;:&nbsp;1</span><br><hr style="margin-top:10px;margin-bottom:10px;"><h5>详情</h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 14px;">一般消费分期平台&nbsp;:&nbsp;2</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 14px;">直销银行&nbsp;:&nbsp;1</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 14px;">信用卡中心&nbsp;:&nbsp;1</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 14px;">网上银行&nbsp;:&nbsp;1</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 14px;">小额贷款公司&nbsp;:&nbsp;1</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 14px;">P2P网贷&nbsp;:&nbsp;1</span><br><hr style="margin-top:10px;margin-bottom:10px;"><span style="font-size: 14px;">借款人手机个数&nbsp;:&nbsp;3</span><br><span style="font-size: 15px;color: #666;font-weight:700;font-family: '宋体'">个数&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#000">7</span></span><br><hr style="margin-top:10px;margin-bottom:10px;"><h5>借款人手机详情</h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 14px;">一般消费分期平台&nbsp;:&nbsp;1</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 14px;">网上银行&nbsp;:&nbsp;1</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 14px;">P2P网贷&nbsp;:&nbsp;1</span><br></div></div></div></div></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--运营商-->
+    <div id="operatorInformation"></div>
+    <!--通讯录-->
+    <div id="contactsInformation"></div>
+    <!--淘宝-->
+    <div id="taobaoInfomation"><div class="content_detail">
+        <h2 class="s_h2">淘宝网</h2>
+        <div class="content_detail_list">
+            <h3 class="id_h3">基本注册信息</h3>
+            <table class="tab_box_c6">
+                <tbody>
+                <tr>
+                    <td>淘宝最后一次登录时间</td>
+                    <td><span>未获取</span></td>
+                    <td>支付宝注册时间</td>
+                    <td><span></span></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>淘宝手机号码</td>
+                    <td><span></span></td>
+
+
+                    <td>淘宝真实姓名</td>
+                    <td><span></span></td>
+
+
+                    <td>淘宝真实身份证号</td>
+                    <td><span></span></td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="content_detail_list">
+            <h3 class="credit_time_h3">消费类别与时间段</h3>
+            <div class="tab_box clearfix">
+                <table class="tab_box_zuo">
+                    <thead>
+                    <tr><th>消费类别分布</th>
+                    </tr></thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div id="main2" style="height: 400px; width: 100%; -webkit-tap-highlight-color: transparent; user-select: none;" _echarts_instance_="1562233094952"><div style="position: relative; overflow: hidden; width: 579px; height: 400px;"><div data-zr-dom-id="bg" class="zr-element" style="position: absolute; left: 0px; top: 0px; width: 579px; height: 400px; user-select: none;"></div><canvas width="579" height="400" data-zr-dom-id="0" class="zr-element" style="position: absolute; left: 0px; top: 0px; width: 579px; height: 400px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas><canvas width="579" height="400" data-zr-dom-id="_zrender_hover_" class="zr-element" style="position: absolute; left: 0px; top: 0px; width: 579px; height: 400px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas></div></div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table class="tab_box_you">
+                    <thead>
+                    <tr><th>消费时间段分布</th>
+                    </tr></thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div id="main1" style="height: 400px; width: 100%; -webkit-tap-highlight-color: transparent; user-select: none;" _echarts_instance_="1562233094951"><div style="position: relative; overflow: hidden; width: 579px; height: 400px;"><div data-zr-dom-id="bg" class="zr-element" style="position: absolute; left: 0px; top: 0px; width: 579px; height: 400px; user-select: none;"></div><canvas width="579" height="400" data-zr-dom-id="0" class="zr-element" style="position: absolute; left: 0px; top: 0px; width: 579px; height: 400px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas><canvas width="579" height="400" data-zr-dom-id="_zrender_hover_" class="zr-element" style="position: absolute; left: 0px; top: 0px; width: 579px; height: 400px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas></div></div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="content_detail_list">
+            <h3 class="risk_expend_h3">风险消费记录</h3>
+            <table class="tab_box">
+                <thead>
+                <tr><th>时间</th>
+                    <th>交易金额</th>
+                    <th>商品</th>
+                </tr></thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="content_detail_list">
+            <h3 class="alipay_h3">支付宝收支记录</h3>
+            <table class="tab_box_c6">
+                <tbody>
+                <tr>
+                    <td>绑定银行卡数量</td>
+                    <td><span>未获取</span></td>
+                    <td>收入笔数</td>
+                    <td><span>未获取</span></td>
+                    <td>支出笔数</td>
+                    <td><span>未获取</span></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>收入总金额</td>
+                    <td><span>0.00元</span></td>
+                    <td>支出总金额</td>
+                    <td><span>0.00元</span></td>
+                    <td>平均收入金额</td>
+                    <td><span>0.00元</span></td>
+                    <td>平均支出金额</td>
+                    <td><span>0.00元</span></td>
+                </tr>
+                <tr>
+                    <td>余额宝金额</td>
+                    <td><span>0.00元</span></td>
+                    <td>余额宝累计收益</td>
+                    <td><span>0.00元</span></td>
+                    <td>花呗额度</td>
+                    <td><span>0.00元</span></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="content_detail_list">
+            <h3 class="address_h3">交易人</h3>
+            <table class="tab_box">
+                <thead>
+                <tr><th>姓名</th>
+                    <th>交易金额</th>
+                    <th>交易时间</th>
+                    <th>交易次数</th>
+                </tr></thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="content_detail_list">
+            <h3 class="taobao_h3">淘宝消费汇总</h3>
+            <table class="tab_box">
+                <thead>
+                <tr><th>时间</th>
+                    <th>交易金额</th>
+                    <th>交易发生数</th>
+                    <th>交易成功数</th>
+                </tr></thead>
+                <tbody>
+
+                </tbody>
+            </table>
+
+        </div>
+        <div class="content_detail_list">
+            <h3 class="taobao_h3">淘宝交易明细</h3>
+            <table class="tab_box taobao_table">
+                <thead>
+                <tr><th style="width: 20%;">宝贝名称</th>
+                    <th style="width: 5%;">交易时间</th>
+                    <th style="width: 5%;">数量</th>
+                    <th style="width: 10%;">实付款</th>
+                    <th style="width: 10%;">交易状态</th>
+                    <th style="width: 5%;">收货人</th>
+                    <th style="width: 20%;">收货地址</th>
+                    <th style="width: 10%;">联系方式</th>
+                </tr></thead>
+                <tbody>
+
+                </tbody>
+            </table>
+
+        </div>
+    </div></div>
+    <!--闪银客户申请明细-->
+    <!--<div id="wecashApplyDetails">
+		<h2 id="essentialInfo" class="s_h2">闪银客户申请明细</h2>
+		<div class="content_detail_list clearfix" ng-cloak ng-show="isWecashDebtDone">
+            <table class="tab_box">
+                <thead>
+                <th>申请时间</th>
+                <th>申请身份证号码</th>
+                <th>申请手机号码</th>
+                <th>申请机构</th>
+                <th></th>
+                <th></th>
+                </thead>
+                <tbody>
+
+                <tr ng-repeat="i in applyDetails">
+                    <td>{{i.registerDate}}</td>
+                    <td>{{i.idcard}}</td>
+                    <td>{{i.phone}}</td>
+                    <td>{{i.channel}}</td>
+                    <td ng-hide="true"><a href="javascript:void(0);" class="certification"><span class="noAuthentication"></span>认证不一致</a><a href="javascript:void(0);" class="certification"><span class="authentication"></span>认证一致</a></td>
+                    <td class="union_detail"><a ng-click="showApplyDetail(i, $event)" href="javascript:void(0)" class="{{i.showClassName}} details detailsList">{{i.text || '详情'}}</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="content_detail_list" ng-hide="isWecashDebtDone">
+            <img src="images/loading.gif" class="loading">
+        </div>
+	</div>-->
+
+</div>
+<!--个人信息-->
+<script type="text/html" id="creditInfo">
+    <div class="personal_info">
+        <div class="personal_name">
+            <a class="personal_img"><img src="image/pic.jpg" alt=""></a>
+            <em class="personal_txt">{{name}}</em>
+        </div>
+        <div class="credit_val">信用值 <span>{{creditInfo}}</span></div>
+        <div class="guest_group">客群标签 <span>无</span></div>
+        <div class="risk">风险标签 <span>无</span></div>
+        <div class="risk"><button id="fetchDataButton" style="padding: 10px 25px;outline: none;border: 0 none;font-size: 16px;color: rgb(0, 0, 0);font-family: 黑体;border-radius: 20px;background-color: #71a5df;color: #fff;cursor: pointer;">获取数据</button></div>
+    </div>
+    <!--导航-->
+    <ul class="base_info">
+        <li class="info_list"><a href="#essentialInfo">基本信息</a></li>
+        <li class="info_list"><a href="#dataS">数据源</a></li>
+        <li class="info_list communication"><a class="down_icon" href="javascript:void(0)">通讯信息</a>
+            <div class="communicationInfo">
+                <div class="sanjiao_icon"></div>
+                <div class="communication_list">
+                    <a href="#yys">运营商</a>
+                    <a href="#txl">通讯录</a>
+                </div>
+            </div>
+        </li>
+        <li class="info_list"><a class="down_icon" href="javascript:void(0)">消费信息</a></li>
+        <li class="info_list"><a class="down_icon" href="javascript:void(0)">金融产品</a></li>
+        <li class="info_list"><a class="down_icon" href="javascript:void(0)">社交网络</a></li>
+        <li class="info_list"><a class="down_icon" href="javascript:void(0)">交叉认证</a></li>
+    </ul>
+    <!--基本信息-->
+    <div class="content_detail"  id="only_id_for_loading_base">
+        <h2 id="essentialInfo" class="s_h2">基本信息</h2>
+        <div class="content_detail_list">
+            <div class="tab_box clearfix">
+                <table class="tab_box_left">
+                    <thead>
+                    <th colspan="5">个人信息</th>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>姓名</td>
+                        <td><span>{{name}}</span></td>
+                        <td>常用邮箱</td>
+                        <td><span>{{email || "未获取"}}</span></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>性别</td>
+                        <td><span>{{sex}}</span></td>
+                        <td>手机号</td>
+                        <td><span>{{phone}}</span></td>
+                        {{if phoneAuth == 1}}
+                        <td><a href="javascript:void(0)" class="certification"><span class="authentication"></span>认证一致</a></td>
+                        {{else if phoneAuth == 2}}
+                        <td><a href="javascript:void(0)" class="certification"><span class="noAuthentication"></span>认证不一致</a></td>
+                        {{else if phoneAuth == 3}}
+                        <td><a href="javascript:void(0)" class="certification"><span class="not_authenticated"></span>未认证</a></td>
+                        {{else if phoneAuth == 4}}
+                        <td><a href="javascript:void(0)" class="certification"><span class="certification_error"></span>认证报错</a></td>
+                        {{/if}}
+                    </tr>
+                    <tr>
+                        <td>年龄</td>
+                        <td><span>{{age}}</span></td>
+                        <td>身份证号</td>
+                        <td><span>{{idCard}}</span></td>
+                        {{if idCardAuth == 1}}
+                        <td><a href="javascript:void(0)" class="certification"><span class="authentication"></span>认证一致</a></td>
+                        {{else if idCardAuth == 2}}
+                        <td><a href="javascript:void(0)" class="certification"><span class="noAuthentication"></span>认证不一致</a></td>
+                        {{else if idCardAuth == 3}}
+                        <td><a href="javascript:void(0)" class="certification"><span class="not_authenticated"></span>未认证</a></td>
+                        {{else if idCardAuth == 4}}
+                        <td><a href="javascript:void(0)" class="certification"><span class="certification_error"></span>认证报错</a></td>
+                        {{/if}}
+                    </tr>
+                    </tbody>
+                </table>
+
+                <table class="tab_box_right">
+                    <thead>
+                    <th colspan="6">黑名单信息</th>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        {{if blackPhoneList}}
+                        <td>手机号查询</td>
+                        {{if isBlackPhone == 1}}
+                        <td><a href="javascript:void(0)" class="blacklist_hit"><span class="noHit"></span>未命中</a></td>
+                        {{else if isBlackPhone == 2}}
+                        <td><a href="javascript:void(0)" class="blacklist_hit"><span class="hit"></span>有命中</a></td>
+                        {{else if isBlackPhone == 3}}
+                        <td><a href="javascript:void(0)" class="blacklist_hit"><span class="not_check"></span>未查询</a></td>
+                        {{else if isBlackPhone == 4}}
+                        <td><a href="javascript:void(0)" class="blacklist_hit"><span class="check_error"></span>查询报错</a></td>
+                        {{/if}}
+                        <td><a href="javascript:void(0)" id="phoneDetails" class="phoneDetail details detailsList" data-phoneshow="true" data-phoneindex="{{index}}">详情</a></td>
+                        {{/if}}
+                        {{if blackIdcardList}}
+                        <td>身份证查询</td>
+                        {{if isBlackIdcard == 1}}
+                        <td><a href="javascript:void(0)" class="blacklist_hit"><span class="noHit"></span>未命中</a></td>
+                        {{else if isBlackIdcard == 2}}
+                        <td><a href="javascript:void(0)" class="blacklist_hit"><span class="hit"></span>有命中</a></td>
+                        {{else if isBlackIdcard == 3}}
+                        <td><a href="javascript:void(0)" class="blacklist_hit"><span class="hit"></span>未查询</a></td>
+                        {{else if isBlackIdcard == 4}}
+                        <td><a href="javascript:void(0)" class="blacklist_hit"><span class="hit"></span>查询报错</a></td>
+                        {{/if}}
+                        <td><a href="javascript:void(0)" id="idCardDetails" class="idCardDetail details detailsList" data-idshow="true" data-idindex="{{index}}">详情</a></td>
+                        {{/if}}
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="content_detail_list">
+            <div class="tab_box clearfix">
+                <table class="tab_box_left">
+                    <thead>
+                    <th colspan="4">教育信息/学历查询</th>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>院校名称</td>
+                        <td><span>{{school}}</span></td>
+                        <td>入学时间</td>
+                        <td><span>{{stuStartTime}}</span></td>
+                    </tr>
+                    <tr>
+                        <td>专业名称</td>
+                        <td><span>{{stuPro}}</span></td>
+                        <td>学制</td>
+                        <td><span>{{stuYear}}年</span></td>
+                    </tr>
+                    <tr>
+                        <td>学历</td>
+                        <td><span>{{stuType}}</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table class="tab_box_right">
+                    <thead>
+                    <th colspan="2">职业信息/工薪</th>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>工作单位</td>
+                        <td><span>{{comNamePersonal}}</span></td>
+                    </tr>
+                    <tr>
+                        <td>职称</td>
+                        <td><span>{{jobName}}</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</script>
+<div class="phoneDetailContainer"></div>
+<div class="idDetailContainer"></div>
+<div class="applyDetailsContainer ng-hide" ng-show="isShowApplyDetail">
+    <div class="details_dialog unionPay" >
+        <div class="square_icon2" ></div>
+        <div class="details_box">
+            <table class="details_box_list">
+                <thead>
+                <tr>
+                    <th>机构</th>
+                    <th>姓名</th>
+                    <th>用户类型</th>
+                    <th>单位名称</th>
+                    <th>申请结果</th>
+                    <th>是否提现</th>
+                    <th>提现次数</th>
+                    <th>剩余额度</th>
+                    <th>是否逾期</th>
+                    <th ng-hide="true" class="ng-hide">当前账户状态</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="ng-binding"></td>
+                    <td class="ng-binding"></td>
+                    <td class="ng-binding"></td>
+                    <td class="ng-binding"></td>
+                    <td class="ng-binding"></td>
+                    <td class="ng-binding"></td>
+                    <td class="ng-binding"></td>
+                    <td class="ng-binding"></td>
+                    <td class="ng-binding">否</td>
+                    <td ng-hide="true" class="ng-binding ng-hide"></td>
+                </tr>
+                </tbody>
+            </table>
+            <table class="details_box_list">
+                <thead>
+                <tr>
+                    <th>用户来源</th>
+                    <th>消费来源</th>
+                    <th>姓名</th>
+                    <th>手机号</th>
+                    <th>提现时间</th>
+                    <th>提现金额</th>
+                    <th>还款日</th>
+                    <th>分期期数</th>
+                    <th>剩余期数</th>
+                    <th>当前状态</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- ngRepeat: i in debtInfo.extractInfo -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="repayDetailsContainer ng-hide" ng-show="isShowRepayDetail">
+    <div class="details_dialog unionPay" >
+        <div class="square_icon2" ></div>
+        <div class="details_box">
+            <table class="details_box_list">
+                <thead>
+                <tr>
+                    <th>期数</th>
+                    <th>应还金额</th>
+                    <th>实际入账总额</th>
+                    <th>剩余还款金额</th>
+                    <th>逾期天数</th>
+                    <th>逾期费</th>
+                    <th>实际入账时间</th>
+                    <th>实际入账金额</th>
+                    <th>还款状态</th>
+                    <th>还款来源</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- ngRepeat: i in repayInfoList -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!--手机号黑名单详情弹出框-->
+<script type="text/html" id="phoneBlackList">
+    <div class="blacklist_dialog blackPhone">
+        <div class="square_icon"></div>
+        <div class="blacklist_box">
+            {{each list as v}}
+            <table class="blacklist_box_list">
+                <tbody>
+                <tr>
+                    <td rowspan="5">{{v.org}}</td>
+                    <td>黑名单原因</td>
+                    {{if v.reason==0}}
+                    <td>借款违约</td>
+                    {{else if v.reason==1}}
+                    <td>法律方面的原因</td>
+                    {{else if v.reason==2}}
+                    <td>网络上的不良信息</td>
+                    {{else if v.reason==3}}
+                    <td>因为风险信息而被机构拒绝</td>
+                    {{else if v.reason==4}}
+                    <td>共享经济黑名单</td>
+                    {{/if}}
+                </tr>
+                <tr>
+                    <td>发生时间</td>
+                    {{if v.create_date_type==0}}
+                    <td>未知</td>
+                    {{else if v.create_date_type==1}}
+                    <td>小于7天</td>
+                    {{else if v.create_date_type==2}}
+                    <td>小于1个月</td>
+                    {{else if v.create_date_type==3}}
+                    <td>小于3个月</td>
+                    {{else if v.create_date_type==4}}
+                    <td>小于6个月</td>
+                    {{else if v.create_date_type==5}}
+                    <td>小于12个月</td>
+                    {{else if v.create_date_type==6}}
+                    <td>大于等于12个月</td>
+                    {{/if}}
+                </tr>
+                <tr>
+                    <td>违约金额</td>
+                    {{if v.amount_type==0}}
+                    <td>未知</td>
+                    {{else if v.amount_type==1}}
+                    <td>小于500元</td>
+                    {{else if v.amount_type==2}}
+                    <td>小于2000元</td>
+                    {{else if v.amount_type==3}}
+                    <td>小于5000元</td>
+                    {{else if v.amount_type==4}}
+                    <td>小于10000元</td>
+                    {{else if v.amount_type==5}}
+                    <td>大于等于10000元</td>
+                    {{/if}}
+                </tr>
+                <tr>
+                    <td>违约时长</td>
+                    {{if v.over_due_type==0}}
+                    <td>未知</td>
+                    {{else if v.over_due_type==1}}
+                    <td>小于1个月</td>
+                    {{else if v.over_due_type==2}}
+                    <td>小于2个月</td>
+                    {{else if v.over_due_type==3}}
+                    <td>小于3个月</td>
+                    {{else if v.over_due_type==4}}
+                    <td>小于6个月</td>
+                    {{else if v.over_due_type==5}}
+                    <td>大于等于6个月</td>
+                    {{/if}}
+                </tr>
+                <tr>
+                    <td>{{v.others}}</td>
+                    <td>{{v.others}}</td>
+                </tr>
+                </tbody>
+            </table>
+            {{/each}}
+        </div>
+    </div>
+</script>
+<!--身份证号黑名单详情弹出框-->
+<script type="text/html" id="idCardBlackList">
+    <div class="blacklist_dialog blackIdcard">
+        <div class="square_icon3"></div>
+        <div class="blacklist_box">
+            {{each list as v}}
+            <table class="blacklist_box_list">
+                <tbody>
+                <tr>
+                    <td rowspan="5">{{v.org}}</td>
+                    <td>黑名单原因</td>
+                    {{if v.reason==0}}
+                    <td>借款违约</td>
+                    {{else if v.reason==1}}
+                    <td>法律方面的原因</td>
+                    {{else if v.reason==2}}
+                    <td>网络上的不良信息</td>
+                    {{else if v.reason==3}}
+                    <td>因为风险信息而被机构拒绝</td>
+                    {{else if v.reason==4}}
+                    <td>共享经济黑名单</td>
+                    {{/if}}
+                </tr>
+                <tr>
+                    <td>发生时间</td>
+                    {{if v.createDateType==0}}
+                    <td>未知</td>
+                    {{else if v.createDateType==1}}
+                    <td>小于7天</td>
+                    {{else if v.createDateType==2}}
+                    <td>小于1个月</td>
+                    {{else if v.createDateType==3}}
+                    <td>小于3个月</td>
+                    {{else if v.createDateType==4}}
+                    <td>小于6个月</td>
+                    {{else if v.createDateType==5}}
+                    <td>小于12个月</td>
+                    {{else if v.createDateType==6}}
+                    <td>大于等于12个月</td>
+                    {{/if}}
+                </tr>
+                <tr>
+                    <td>违约金额</td>
+                    {{if v.amountType==0}}
+                    <td>未知</td>
+                    {{else if v.amountType==1}}
+                    <td>小于500元</td>
+                    {{else if v.amountType==2}}
+                    <td>小于2000元</td>
+                    {{else if v.amountType==3}}
+                    <td>小于5000元</td>
+                    {{else if v.amountType==4}}
+                    <td>小于10000元</td>
+                    {{else if v.amountType==5}}
+                    <td>大于等于10000元</td>
+                    {{/if}}
+                </tr>
+                <tr>
+                    <td>违约时长</td>
+                    {{if v.overDueType==0}}
+                    <td>未知</td>
+                    {{else if v.overDueType==1}}
+                    <td>小于1个月</td>
+                    {{else if v.overDueType==2}}
+                    <td>小于2个月</td>
+                    {{else if v.overDueType==3}}
+                    <td>小于3个月</td>
+                    {{else if v.overDueType==4}}
+                    <td>小于6个月</td>
+                    {{else if v.overDueType==5}}
+                    <td>大于等于6个月</td>
+                    {{/if}}
+                </tr>
+                <tr>
+                    <td>其他</td>
+                    <td>{{v.others}}</td>
+                </tr>
+                </tbody>
+            </table>
+            {{/each}}
+        </div>
+    </div>
+</script>
+<!--数据源-->
+<script type="text/html" id="dataSource">
+    <div class="content_detail">
+        <h2 id="dataS" class="s_h2">数据源</h2>
+
+        <div class="content_detail_list">
+            <div class="tab_box clearfix">
+                <table class="tab_box_zuo">
+                    <thead>
+                    <th>数据源</th>
+                    <th>数据类型</th>
+                    <th>最后更新时间</th>
+                    <th></th>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>姓名</td>
+                        <td>身份信息</td>
+                        <td>2010-09 14:22</td>
+                        <td><a href="javascript:void(0)" class="authorize"><span class="new_authorize"></span>最新授权</a></td>
+                    </tr>
+                    <tr>
+                        <td>身份证</td>
+                        <td>身份信息</td>
+                        <td>2010-09 14:22</td>
+                        <td><a href="javascript:void(0)" class="authorize"><span class="new_authorize"></span>最新授权</a></td>
+                    </tr>
+                    <tr>
+                        <td>在网基本信息</td>
+                        <td>身份信息</td>
+                        <td>2010-09 14:22</td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table class="tab_box_you">
+                    <thead>
+                    <th>数据源</th>
+                    <th>数据类型</th>
+                    <th>最后更新时间</th>
+                    <th></th>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>姓名</td>
+                        <td>身份信息</td>
+                        <td>2010-09 14:22</td>
+                        <td><a href="javascript:void(0)" class="authorize"><span class="new_authorize"></span>最新授权</a></td>
+                    </tr>
+                    <tr>
+                        <td>身份证</td>
+                        <td>身份信息</td>
+                        <td>2010-09 14:22</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>在网基本信息</td>
+                        <td>身份信息</td>
+                        <td>2010-09 14:22</td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</script>
+<!--运营商-->
+<script type="text/html" id="operatorInfo">
+    {{each data as d}}
+    <div class="content_detail">
+        <h2 id="yys" class="s_h2">运营商</h2>
+
+        <div class="content_detail_list">
+            <h3 class="id_h3">在网基本信息</h3>
+            <table class="tab_box_c6">
+                <tbody>
+                <tr>
+                    <td>实名信息 <span>{{d.idcardName}}</span></td>
+                    {{if (d.phoneNumType||"").toLowerCase()=="yidong"}}
+                    <td>所属运营商 <span>移动</span></td>
+                    {{else if (d.phoneNumType||"").toLowerCase()=="liantong"}}
+                    <td>所属运营商 <span>联通</span></td>
+                    {{else if (d.phoneNumType||"").toLowerCase()=="dianxin"}}
+                    <td>所属运营商 <span>电信</span></td>
+                    {{/if}}
+                    <td>授权号 <span>{{(d.phone || []).join(' ')}}</span>
+                        {{if d&&d.phonedVerified}}
+                        {{if d.phonedVerified == 1}}
+                        <a href="javascript:void(0)" class="certification"><span class="authentication"></span>认证一致</a>
+                        {{else if d.phonedVerified == 2}}
+                        <a href="javascript:void(0)" class="certification"><span class="noAuthentication"></span>认证不一致</a>
+                        {{/if}}
+                        {{/if}}
+                    </td>
+                    {{if (d.regDays/30).toFixed(2) < 3}}
+                    <td>在网时长 <span style="color:#ff0000">{{(d.regDays/30).toFixed(2)}}月</span></td>
+                    {{else}}
+                    <td>在网时长 <span>{{(d.regDays/30).toFixed(2)}}月</span></td>
+                    {{/if}}
+                </tr>
+                <tr>
+                    <td>黑名单电话数 <span>{{d.contactBlackCount}}</span></td>
+                    <td>运营商与通讯录切合度 <span>{{d.callingContactsMatchValue}}</span> <i style="font-style:normal;color:#f8ac39" class="{{d.risk1}}">{{d.riskLevel1}}</i></td>
+                    <td>运营商呼入和呼出切合度 <span>{{d.usualPhoneEvalValue}}</span> <i style="font-style:normal;color:#f8ac39" class="{{d.risk2}}">{{d.riskLevel2}}</i></td>
+                </tr>
+                <tr>
+                    <td>借贷平台注册客户数 <span>{{d.contactsWecashCount}}</span></td>
+                    <td>借贷平台逾期客户数 <span>{{d.contactsWecashOverdueCount}}/{{d.contactsWecashCount}}</span></td>
+                    <td>借贷平台高风险客户数 <span>{{typeof d.contactsWecashHighriskCount != "undefined"?d.contactsWecashHighriskCount : "未获取"}}/{{d.contactsWecashCount}}</span></td>
+                    {{if d.idIdVerified == 1}}
+                    <td><a href="javascript:void(0)" class="certification"><span class="authentication"></span>认证一致</a></td>
+                    {{else if d.idIdVerified == 2}}
+                    <td><a href="javascript:void(0)" class="certification"><span class="noAuthentication"></span>认证不一致</a></td>
+                    {{else if d.idIdVerified == 3}}
+                    <td><a href="javascript:void(0)" class="certification"><span class="not_authenticated"></span>未认证</a></td>
+                    {{/if}}
+                </tr>
+                <tr>
+                    <td>网络标注电话数 <span>{{d.contactLableCount}}</span></td>
+                    <td>网络标注含敏感信息电话数 <span>{{d.contactSignLableMarkCount}}/{{d.contactLableCount}}</span></td>
+                    <td>网络标注含金融信息电话数 <span>{{d.contactSignLableFinaceCount}}/{{d.contactLableCount}}</span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--通话简述-->
+        <div class="content_detail_list">
+            <h3 class="id_h3">通话简述</h3>
+            <table class="tab_box_c6">
+                <tbody>
+                <tr>
+                    <td>平均每月消费金额 <span>{{d.mobileCostPerMonth}}</span></td>
+                    <td>过去1个月累计通话次数 <span>{{d.lastMonthContactsCount}}</span></td>
+                    <td>过去1个月累计拨打通话时长 <span>{{(d.lastMonthCallOutTime/60).toFixed(0)}}分钟</span></td>
+                    <td>过去1个月累计接收通话时长 <span>{{(d.lastMonthCallInTime/60).toFixed(0)}}分钟</span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--新增前五通话所在地-->
+        <div class="content_detail_list">
+            <h3 class="address_h3">前五通话所在地</h3>
+            <table class="tab_box">
+                <thead>
+                <th>通话地</th>
+                <th>总通话次数</th>
+                <th>总通话时长(秒)</th>
+                <!--<th>最近通话时间</th>-->
+                <th>主叫次数</th>
+                <th>主叫时长(秒)</th>
+                <th>被叫次数</th>
+                <th>被叫时长(秒)</th>
+                </thead>
+                <tbody>
+                {{each d.topCallAddressList as v}}
+                <tr>
+                    <td>{{v.callAddr}}</td>
+                    <td>{{v.totalCount}}</td>
+                    <td>{{v.totalTime}}</td>
+                    <!--<td>{{v.lastCallTime}}</td>-->
+                    <td>{{v.callOutCount}}</td>
+                    <td>{{v.callOutTime}}</td>
+                    <td>{{v.callInCount}}</td>
+                    <td>{{v.callInTime}}</td>
+                </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+
+        <!--通话详单-->
+        <div class="content_detail_list">
+            <h3 class="address_h3">通话详单</h3>
+            <table class="tab_box">
+                <thead>
+                <th>电话号码</th>
+                <th>风险信息类型</th>
+                <th>网络标记</th>
+                <th>有无通话记录</th>
+                <th>通话次数</th>
+                <th>通话时长(秒)</th>
+                <th>最近通话时间</th>
+                <th>被叫次数</th>
+                <th>被叫时长(秒)</th>
+                <th>主叫次数</th>
+                <th>主叫时长(秒)</th>
+                </thead>
+                <tbody>
+                {{each d.contactBlackSenLableDetail as v}}
+                <tr>
+                    <td>{{v.phone}}</td>
+                    <td>{{v.type}}</td>
+                    <td>{{v.phoneSentiveInfo}}</td>
+
+                    <td>{{if v.haveCallIn==0}}无{{else if v.haveCallIn==1}}有{{/if}}</td>
+
+                    <td>{{v.totalCount}}</td>
+                    <td>{{v.totalTime}}</td>
+                    <td>{{v.lastCallTime}}</td>
+                    <td>{{v.callInCount}}</td>
+                    <td>{{v.callInTime}}</td>
+                    <td>{{v.callOutCount}}</td>
+                    <td>{{v.callOutTime}}</td>
+                </tr>
+                {{/each}}
+                </tbody>
+            </table>
+            {{if d._len}}
+            <div class="show_all_{{$index}} showmore">
+                <div>查看全部</div>
+            </div>
+            {{/if}}
+        </div>
+
+    </div>
+    {{/each}}
+</script>
+<!-- 运营商 end -->
+<!--通讯录-->
+<script type="text/html" id="contactsInfo">
+    {{each data as d}}
+    <div class="content_detail">
+        <h2 id="txl" class="s_h2">通讯录</h2>
+
+        <div class="content_detail_list">
+            <h3 class="id_h3">基本注册信息</h3>
+            <table class="tab_box_c6">
+                <tbody>
+                <tr>
+                    <td>通讯录总数 <span>{{d.contactsCount}}</span></td>
+                    <td>黑名单电话数 <span>{{d.contactsBlackCount}}/{{d.contactsCount}}</span></td>
+                    <td>敏感风险电话数 <span>{{d.contactsSensitiveCount}}/{{d.contactsCount}}</span></td>
+                    <td>金融风险电话数 <span>{{d.contactsFinanceCount}}/{{d.contactsCount}}</span></td>
+                </tr>
+                <tr>
+                    <td>借贷平台注册客户数 <span>{{d.contactsWecashUserCount}}/{{d.contactsCount}}</span></td>
+                    <td>借贷平台逾期用户数 <span>{{d.contactsWecashOverdueUserCount}}/{{d.contactsWecashUserCount}}</span></td>
+                    <td>借贷平台高风险客户数 <span>{{d.contactsWecashHighriskCount}}/{{d.contactsWecashUserCount}}</span></td>
+                </tr>
+                <tr>
+                    <td>网络标注电话数 <span>{{d.contactsPhoneMarkCount}}/{{d.contactsCount}}</span></td>
+                    <td>网络标注含敏感信息电话数 <span>{{d.contactsMarkSensitiveCount}}/{{d.contactsPhoneMarkCount}}</span></td>
+                    <td>网络标注含金融信息电话数 <span>{{d.contactsMarkFinanceCount}}/{{d.contactsPhoneMarkCount}}</span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="content_detail_list clearfix">
+            <h3 class="address_h3">通讯录详情</h3>
+            <table class="tab_box">
+                <thead>
+                <th>手机号</th>
+                <th>姓名</th>
+                <th>网络标注内容</th>
+                <th>风险信息类型</th>
+                <th>是否有通话往来</th>
+                <th>通话次数</th>
+                <th>通话时长（秒）</th>
+                </thead>
+                <tbody>
+                {{each d.contactsDetails as v}}
+                <tr>
+                    <td>{{v.phone}}</td>
+                    <td>{{v.phoneBookName}}</td>
+                    <td>{{v.phoneSensitiveInfo}}</td>
+                    <td>{{v.type}}</td>
+                    {{if v.haveCallInfo == 1}}
+                    <td>是</td>
+                    {{else if v.haveCallInfo == 0}}
+                    <td>否</td>
+                    {{/if}}
+                    <td>{{v.totalCount}}</td>
+                    <td>{{v.totalTime}}</td>
+                </tr>
+                {{/each}}
+                </tbody>
+            </table>
+            {{if d._len}}
+            <div class="show_all_{{$index}} showDetails showDetails_contacts">
+                <div>查看全部</div>
+            </div>
+            {{/if}}
+        </div>
+
+    </div>
+    {{/each}}
+</script>
+<!--新增闪银用户内容-->
+<script type="text/html" id="wecashOperatorTemplate">
+    {{each data as d}}
+    <div class="content_detail_list">
+        <h3 class="address_h3">闪银用户内容</h3>
+        <table class="tab_box">
+            <thead>
+            <th>电话号码</th>
+            <th>闪银注册姓名</th>
+            <th>闪银学校</th>
+            <th>闪银公司</th>
+            <th>是否逾期</th>
+            <th>最大逾期天数</th>
+            <th>是否高风险冻结</th>
+            <th>有无通话记录</td>
+            <th>通话时长(秒)</th>
+            <th>通话次数</th>
+            <th>主叫时长(秒)</th>
+            <th>主叫次数</th>
+            <th>被叫时长(秒)</th>
+            <th>被叫次数</th>
+            </thead>
+            <tbody>
+            {{each d.contactsWecashDict as v}}
+            <tr>
+                <td>{{v.phone}}</td>
+                <td>{{v.name}}</td>
+                <td>{{v.schoolName}}</td>
+                <td>{{v.companyName}}</td>
+                {{if v.isOverdue==0}}
+                <td>无</td>
+                {{else}}
+                <td>有</td>
+                {{/if}}
+                <td>{{v.maxOverdueDay}}</td>
+                {{if v.riskInfo==0}}
+                <td>无</td>
+                {{else}}
+                <td>有</td>
+                {{/if}}
+                {{if v.haveCallIn==0}}
+                <td>无</td>
+                {{else}}
+                <td>有</td>
+                {{/if}}
+                <td>{{v.totalTime}}</td>
+                <td>{{v.totalCount}}</td>
+                <td>{{v.callOutTime}}</td>
+                <td>{{v.callOutCount}}</td>
+                <td>{{v.callInTime}}</td>
+                <td>{{v.callInCount}}</td>
+            </tr>
+            {{/each}}
+            </tbody>
+        </table>
+        {{if d._len>=21}}
+        <div class="show_all_{{$index}} showDetails showDetails_user_info">
+            <div>查看全部</div>
+        </div>
+        {{/if}}
+    </div>
+    <!--新增闪银用户内容 end-->
+    {{/each}}
+</script>
+<!--新增闪银客户-->
+<script type="text/html" id="wecashAddressTemplate">
+    {{each data as d}}
+    <div class="content_detail_list">
+        <h3 class="address_h3">闪银客户</h3>
+        <table class="tab_box">
+            <thead>
+            <th>电话号码</th>
+            <th>通讯录姓名</th>
+            <th>闪银注册姓名</th>
+            <th>闪银学校</th>
+            <th>闪银公司</th>
+            <th>是否逾期</th>
+            <th>最大逾期天数</th>
+            <th>是否高风险冻结</th>
+            <th>有无通话记录</th>
+            <th>通话时长(秒)</th>
+            <th>通话次数</th>
+            <!--<th>主叫时长(秒)</th>
+            <th>主叫次数</th>
+            <th>被叫时长(秒)</th>
+            <th>被叫次数</th>-->
+            </thead>
+            <tbody>
+            {{each d.contactsWecashDict as v}}
+            <tr>
+                <td>{{v.phone}}</td>
+                <td>{{v.phoneBookName}}</td>
+                <td>{{v.name}}</td>
+                <td>{{v.schoolName}}</td>
+                <td>{{v.companyName}}</td>
+                {{if v.isOverdue==0}}
+                <td>无</td>
+                {{else}}
+                <td>有</td>
+                {{/if}}
+                <td>{{v.maxOverdueDay}}</td>
+                {{if v.riskInfo==0}}
+                <td>无</td>
+                {{else}}
+                <td>有</td>
+                {{/if}}
+                {{if v.haveCallIn==0}}
+                <td>无</td>
+                {{else}}
+                <td>有</td>
+                {{/if}}
+                <td>{{v.totalTime}}</td>
+                <td>{{v.totalCount}}</td>
+                <!--<td>{{v.callOutTime}}</td>
+                <td>{{v.callOutCount}}</td>
+                <td>{{v.callInTime}}</td>
+                <td>{{v.callInCount}}</td>-->
+            </tr>
+            {{/each}}
+            </tbody>
+        </table>
+        {{if d._len>=21}}
+        <div class="show_all_{{$index}} showDetails showDetails_client">
+            <div>查看全部</div>
+        </div>
+        {{/if}}
+    </div>
+    {{/each}}
+    <!--新增闪银客户 end -->
+</script>
+
+<!--淘宝网-->
+<script type="text/html" id="taobaoInfo">
+    <div class="content_detail">
+        <h2 class="s_h2">淘宝网</h2>
+        <div class="content_detail_list">
+            <h3 class="id_h3">基本注册信息</h3>
+            <table class="tab_box_c6">
+                <tbody>
+                <tr>
+                    <td>淘宝最后一次登录时间</td>
+                    <td><span>{{basic.lastLoginTime || "未获取"}}</span></td>
+                    <td>支付宝注册时间</td>
+                    <td><span>{{basic.registerTime}}</span></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>淘宝手机号码</td>
+                    <td><span>{{basic.phone}}</span></td>
+                    {{if basic.phoneAuth == 1}}
+                    <td><a href="javascript:void(0)" class="certification"><span class="authentication"></span>认证一致</a></td>
+                    {{else if basic.phoneAuth == 2}}
+                    <td><a href="javascript:void(0)" class="certification"><span class="noAuthentication"></span>认证不一致</a></td>
+                    {{else if basic.phoneAuth == 3}}
+                    <td><a href="javascript:void(0)" class="certification"><span class="not_authenticated"></span>未认证</a></td>
+                    {{/if}}
+
+                    <td>淘宝真实姓名</td>
+                    <td><span>{{basic.name}}</span></td>
+                    {{if basic.nameAuth == 1}}
+                    <td><a href="javascript:void(0)" class="certification"><span class="authentication"></span>认证一致</a></td>
+                    {{else if basic.nameAuth == 2}}
+                    <td><a href="javascript:void(0)" class="certification"><span class="noAuthentication"></span>认证不一致</a></td>
+                    {{else if basic.nameAuth == 3}}
+                    <td><a href="javascript:void(0)" class="certification"><span class="not_authenticated"></span>未认证</a></td>
+                    {{/if}}
+
+                    <td>淘宝真实身份证号</td>
+                    <td><span>{{basic.idcard}}</span></td>
+                    {{if basic.idcardAuth == 1}}
+                    <td><a href="javascript:void(0)" class="certification"><span class="authentication"></span>认证一致</a></td>
+                    {{else if basic.idcardAuth == 2}}
+                    <td><a href="javascript:void(0)" class="certification"><span class="noAuthentication"></span>认证不一致</a></td>
+                    {{else if basic.idcardAuth == 3}}
+                    <td><a href="javascript:void(0)" class="certification"><span class="not_authenticated"></span>未认证</a></td>
+                    {{/if}}
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="content_detail_list">
+            <h3 class="credit_time_h3">消费类别与时间段</h3>
+            <div class="tab_box clearfix">
+                <table class="tab_box_zuo">
+                    <thead>
+                    <th>消费类别分布</th>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div id="main2" style="height:400px;width:100%"></div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table class="tab_box_you">
+                    <thead>
+                    <th>消费时间段分布</th>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div id="main1" style="height:400px;width:100%"></div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="content_detail_list">
+            <h3 class="risk_expend_h3">风险消费记录</h3>
+            <table class="tab_box">
+                <thead>
+                <th>时间</th>
+                <th>交易金额</th>
+                <th>商品</th>
+                </thead>
+                <tbody>
+                {{each creditConsumeRecord as v}}
+                <tr>
+                    <td>{{v.time}}</td>
+                    <td>{{v.amount}}元</td>
+                    <td>{{v.commodity}}</td>
+                </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+        <div class="content_detail_list">
+            <h3 class="alipay_h3">支付宝收支记录</h3>
+            <table class="tab_box_c6">
+                <tbody>
+                <tr>
+                    <td>绑定银行卡数量</td>
+                    <td><span>{{alipayConsumeRecord.cardNum || "未获取"}}</span></td>
+                    <td>收入笔数</td>
+                    <td><span>{{alipayConsumeRecord.incomeNo || "未获取"}}</span></td>
+                    <td>支出笔数</td>
+                    <td><span>{{alipayConsumeRecord.expenseNo || "未获取"}}</span></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>收入总金额</td>
+                    <td><span>{{alipayConsumeRecord.incomeTotalAmount}}元</span></td>
+                    <td>支出总金额</td>
+                    <td><span>{{alipayConsumeRecord.expenseTotalAmount}}元</span></td>
+                    <td>平均收入金额</td>
+                    <td><span>{{alipayConsumeRecord.incomeAvgAmount}}元</span></td>
+                    <td>平均支出金额</td>
+                    <td><span>{{alipayConsumeRecord.expenseAvgAmount}}元</span></td>
+                </tr>
+                <tr>
+                    <td>余额宝金额</td>
+                    <td><span>{{alipayConsumeRecord.yuebaoAmount}}元</span></td>
+                    <td>余额宝累计收益</td>
+                    <td><span>{{alipayConsumeRecord.yuebaoProfit}}元</span></td>
+                    <td>花呗额度</td>
+                    <td><span>{{alipayConsumeRecord.huabeiCreditAmount}}元</span></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="content_detail_list">
+            <h3 class="address_h3">交易人</h3>
+            <table class="tab_box">
+                <thead>
+                <th>姓名</th>
+                <th>交易金额</th>
+                <th>交易时间</th>
+                <th>交易次数</th>
+                </thead>
+                <tbody>
+                {{each tradeRecord as v}}
+                <tr>
+                    <td>{{v.name}}</td>
+                    <td>{{v.amount}}元</td>
+                    <td>{{v.time}}</td>
+                    <td>{{v.num}}</td>
+                </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+        <div class="content_detail_list">
+            <h3 class="taobao_h3">淘宝消费汇总</h3>
+            <table class="tab_box">
+                <thead>
+                <th>时间</th>
+                <th>交易金额</th>
+                <th>交易发生数</th>
+                <th>交易成功数</th>
+                </thead>
+                <tbody>
+                {{each taobaoConsumeCountPerMonth as v}}
+                <tr>
+                    <td>{{v.time}}</td>
+                    <td>{{v.amount}}元</td>
+                    <td>{{v.times}}</td>
+                    <td>{{v.success}}</td>
+                </tr>
+                {{/each}}
+                </tbody>
+            </table>
+            {{if _len2>=21}}
+            <div class="showDetails showDetails_taobao">
+                <div>查看全部</div>
+            </div>
+            {{/if}}
+        </div>
+        <div class="content_detail_list">
+            <h3 class="taobao_h3">淘宝交易明细</h3>
+            <table class="tab_box taobao_table">
+                <thead>
+                <th style="width: 20%;">宝贝名称</th>
+                <th style="width: 5%;">交易时间</th>
+                <th style="width: 5%;">数量</th>
+                <th style="width: 10%;">实付款</th>
+                <th style="width: 10%;">交易状态</th>
+                <th style="width: 5%;">收货人</th>
+                <th style="width: 20%;">收货地址</th>
+                <th style="width: 10%;">联系方式</th>
+                </thead>
+                <tbody>
+                {{each taobaoTradeDetail as v}}
+                <tr>
+                    <td style="width: 20%;">{{v.title}}</td>
+                    <td style="width: 5%;">{{v.time}}</td>
+                    <td style="width: 5%;">{{v.num}}</td>
+                    <td style="width: 10%;">{{v.amount}}元</td>
+                    <td style="width: 10%;">{{v.status}}</td>
+                    <td style="width: 5%;">{{v.receiver || "未获取"}}</td>
+                    <td style="width: 20%;">{{v.address || "未获取"}}</td>
+                    <td style="width: 10%;">{{v.phone}}</td>
+                </tr>
+                {{/each}}
+                </tbody>
+            </table>
+            {{if _len1>=21}}
+            <div class="showDetails showDetails_taobaoDetails">
+                <div>查看全部</div>
+            </div>
+            {{/if}}
+        </div>
+    </div>
+</script>
+
+<div class="detailContainer"></div>
+
+<!--京东-->
+<script type="text/html" id="jdInfo">
+    <div class="content_detail">
+        <h2 class="s_h2">京东</h2>
+
+        <div class="content_detail_list">
+            <h3 class="id_h3">基本注册信息</h3>
+            <table class="tab_box_c6">
+                <tbody>
+                <tr>
+                    <td>最后登录时间</td>
+                    <td><span>2015-6-20 14:22</span></td>
+                    <td>注册时间</td>
+                    <td><span>2015-06-20 14:22</span></td>
+                    <td>手机号</td>
+                    <td><span>1362382434</span></td>
+                    <td><a href="javascript:void(0)" class="certification"><span class="noAuthentication"></span>认证不一致</a></td>
+                    <td>真实姓名</td>
+                    <td><span>郭泽雨</span></td>
+                    <td><a href="javascript:void(0)" class="certification"><span class="authentication"></span>认证一致</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="content_detail_list clearfix">
+            <div class="tab_box_left">
+                <h3 class="jd_logo">京东资产</h3>
+                <table class="tab_box">
+                    <tbody>
+                    <tr>
+                        <td>白条额度</td>
+                        <td><span>1,800.00元</span></td>
+                        <td>小金库</td>
+                        <td><span>800.00元</span></td>
+                    </tr>
+                    <tr>
+                        <td>可用额度</td>
+                        <td><span>1,600.00元</span></td>
+                        <td>锁定额度</td>
+                        <td><span>1,600.00元</span></td>
+                    </tr>
+                    <tr>
+                        <td>账户状态</td>
+                        <td><span>正常</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab_box_you">
+                <h3 class="address_h3">近3个月收支明细</h3>
+                <table class="tab_box">
+                    <thead>
+                    <th>时间</th>
+                    <th>存入</th>
+                    <th>支出</th>
+                    <th>备注</th>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>2015-06</td>
+                        <td>32.00元</td>
+                        <td>32.00元</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>2015-06</td>
+                        <td>32.00元</td>
+                        <td>32.00元</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>2015-06</td>
+                        <td>32.00元</td>
+                        <td>32.00元</td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="content_detail_list">
+            <h3 class="jd_logo">京东交易明细</h3>
+            <table class="tab_box">
+                <thead>
+                <th>订单信息</th>
+                <th>交易时间</th>
+                <th>收货人</th>
+                <th>订单金额</th>
+                <th>付款方式</th>
+                <th>交易状态</th>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>01</td>
+                    <td>2015-06-20 14:22</td>
+                    <td>张三</td>
+                    <td>500.00</td>
+                    <td>借记卡</td>
+                    <td>已完成</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="content_detail_list">
+            <h3 class="jd_logo">京东消费汇总</h3>
+            <table class="tab_box">
+                <thead>
+                <th>时间</th>
+                <th>交易金额</th>
+                <th>交易发生数</th>
+                <th>交易成功数</th>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>2015-06</td>
+                    <td>50.00</td>
+                    <td>22</td>
+                    <td>22</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="content_detail_list">
+            <h3 class="jd_logo">京东收货地址</h3>
+            <table class="tab_box">
+                <thead>
+                <th>姓名</th>
+                <th>所在地</th>
+                <th>地址</th>
+                <th></th>
+                <th>手机</th>
+                <th>固定电话</th>
+                <th>电子邮箱</th>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>张三</td>
+                    <td>北京市</td>
+                    <td>北京市东城区</td>
+                    <td class="default_address"><span class="default_address_icon"></span>默认地址</td>
+                    <td>13600144922</td>
+                    <td>010-12345678</td>
+                    <td>guozeyu@126.com</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</script>
+<!--银联卡-->
+<script type="text/html" id="unionPayInfo">
+    <div class="content_detail">
+        <h2 class="s_h2">银联卡</h2>
+        <div class="content_detail_list">
+            <table class="tab_box">
+                <thead>
+                <th>银联卡号</th>
+                <th>首次交易日期</th>
+                <th>最后交易日期</th>
+                <th>支出金额</th>
+                <th>收入金额</th>
+                <th>交易次数</th>
+                <th></th>
+                </thead>
+                <tbody>
+                {{each data as v index}}
+                <tr>
+                    <td>{{v.cardbaseInfo.card}}</td>
+                    <td>{{v.cardbaseInfo.firstTransDate}}</td>
+                    <td>{{v.cardbaseInfo.lastTransDate}}</td>
+                    <td>{{v.cardbaseInfo.outcome}}</td>
+                    <td>{{v.cardbaseInfo.income}}</td>
+                    <td>{{v.cardbaseInfo.transCount}}</td>
+                    <td class="union_detail"><a href="javascript:void(0)" class="unionPayDetails details detailsList" data-show="true" data-index="{{index}}">详情</a></td>
+                </tr>
+
+                {{/each}}
+                </tbody>
+            </table>
+            <!--银联卡详情-->
+
+        </div>
+    </div>
+</script>
+<script type="text/html" id="unionPayDetail">
+    <div class="details_dialog unionPay">
+        <div class="square_icon2"></div>
+        <div class="details_box">
+            <table class="details_box_list">
+                <thead>
+                <tr>
+                    <th>商户名称</th>
+                    <th>商户地址</th>
+                    <th>商户类型</th>
+                    <th>交易代码</th>
+                    <th>交易金额</th>
+                    <th>交易时间</th>
+                    <th>商户代码</th>
+                    <th>交易终端代码</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{each cardBillList as v}}
+                <tr>
+                    <td>{{v.merchantName}}</td>
+                    <td>{{v.merchantAddress}}</td>
+                    <td>{{v.merchantType}}</td>
+                    <td>{{v.transactionCode}}</td>
+                    <td>{{v.transactionAmount}}</td>
+                    <td>{{v.transactionTime}}</td>
+                    <td>{{v.merchantId}}</td>
+                    <td>{{v.terminalId}}</td>
+                </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</script>
+<!--交叉认证-->
+<script type="text/html" id="certifiedInfo">
+    <div class="content_detail">
+        <h2 id="certification" class="s_h2">交叉认证</h2>
+        <div class="content_detail_list">
+            <div class="tab_box clearfix">
+                <table class="tab_box_left">
+                    <thead>
+                    <th colspan="6">姓名交叉认证</th>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>用户注册姓名</td>
+                        <td><span>{{name}}</span></td>
+                        <td>闪银撞库姓名</td>
+                        <td><span>{{wecashName}}</span></td>
+                    </tr>
+                    <tr>
+                        <td>58或北银撞库姓名</td>
+                        <td><span>{{wecashOtherName}}</span></td>
+                        <td>淘宝名</td>
+                        <td><span>{{taobaoName}}</span></td>
+                    </tr>
+                    <tr>
+                        <td>运营商身份证姓名</td>
+                        {{each operatorIdcardNameArray as v}}
+                        <td><span>{{v.idcardName}}</span></td>
+                        {{/each}}
+                    </tr>
+                    </tbody>
+                </table>
+                <table class="tab_box_right">
+                    <thead>
+                    <th colspan="6">电话交叉认证</th>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>用户注册电话</td>
+                        <td><span>{{phone}}</span></td>
+                        <td>闪银撞库电话</td>
+                        <td><span>{{wecashPhone}}</span></td>
+                    </tr>
+                    <tr>
+                        <td>58或北银撞库电话</td>
+                        <td><span>{{wecashOtherPhone}}</span></td>
+                        <td>支付宝电话</td>
+                        <td><span>{{alipayPhone}}</span></td>
+                    </tr>
+                    <tr>
+                        <td>淘宝电话</td>
+                        <td><span>{{taobaoPhone}}</span></td>
+                        <td>淘宝收货人为本人的电话汇总</td>
+                        {{each phoneTaobaoArray as v}}
+                        <td><span>{{v.selfReceiverPhone}}</span></td>
+                        {{/each}}
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="content_detail_list">
+            <div class="tab_box clearfix">
+                <table class="tab_box_left">
+                    <thead>
+                    <th colspan="6">身份证号交叉认证</th>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>用户注册身份证号</td>
+                        <td><span>{{idcard}}</span></td>
+                        <td>闪银撞库身份证号</td>
+                        <td><span>{{wecashIdcard}}</span></td>
+                    </tr>
+                    <tr>
+                        <td>58或北银撞库身份证号</td>
+                        <td><span>{{wecashOtherIdcard}}</span></td>
+                        <td>支付宝实名身份证号</td>
+                        <td><span>{{alipayIdcard}}</span></td>
+                    </tr>
+                    <tr>
+                        <td>运营商身份证号</td>
+                        {{each opertorIdcardList as v}}
+                        <td><span>{{opertorIdcardList.idcard}}</span></td>
+                        {{/each}}
+                    </tr>
+                    </tbody>
+                </table>
+                <table class="tab_box_right">
+                    <thead>
+                    <th colspan="6">地址交叉认证</th>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>闪银撞库地址</td>
+                        <td><span>{{wecashAddress}}</span></td>
+                        <td>58或北银撞库地址</td>
+                        <td><span>{{wecashOtherAddress}}</span></td>
+                    </tr>
+                    <tr>
+                        <td>身份证归属地</td>
+                        <td><span>{{idcardAddress}}</span></td>
+                        <td>手机归属地</td>
+                        <td><span>{{phoneAddress}}</span></td>
+                    </tr>
+                    <tr>
+                        <td>运营商身份证地址</td>
+                        {{each operatorIdcardAddressArray as v}}
+                        <td><span>{{v.idcardAddress}}</span></td>
+                        {{/each}}
+                    </tr>
+                    <tr>
+                        <td colspan="6">淘宝前三收货地址</td>
+                    </tr>
+                    <!--<tr>
+                        <td>收货地址</td>
+                        <td>收货次数</td>
+                        <td>收货电话</td>
+                        <td>收货人</td>
+                    </tr>-->
+                    {{each addressTaobaoArray as v}}
+                    <tr>
+                        <td colspan="6">{{v.receiverAddress}}</td>
+                    </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</script>
+<script src="js/jquery-2.1.1.min.js" ></script>
+<div id="otherLoading" style="text-align:center;display:none"><img src="image/loading.gif" style="width:50px;height:50px"></div>
+<script type="text/javascript">
+    //     mini.parse();
+    //     function cancelUpdate(){
+    //         if (window.CloseOwnerWindow) return window.CloseOwnerWindow();
+    //         else window.close();
+    //     }
+$(function () {
+    console.log( $(".zhengxin .layui-layer-close",window.parent.document));
+    console.log( window.parent.document);
+    $(".zhengxin .layui-layer-close",window.parent.document).click(function () {
+        $(".zhengxin",window.parent.document).hide();
+    })
+})
+</script>
+
+
+<script type="text/javascript">
+    var ele='';
+    $(function(){
+        var curWwwPath=window.document.location.href;
+
+//获取主机地址之后的目录
+        var pathName=window.document.location.pathname;
+        var pos=curWwwPath.indexOf(pathName);
+
+//获取主机地址，如： http://localhost:8083
+        var localhostPaht=curWwwPath.substring(0,pos);
+
+//获取带"/"的项目名
+        var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
+
+//        var syCustId=GetQueryString('customerId');
+        var idNo=GetQueryString('idNo');
+        var phone=GetQueryString('phoneNo');
+        $.ajax( {
+            url:projectName+'/admin/credit_report/toTongdunJson',// 跳转到 action
+            data:{
+                idNo : idNo,
+                phone:phone
+            },
+            type:'post',
+            dataType:'JSON',
+            success:function(data) {
+                $("#finalScore").html(data['finalScore']);
+                $("#finalDecision").html(getFinalDecision(data['finalDecision']));
+                $("#riskType").html(getRiskType(data['riskType']));
+                $("#policyMode").html(getPolicyMode(data['policyMode']));
+                // alert(data['finalScore']);
+                var obj=eval("("+data['rules']+")");
+                // alert(obj.length);
+                // alert($.isArray(obj));
+                createPanel(obj);
+            },
+            error : function() {
+                alert("异常！");
+            }
+        });
+
+    });
+    function createPanel(ruleData){
+        var rules=ruleData;
+        if(""==rules){
+            return;
+        }
+        var ruleDiv=$("#rules");
+        ele="<div class='panel-group' id='accordion' role='tablist' >";
+        for (var i=0;i<rules.length;i++){  //存在多个规则
+            var rule=rules[i];
+            ele+="<div class='panel panel-default'>";
+            ele+="<div class='panel-heading' role='tab' id='headin"+i+"One'>";
+            ele+="<h4 class='panel-title'>";
+            ele+="<a role='button' data-toggle='collapse' data-parent='#accordion' href='#collapse"+i+"One' aria-expanded='true' aria-controls='collapse"+i+"One'>"+rule.name;
+            ele+="</a></h4></div>";
+            ele+="<div id='collapse"+i+"One' class='panel-collapse in' role='tabpanel' aria-labelledby='heading"+i+"One'>";
+            ele+="<div class='panel-body'>";
+            loadRuleDetail(rule.ruleTable);
+            // alert(rule.name);
+            ele+="</div></div></div>";
+
+        }
+        ele+="</div>";
+        ruleDiv.append(ele);
+    }
+
+    function loadRuleDetail(jsonn){
+        var json1=eval('(' + jsonn + ')');
+        //alert(jsonn);
+        var json=[];
+        json.push(json1);
+        for(var i=0;i<json.length;i++){
+            var mingzhongfenshu=json[i]['命中分数'];
+            ele+="<span style='font-size: 15px;color: #666;font-weight:700;font-family: '宋体';'>命中分数&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#000'>"+mingzhongfenshu+"</span></span><hr style='border:0.5px dashed gay; margin-top:10px;margin-bottom:10px; ' >";
+            var flag=false;
+            for(var key in json[i]){
+                var mm= json[i][key];  //拿到规则key value
+                if($.isArray(mm)){   //进入到规则详情数组
+                    for(var j=0;j<mm.length;j++){  //循环数组
+                        var desc=mm[j]['描述'];
+                        ele+="<span style='font-size: 15px;color: #666;font-weight:700;font-family: '宋体';'>描述&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#000'>"+desc+"</span></span><br/>";
+                        for(var key1 in mm[j]){  //循环规则对象
+                            if(key1=='描述'){
+                                continue;
+                            }
+                            var nn= mm[j][key1];
+
+                            if($.isArray(nn)){
+                                ele+="<hr style='margin-top:10px;margin-bottom:10px;'><h5>"+key1+"</h5>";  //数组标题列
+                                for(var k=0;k<nn.length;k++){
+                                    for(var key2 in nn[k]){
+                                        var bb= nn[k][key2];
+                                        if($.isArray(bb)){
+                                        }else{
+                                            ele+="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='font-size: 14px;'>"+key2+'&nbsp;:&nbsp;'+bb+"</span><br/>";
+                                        }
+                                    }
+                                }
+                                flag=true;
+                            }else{   //单一一级规则属性
+                                if(flag){  //表示上一个是数组
+                                    ele+="<hr style='margin-top:10px;margin-bottom:10px;'><span style='font-size: 14px;'>"+key1+"&nbsp;:&nbsp;"+nn+"</span><br/>";
+                                    flag=false;
+                                }else{
+                                    ele+="<span style='font-size: 15px;color: #666;font-weight:700;font-family: '宋体';'>"+key1+"&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#000'>"+nn+"</span></span><br/>";
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+    }
+    function getPolicyMode(key){
+        if("FirstMatch"==key){
+            return "首次匹配";
+        }else if("WorstMatch"==key){
+            return "最坏匹配";
+        }else{
+            return "权重模式";
+        }
+    }
+    function getRiskType(key){
+        if("suspiciousLoan"==key){
+            return "异常借款";
+        }else if("Review"==key){
+            return "低风险，审查";
+        }else{
+            return "高风险，拒绝";
+        }
+    }
+    function getFinalDecision(key){
+        if("Accept"==key){
+            return "无风险，通过";
+        }else if("Review"==key){
+            return "低风险，审查";
+        }else{
+            return "高风险，拒绝";
+        }
+    }
+
+
+    function GetQueryString(name)
+    {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r!=null)return  unescape(r[2]); return null;
+    }
+
+</script>
+
+
+<div class="globalTip"><div><i class="waitIcon"></i><p class="tip_content4show"></p></div></div><div class="globalTip"><div><i class="waitIcon"></i><p class="tip_content4show"></p></div></div></body>
+</html>

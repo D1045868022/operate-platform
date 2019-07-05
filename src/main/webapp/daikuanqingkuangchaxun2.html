@@ -145,8 +145,9 @@
 <script src="js/jedate.min.js"></script>
 <script src="js/common.js"></script>
 <script>
-    <!--下拉框~~~~~~贷鱼贷款状态-->
+    <!--下拉框 贷鱼贷款状态 -->
     $(function(){
+
         $.ajax({
             type: 'POST',
             url: 'http://localhost:8010/daikuanchaxun/enquiry/enquiryStatus2',
@@ -350,6 +351,18 @@
     //多条件查询点击事件
     $("#btn-search").on("click",function(){
         _search()
+    })
+//    查询详情
+    $("#reviewList").on("dblclick","tr",function () {
+        $("#money_info", window.parent.document).show();
+
+    })
+    $("#money_info .layui-layer-close",window.parent.document).click(function () {
+        $("#money_info", window.parent.document).hide();
+    })
+    $(".ul_li", window.parent.document).click(function () {
+        $(this,window.parent.document).children(".iradio_square-blue").addClass("checked");
+        $(this,window.parent.document).siblings().find(".iradio_square-blue").removeClass("checked");
     })
 
 </script>
