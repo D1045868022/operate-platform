@@ -63,6 +63,13 @@ public class LoanDetailVo {
     private String backBank;//默认还款银行
     private String agreement;//授权协议----默认值
 
+    //影像资料pojo类对应表userPicture
+    private String idPositive;//'身份证正面
+    private String idOtherSide;//'身份证反面
+    private String phoneIdPicture;//'手机身份证照片
+    private String videoAuthentication;//'视频认证
+    private String trainingContract;//'培训合同照片
+    private String diploma;//'毕业证照片
 
 
 }
