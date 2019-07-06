@@ -40,14 +40,14 @@
 
     <!--总条数-->
     <select id="queryByloginId" parameterType="java.lang.Integer" resultType="com.zr.loan.pojo.LoanDetailVo">
-        SELECT p.loginId,pf.myCourse,pf.amountInstallments,pf.paymentCycle,pf.classHours,u.`name`,u.idCode,u.phone,u.qqCode,pic.idPositive,pic.idOtherSide,pic.phoneIdPicture,pic.videoAuthentication,pic.trainingContract,pic.diploma
+        SELECT DISTINCT p.loginId,pf.myCourse,pf.amountInstallments,pf.paymentCycle,pf.classHours,u.`name`,u.idCode,u.phone,u.qqCode,pic.idPositive,pic.idOtherSide,pic.phoneIdPicture,pic.videoAuthentication,pic.trainingContract,pic.diploma
         ,l.maritalStatus,l.liveStatus,l.liveYear,l.detailedAddress,urr.familyContacts,urr.relationsWithMe,urr.contactTelephone,urr.commonFamilyContacts,urr.commonRelationsWithMe,urr.commonPhone,
         upay.openingBank,upay.bankCardAccount,upay.bankPhone,p.amountSettlement,p.paymentAccount,p.agreement,p.startTime,p.firstPayMentDate,p.backBank
          FROM paydivide p
         LEFT JOIN paymentInformation pf ON p.loginId=pf.loginId
         LEFT JOIN userinfo u ON p.loginId=u.loginId
         LEFT JOIN useredu e ON p.loginId=e.loginId
-        LEFT JOIN userlive l ON p.loginId=e.loginId
+        LEFT JOIN userlive l ON p.loginId=l.loginId
         LEFT JOIN userpicture pic ON p.loginId=pic.loginId
         LEFT JOIN userrelation urr ON p.loginId=urr.loginId
         LEFT JOIN userrepay upay ON p.loginId=upay.loginId
