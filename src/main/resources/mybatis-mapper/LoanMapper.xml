@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zr.loan.mapper.LoanMapper">
+    <select id="queryPage" parameterType="com.zr.loan.pojo.LoanSelectVo" resultType="com.zr.loan.pojo.LoanShowVo">
+        select *from paydivide
+        WHERE  1=1
+        <if test="idNo != null and idNo != ''">
+            and idCode = #{idNo}
+        </if>
+        <if test=" idName != null and idName != ''">
+            and name = #{idName}
+        </if>
+        <if test="phoneNo != null and phoneNo != ''">
+            and iphone = #{phoneNo}
+        </if>
+        <if test=" bcName != null and bcName != ''">
+            and paymentAccount = #{bcName}
+        </if>
+        limit #{offset},#{pageSize}
+    </select>
+
+    <!--总条数-->
+    <select id="queryCount" parameterType="com.zr.loan.pojo.LoanSelectVo" resultType="java.lang.Integer">
+        select count(id)
+        FROM paydivide
+        WHERE  1=1
+        <if test="idNo != null and idNo != ''">
+            and idCode = #{idNo}
+        </if>
+        <if test=" idName != null and idName != ''">
+            and name = #{idName}
+        </if>
+        <if test="phoneNo != null and phoneNo != ''">
+            and iphone = #{phoneNo}
+        </if>
+        <if test=" bcName != null and bcName != ''">
+            and paymentAccount = #{bcName}
+        </if>
+    </select>
+
+    <!--总条数-->
+    <select id="queryByloginId" parameterType="java.lang.Integer" resultType="com.zr.loan.pojo.LoanDetailVo">
+        SELECT p.loginId,pf.myCourse,pf.amountInstallments,pf.paymentCycle,pf.classHours,u.`name`,u.idCode,u.phone,u.qqCode,pic.idPositive,pic.idOtherSide,pic.phoneIdPicture,pic.videoAuthentication,pic.trainingContract,pic.diploma
+        ,l.maritalStatus,l.liveStatus,l.liveYear,l.detailedAddress,urr.familyContacts,urr.relationsWithMe,urr.contactTelephone,urr.commonFamilyContacts,urr.commonRelationsWithMe,urr.commonPhone,
+        upay.openingBank,upay.bankCardAccount,upay.bankPhone,p.amountSettlement,p.paymentAccount,p.agreement,p.startTime,p.firstPayMentDate,p.backBank
+         FROM paydivide p
+        LEFT JOIN paymentInformation pf ON p.loginId=pf.loginId
+        LEFT JOIN userinfo u ON p.loginId=u.loginId
+        LEFT JOIN useredu e ON p.loginId=e.loginId
+        LEFT JOIN userlive l ON p.loginId=e.loginId
+        LEFT JOIN userpicture pic ON p.loginId=pic.loginId
+        LEFT JOIN userrelation urr ON p.loginId=urr.loginId
+        LEFT JOIN userrepay upay ON p.loginId=upay.loginId
+        WHERE p.loginId=#{loginId};
+    </select>
+
+</mapper>
+
+
