@@ -247,26 +247,26 @@
 
 
     function _search(_page) {
-        var idCode,customerName,contactNumber,merchant,pageIndex,pageSize;
-        idCode = $("#idNo").val();
-        customerName = $("#idName").val();
-        contactNumber = $("#phoneNo").val();
-        merchant = $("#bcName").val();
+        var idNo,idName,phoneNo,bcName,pageIndex,pageSize;
+        idNo = $("#idNo").val();
+        idName = $("#idName").val();
+        phoneNo = $("#phoneNo").val();
+        bcName = $("#bcName").val();
         if(_page!=""){
             var tmp={
-                "idCode":idCode,
-                "customerName":customerName,
-                "contactNumber":contactNumber,
-                "merchant":merchant,
+                "idNo":idNo,
+                "idName":idName,
+                "phoneNo":phoneNo,
+                "bcName":bcName,
                 "pageIndex":_page,
                 "pageSize":1
             };
         }else{
             var tmp={
-                "idCode":idCode,
-                "customerName":customerName,
-                "contactNumber":contactNumber,
-                "merchant":merchant,
+                "idNo":idNo,
+                "idName":idName,
+                "phoneNo":phoneNo,
+                "bcName":bcName,
                 "pageIndex":0,
                 "pageSize":1
             };
@@ -274,7 +274,7 @@
 
         $.ajax({
             type: 'POST',
-            url: 'http://localhost:8010/daikuanchaxun/queryPage',
+            url: 'http://localhost:8010/loansituation/queryPage',
             dataType: 'JSON',
             data: JSON.stringify(tmp),
             contentType: "application/json;charset=utf-8",
@@ -289,20 +289,19 @@
                     }
                     for(var i = 0;i<_list.length;i++){
                         _html+="<tr>"+
-                            "<td>"+_list[i].merchant+"</td>"+
-                            "<td>"+_list[i].customerName+"</td>"+
+                            "<td>"+_list[i].paymentAccount+"</td>"+
+                            "<td>"+_list[i].name+"</td>"+
                             "<td>"+_list[i].idCode+"</td>"+
-                            "<td>"+_list[i].contactNumber+"</td>"+
-                            "<td>"+_list[i].management+"</td>"+
-                            "<td>"+_list[i].loanFishStatus+"</td>"+
-                            "<td>"+_list[i].pushStatus+"</td>"+
-                            "<td>"+_list[i].approvalTime+"</td>"+
-                            "<td>"+_list[i].incomingPartsTime+"</td>"+
-                            "<td>"+_list[i].incomingPartsChannel+"</td>"+
-                            "<td>"+_list[i].managementNum+"</td>"+
-                            "<td>"+_list[i].signatureStatus+"</td>"+
-                            "<td>"+_list[i].createName+"</td>"+
-                            "<td>"+_list[i].updateName+"</td>";
+                            "<td>"+_list[i].amountSettlement+"</td>"+
+                            "<td>"+_list[i].amountSettlement+"</td>"+
+                            "<td>"+_list[i].amountSettlement+"</td>"+
+                            "<td>"+_list[i].amountSettlement+"</td>"+
+                            "<td>"+_list[i].amountSettlement+"</td>"+
+                            "<td>"+_list[i].amountSettlement+"</td>"+
+                            "<td>"+_list[i].amountSettlement+"</td>"+
+                            "<td>"+_list[i].amountSettlement+"</td>"+
+                            "<td>"+_list[i].amountSettlement+"</td>"+
+                            "<td>"+_list[i].amountSettlement+"</td>";
                         _html+="<tr/>";
                     }
                     $("#reviewList tbody").html(_html);

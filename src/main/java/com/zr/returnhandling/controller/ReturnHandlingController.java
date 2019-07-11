@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-//前端和后端端口不同：跨域的访问需要这个注解
+//1111前端和后端端口不同：跨域的访问需要这个注解
 @CrossOrigin
 public class ReturnHandlingController {
     @Autowired

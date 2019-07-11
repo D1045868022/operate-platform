@@ -11,6 +11,7 @@ import java.util.Date;
 @Data
 public class Loansituation {
 
+
     private  Integer id;
 
     private String merchant;    //商户
