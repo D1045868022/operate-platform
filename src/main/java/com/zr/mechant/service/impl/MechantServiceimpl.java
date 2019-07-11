@@ -95,11 +95,11 @@ public class MechantServiceimpl implements MechantService {
 
         mechantMapper.addMp(mechantAddVo.getMechantPicList());
         mechantMapper.addMc(mc);
-        mechantMapper.addMs(mechantAddVo.getMechant_speedProgressList());
+        mechantMapper.addMs(mechantAddVo.getMechantSpeedProgressList());
         mechantMapper.addMca(mca);
         mechantMapper.addMg(mg);
         mechantMapper.addMz(mz);
-        mechantMapper.addMo(mechantAddVo.getMechant_otherList());
+        mechantMapper.addMo(mechantAddVo.getMechantOtherList());
 
         return ResultVOBuilder.success(mechantAddVo);
     }

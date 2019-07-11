@@ -143,13 +143,14 @@ public class OperatePlatformApplicationTests {
 		try {
 			System.out.println(IDUtils.genLuJing());
 			System.out.println(IDUtils.genImageName());
-			FileInputStream in=new FileInputStream(new File("C:\\Users\\86151\\Desktop\\img\\showpic2.jpg"));
-			boolean flag = uploadFile("192.168.17.131", 21, "ftpuser2", "root", "/home/ftpuser2/",IDUtils.genLuJing(), IDUtils.genImageName()+".gif", in);
+			FileInputStream in=new FileInputStream(new File("C:\\Users\\Administrator\\Desktop\\uptupian\\6af1fa86caf047e683e4a830491da6fc.jpg"));
+			boolean flag = uploadFile("192.168.92.128", 21, "ftpuser", "ftpuser123456", "/home/ftpuser/",IDUtils.genLuJing(), IDUtils.genImageName()+".gif", in);
 			System.out.println(flag);
+
 			/*String host, int port, String username, String password, String remotePath,
-					String fileName, String localPath)
+					String fileName, String localPath)*/
 			//下载代码
-		/*	boolean flag = downloadFile("192.168.17.131", 21, "ftpuser2", "root", "/home/ftpuser2/2019/07/05","9.gif", "E:\\0529\\图片");
+			/*boolean flag = downloadFile("192.168.92.128", 21, "ftpuser", "ftpuser123456", "/home/ftpuser2/2019/07/05","9.gif", "C:\\Users\\Administrator\\Desktop\\tupian");
 			System.out.println(flag);*/
 
 

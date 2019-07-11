@@ -69,8 +69,9 @@ public class PaydivideServiceImpl implements PaydivideSerivce{
         if (StringUtils.isEmpty(paydivideUpdateStatusVo.getStatus())){
             return ResultVOBuilder.error(ContentUtil.STATUSISNU,ContentUtil.ERRORCODE);
         }
+        PaydivideSelectVo byId = paydivideMapper.findById(paydivideUpdateStatusVo.getId());
         //只有 ”确认状态“ 下才能走审批
-        if(paydivideUpdateStatusVo.getStatus()!=StatusEnum.getstatusValue(ContentUtil.QDZT)){
+        if(byId.getStatus()!=StatusEnum.getstatusValue(ContentUtil.QDZT)){
             return ResultVOBuilder.error(ContentUtil.QRSTATUS,ContentUtil.ERRORCODE);
         }
         //操作数据库

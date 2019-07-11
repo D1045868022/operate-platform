@@ -43,7 +43,7 @@ public class MechantAddVo {
 //    private String statusName;
 //    private String  code;
     //private Integer mechant_id;
-    private List<Mechant_SpeedProgress> mechant_speedProgressList;
+    private List<Mechant_SpeedProgress> mechantSpeedProgressList;
 
     //合同信息表 mechant_pic
     // private Date startTime  ;
@@ -57,6 +57,7 @@ public class MechantAddVo {
     private Integer isStore;//是否有门店
     private Integer isCreateStore;//是否能自建门店
     private Integer  isDeduction;//商户标识
+    private List<Integer> deductionList;//商户标识多选框
     private  Integer isGrantAuthorization;//是否强制授权
     private Integer isActiveRepayment; //是否能主动还款
     private Integer education;  //教育
@@ -85,7 +86,7 @@ public class MechantAddVo {
     private String zhifubaoPid;
     //其他信息表mechant_other
     //private String pic;
-    private List<Mechant_Other> mechant_otherList;
+    private List<Mechant_Other> mechantOtherList;
 
     private Date createTime;
     private String createName;

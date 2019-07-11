@@ -6,7 +6,7 @@
         select startTime,name,status
         FROM paydivide
         WHERE status=#{status}
-        <if test="name!=null">
+        <if test="name!=null and name!=''">
             and name=#{name}
         </if>
         <if test="startTime!=null">
