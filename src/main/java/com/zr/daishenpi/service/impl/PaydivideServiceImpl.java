@@ -35,7 +35,7 @@ public class PaydivideServiceImpl implements PaydivideSerivce{
         //查询出总条数
         int count = paydivideMapper.queryCount();
 
-        paydivideSelectVo.setStatus(StatusEnum.getstatusValue(ContentUtil.QRZT));
+        paydivideSelectVo.setStatus(StatusEnum.getstatusValue(ContentUtil.QDZT));
 
         //查询出全部信息 paydivideSelectVoList中有为转化的数据 status
         List<PaydivideSelectVo> paydivideSelectVoList = paydivideMapper.queryByPage(paydivideSelectVo);
@@ -70,7 +70,7 @@ public class PaydivideServiceImpl implements PaydivideSerivce{
             return ResultVOBuilder.error(ContentUtil.STATUSISNU,ContentUtil.ERRORCODE);
         }
         //只有 ”确认状态“ 下才能走审批
-        if(paydivideUpdateStatusVo.getStatus()!=StatusEnum.getstatusValue(ContentUtil.QRZT)){
+        if(paydivideUpdateStatusVo.getStatus()!=StatusEnum.getstatusValue(ContentUtil.QDZT)){
             return ResultVOBuilder.error(ContentUtil.QRSTATUS,ContentUtil.ERRORCODE);
         }
         //操作数据库

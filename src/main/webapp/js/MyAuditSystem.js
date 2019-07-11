@@ -21,9 +21,19 @@ $(document).ready(function() {
         };
         pager = $.extend(pager, opt);
         var URLHTTP="http://182.92.6.16:8688/hd-merchant-approve/userInfo/hdCreditReports"
-        
+
+     /*   var temp={
+
+
+         pageSize: pager.pageCount ,
+         pageIndex: pager.currentPage
+
+
+         }*/
         $.ajax({
             type: "post",
+           // url: "http://localhost:8010/daishenpi/getUserContactsInfo",
+            //data:temp,
             url: URLHTTP+"/getUserContactsInfo?pageSize=5&pageNo=1&userId=26564",
             //url: "/getUserContactsInfo?pageSize=5&pageNo=1&userId=26564",
             dataType: 'json',
