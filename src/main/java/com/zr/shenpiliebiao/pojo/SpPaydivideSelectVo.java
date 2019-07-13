@@ -1,5 +1,6 @@
 package com.zr.shenpiliebiao.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zr.util.PageVo;
 import lombok.Data;
 
@@ -14,8 +15,11 @@ import java.util.Date;
 public class SpPaydivideSelectVo extends PageVo{
 
     private Integer Id;
-    private Date startTime;//开始时间 （进件时间）
+    /*@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+    private Date startTime;//开始时间 （进件时间）*/
     private String name; //客户姓名
+    private Integer status; //推送状态 value
+    private String statusName; // 推送状态 name
 
 
 }

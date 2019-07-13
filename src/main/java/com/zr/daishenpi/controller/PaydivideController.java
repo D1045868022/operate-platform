@@ -38,7 +38,6 @@ public class PaydivideController {
 
         return paydivideSerivce.updateStatus(paydivideUpdateStatusVo);
 
-
     }
 
 

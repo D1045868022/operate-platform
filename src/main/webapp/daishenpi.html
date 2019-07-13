@@ -238,7 +238,20 @@
                   <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="managerList" rowspan="1" colspan="1" aria-sort="ascending" aria-label="进件时间: 以降序排列此列" style="width: 105px;">进件时间</th><th class="sorting" tabindex="0" aria-controls="managerList" rowspan="1" colspan="1" aria-label="客户姓名: 以升序排列此列" style="width: 58px;">客户姓名</th><th class="sorting" tabindex="0" aria-controls="managerList" rowspan="1" colspan="1" aria-label="渠道名称: 以升序排列此列" style="width: 168px;">渠道名称</th><th class="sorting" tabindex="0" aria-controls="managerList" rowspan="1" colspan="1" aria-label="货款类型: 以升序排列此列" style="width: 58px;">货款类型</th><th class="sorting" tabindex="0" aria-controls="managerList" rowspan="1" colspan="1" aria-label="资金方: 以升序排列此列" style="width: 45px;">资金方</th><th class="sorting" tabindex="0" aria-controls="managerList" rowspan="1" colspan="1" aria-label="推送状态: 以升序排列此列" style="width: 58px;">推送状态</th><th class="sorting" tabindex="0" aria-controls="managerList" rowspan="1" colspan="1" aria-label="历史审核人: 以升序排列此列" style="width: 72px;">历史审核人</th><th class="sorting" tabindex="0" aria-controls="managerList" rowspan="1" colspan="1" aria-label="累计用时: 以升序排列此列" style="width: 59px;">累计用时</th><th class="sorting" tabindex="0" aria-controls="managerList" rowspan="1" colspan="1" aria-label="操作: 以升序排列此列" style="width: 100px;">操作</th></tr>
                   </thead>
                   <tbody class="tTableBody">
-                  <tr role="row" class="odd"><td class="sorting_1">2019-05-25 10:07:28</td><td>郭淑芳</td><td>广东明世在线教育科技有限公司</td><td>教育贷</td><td>晋商教育</td><td></td><td>zhangrongxin</td><td>10分钟42秒</td><td><button type="button" data-id="6537686126979712001" class="btn btn-primary btn-sm" name="receiveOrderBtn" disabled="">领单</button>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" data-id="6537686126979712001" class="btn btn-primary btn-sm" name="resetBtn">重置</button></td></tr></tbody>
+                      <tr role="row" class="odd">
+                          <td class="sorting_1">2019-05-25 10:07:28</td>
+                          <td>郭淑芳</td>
+                          <td>广东明世在线教育科技有限公司</td>
+                          <td>教育贷</td>
+                          <td>晋商教育</td>
+                          <td></td>
+                          <td>zhangrongxin</td>
+                          <td>10分钟42秒</td>
+                          <td>
+                              <button type="button" data-id="6537686126979712001" class="btn btn-primary btn-sm" name="receiveOrderBtn" disabled="">领单</button>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" data-id="6537686126979712001" class="btn btn-primary btn-sm" name="resetBtn">重置</button>
+                          </td>
+                      </tr>
+                  </tbody>
               </table><div class="bottom"><div class="dataTables_info" id="managerList_info" role="status" aria-live="polite">显示第 1 至 1 项结果，共 1 项</div><div class="dataTables_length" id="managerList_length"><label>显示 <select name="managerList_length" aria-controls="managerList" class="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> 项结果</label></div><div class="dataTables_paginate paging_simple_numbers" id="managerList_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="managerList_previous"><a href="javascript:void(0);" aria-controls="managerList" data-dt-idx="0" tabindex="0">上页</a></li><li class="paginate_button active"><a href="javascript:void(0);" aria-controls="managerList" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button next disabled" id="managerList_next"><a href="javascript:void(0);" aria-controls="managerList" data-dt-idx="2" tabindex="0">下页</a></li></ul></div><div class="clear"></div></div></div>
           </div>
       </div>
@@ -261,6 +274,43 @@
 <script src="js/MyAuditSystem.js"></script>
 <script src="js/CaseMyAuditSystem.js"></script>
 <script src="js/html5shiv.js"></script>
+<script>
+    /*$(function () {
+        alert("待审批")
+        $.ajax({
+            url:"http://localhost:8010/daishenpi/getUserContactsInfo",
+            dataType:'json',//服务器返回json格式数据
+            type:'POST',//HTTP请求类型
+            success:function(res){
+                if(res.success){
+                    var _list = res.data;
+                    for(var i = 0;i<_list.length;i++){
+                        var _li = "<tr>";
+                        _li+="<td>"+_list[i].jinjiandate+"</td>"+
+                            "<td>"+_list[i].name+"</td>"+
+                            "<td>"+_list[i].qudaoName+"</td>"+
+                            "<td>"+_list[i].daikuanType+"</td>"+
+                            "<td>"+_list[i].zijinfang+"</td>"+
+                            "<td>"+_list[i].statusName+"</td>"+
+                            "<td>"+_list[i].shenhePerson+"</td>"+
+                            "<td>"+_list[i].leijiYongshi+"</td>"+
+                            "<td>"+_list[i].statusName+"</td>"
+                        // /!*"<td><button type="button" onclick="managerApproveClick(&quot;6537686126979712001&quot;)" class="btn btn-primary btn-sm">详情</button></td>"*!/
+                        ;
+                        _li+="</tr>";
+                        $(".tTableBody").append(_li);
+                    }
+
+                }else{
+                    $(".msg").show().text("获取失败！原因"+_res.errorMessage);
+                    setTimeout(function(){
+                        $(".msg").hide("slow")
+                    },2000)
+                }
+            }
+        });
+    })*/
+</script>
 <script>
 var dt;
 function refresh(){

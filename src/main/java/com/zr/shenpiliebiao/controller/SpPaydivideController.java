@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 待审批列表    对应数据库表---paydivide
+ * 审批列表    对应数据库表---paydivide
  * Created by 李江涛 on 2019/7/9 0009.
  */
 @RestController

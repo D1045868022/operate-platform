@@ -2,6 +2,8 @@ package com.zr.shenpiliebiao.service.impl;
 
 
 
+import com.zr.daishenpi.daishenpiEnum.StatusEnum;
+import com.zr.daishenpi.pojo.PaydivideSelectVo;
 import com.zr.shenpiliebiao.shenpiEnum.SpStatusEnum;
 import com.zr.shenpiliebiao.mapper.SpPaydivideMapper;
 import com.zr.shenpiliebiao.pojo.SpPaydivideSelectVo;
@@ -37,7 +39,8 @@ public class SpPaydivideServiceImpl implements SpPaydivideSerivce {
         //查询出全部信息 paydivideSelectVoList中有为转化的数据 status
         List<SpPaydivideSelectVo> spPaydivideSelectVoList = spPaydivideMapper.queryByPage(spPaydivideSelectVo);
 
-
+        //枚举类数据转换 将值转换成中文
+        List<SpPaydivideSelectVo> paydivideSelectVos = numberToString(spPaydivideSelectVoList);
 
         //用工具类进行分页处理
         AllRecords records=new AllRecords();
@@ -49,7 +52,17 @@ public class SpPaydivideServiceImpl implements SpPaydivideSerivce {
 
         return ResultVOBuilder.success(records);
     }
+    //数字转换成字符类
+    public List<SpPaydivideSelectVo> numberToString(List<SpPaydivideSelectVo> paydivideSelectVoList){
+        //遍历集合 进行数值和字符转换
+        for (SpPaydivideSelectVo py:paydivideSelectVoList){
+            if(py.getStatus()!=null){
+                py.setStatusName(StatusEnum.getstatusName(py.getStatus()));
+            }
+        }
 
+        return paydivideSelectVoList;
+    }
 
 
 }

@@ -3,15 +3,15 @@
 <mapper namespace="com.zr.daishenpi.mapper.PaydivideMapper">
     <!--分页查询-->
     <select id="queryByPage" parameterType="com.zr.daishenpi.pojo.PaydivideSelectVo" resultType="com.zr.daishenpi.pojo.PaydivideSelectVo">
-        select startTime,name,status
+        select id,startTime,name,status
         FROM paydivide
         WHERE status=#{status}
         <if test="name!=null and name!=''">
             and name=#{name}
         </if>
-        <if test="startTime!=null">
+       <!-- <if test="startTime!=null">
             and startTime=#{startTime}
-        </if>
+        </if>-->
         limit #{offset},#{pageSize}
     </select>
 

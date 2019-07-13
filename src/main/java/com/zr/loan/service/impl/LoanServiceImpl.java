@@ -47,7 +47,7 @@ private LoanMapper loanMapper;
     @Override
     public ResultVo<LoanDetailVo> queryByloginId(Integer loginId) {
         LoanDetailVo loanDetailVo = loanMapper.queryByloginId(loginId);
-        loanDetailVo.setRelationsWithMeName(RelationEnum.getName(loanDetailVo.getRelationsWithMe()));//常用和我的关系（第一联系人）name
+        loanDetailVo.setRelationsWithMeName(RelationEnum.getName(loanDetailVo.getRelationsWithMe()));//常用和我的关系（第一联系人）n  ame
         loanDetailVo.setCommonRelationsWithMeName(RelationEnum.getName(loanDetailVo.getCommonRelationsWithMe()));//常用和我的关系（第一联系人）name
         loanDetailVo.setMaritalStatusName(MaritalStatusEnum.getName(loanDetailVo.getMaritalStatus()));//婚姻状况
         loanDetailVo.setLiveStatusName(LivingConditionsEnum.getName(loanDetailVo.getLiveStatus()));//居住状态

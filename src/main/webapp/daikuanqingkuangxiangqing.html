@@ -35,11 +35,15 @@
             border-radius: 3px;
             padding: 0 25px;
         }
+        .btn_handles{
+          text-align: center;
+        }
+
     </style>
     <script id="layui_layer_"></script></head>
 <body style="overflow: scroll;">
 <form id="saveForm" class="form-horizontal" action="/hd/loan/saveReviewMsg/" method="post">
-    <div class="content">
+    <div class="content" style="overflow:hidden;">
         <!--面包屑导航start-->
         <!-- <ol class="breadcrumb">
               <li><a href="#">申请列表</a></li>
@@ -665,10 +669,11 @@
                         <span class="contactFirst wt_100">办单员电话&nbsp;:&nbsp;</span>
                         <input class="con_bor" type="text" readonly="readonly" value="18923745586" />
                     </div>
-                    <div class="contactsList">
+                    <div class="contactsList ">
                         <a class="ListTips">申请人</a>
                         <div class="col-lg-12 col-sm-12 col-md-12">
-                            <p><span class="contactFirst">姓名&nbsp;:&nbsp;</span><input type="text" readonly="readonly" value="王专"><span class="contactFirst">联系方式&nbsp;:&nbsp;</span><input type="text" readonly="readonly" value="15137761021"><span class="glyphicon glyphicon-earphone phoneIcon"></span></p>
+                            <p><span class="contactFirst">姓名&nbsp;:&nbsp;</span>
+                                <input type="text" class="idName" readonly="readonly" value="王专"><span class="contactFirst">联系方式&nbsp;:&nbsp;</span><input type="text" class="contact_phone" readonly="readonly" value="15137761021"><span class="glyphicon glyphicon-earphone phoneIcon"></span></p>
                             <p class="shen">
 
                             <div class="iradio_square-blue" style="position: relative;"><input type="radio" value="A" data-val="已核实" name="applyUserCallStatus" id="applyUserCallStatus0" style="position: absolute; top: -100%; left: -100%; display: block; width: 300%; height: 300%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: -100%; left: -100%; display: block; width: 300%; height: 300%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
@@ -749,7 +754,7 @@
 
 
 
-                    <div class="contactsList">
+                    <div class="contactsList first_contact">
                         <a class="ListTips">第一联系人</a>
                         <div class="col-lg-12 col-sm-12 col-md-12">
                             <input type="hidden" name="loanCustContactsInfoList[0].id" value="6552118089084830721">
@@ -823,7 +828,7 @@
                         </div>
                     </div>
 
-                    <div class="contactsList">
+                    <div class="contactsList second_contact">
                         <a class="ListTips">第二联系人</a>
                         <div class="col-lg-12 col-sm-12 col-md-12">
                             <input type="hidden" name="loanCustContactsInfoList[1].id" value="6552118089093219329">
@@ -1050,6 +1055,13 @@
             </div>
         </div>
         <!--ID end-->
+
+    </div>
+    <div class="btn_handles">
+        <button class="btn btn-primary btn-sm search_btn" type="button" id="btn_tongguo">通过</button>
+        <button class="btn btn-primary btn-sm search_btn" type="button" id="btn_jujue">拒绝</button>
+        <button class="btn btn-primary btn-sm search_btn" type="button" id="btn_dahui">打回</button>
+
     </div>
 </form>
 <!--点击图片显示区域 start-->
