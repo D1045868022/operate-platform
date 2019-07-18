@@ -3,7 +3,7 @@
 <mapper namespace="com.zr.daishenpi.mapper.PaydivideMapper">
     <!--分页查询-->
     <select id="queryByPage" parameterType="com.zr.daishenpi.pojo.PaydivideSelectVo" resultType="com.zr.daishenpi.pojo.PaydivideSelectVo">
-        select id,startTime,name,status
+        select loginId Id,startTime,name,status
         FROM paydivide
         WHERE status=#{status}
         <if test="name!=null and name!=''">
@@ -25,7 +25,7 @@
     <select id="findById" parameterType="java.lang.Integer" resultType="com.zr.daishenpi.pojo.PaydivideSelectVo">
       select *
       FROM paydivide
-      WHERE id=#{id}
+      WHERE loginId=#{id}
 
     </select>
 
@@ -33,7 +33,7 @@
     <update id="updateSpStatus" parameterType="com.zr.daishenpi.pojo.PaydivideUpdateStatusVo">
         update paydivide
         SET status=#{status}
-        WHERE id=#{id}
+        WHERE loginId=#{id}
 
     </update>
 

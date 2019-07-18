@@ -141,11 +141,11 @@ public class OperatePlatformApplicationTests {
 	@Test
 	public void contextLoads() {
 		try {
-			System.out.println(IDUtils.genLuJing());
+			/*System.out.println(IDUtils.genLuJing());
 			System.out.println(IDUtils.genImageName());
 			FileInputStream in=new FileInputStream(new File("C:\\Users\\Administrator\\Desktop\\uptupian\\6af1fa86caf047e683e4a830491da6fc.jpg"));
 			boolean flag = uploadFile("192.168.92.128", 21, "ftpuser", "ftpuser123456", "/home/ftpuser/",IDUtils.genLuJing(), IDUtils.genImageName()+".gif", in);
-			System.out.println(flag);
+			System.out.println(flag);*/
 
 			/*String host, int port, String username, String password, String remotePath,
 					String fileName, String localPath)*/

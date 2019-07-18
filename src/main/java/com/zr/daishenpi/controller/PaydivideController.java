@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
  * Created by 李江涛 on 2019/7/9 0009.
  */
 @RestController
+@CrossOrigin
 @RequestMapping("daishenpi/")
 public class PaydivideController {
 

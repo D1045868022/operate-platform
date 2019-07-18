@@ -3,7 +3,7 @@
 <mapper namespace="com.zr.shenpiliebiao.mapper.SpPaydivideMapper">
     <!-- queryByPage-->
     <select id="queryByPage" parameterType="com.zr.shenpiliebiao.pojo.SpPaydivideSelectVo" resultType="com.zr.shenpiliebiao.pojo.SpPaydivideSelectVo">
-        select *
+        select loginId Id ,name,status
         FROM paydivide
         WHERE status IN (1,3,4,5)
         <if test="name!=null">
