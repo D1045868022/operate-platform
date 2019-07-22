@@ -229,12 +229,13 @@
                         <thead style="border-bottom: 0;background-color: #fff;">
                             <tr role="row">
                                 <th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 247px;">商户名称</th>
-                                <th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 47px;">所在地</th>
+                                <th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 47px;">教育机构地址</th>
                                 <th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 61px;">业务类型</th>
                                 <th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 61px;">渠道维护</th>
-                                <th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 91px;">合作开始日期</th>
-                                <th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 91px;">合作结束日期</th>
+                                <th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 91px;">宽限期天数</th>
+                                <th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 91px;">机构利率</th>
                                 <th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 61px;">商户状态</th>
+                                <th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 61px;">商务名称</th>
                                 <th class="text-center sorting_disabled td_align_left" rowspan="1" colspan="1" style="width: 365px;">操作</th>
                             </tr>
                         </thead>
@@ -269,9 +270,9 @@
                 <div class="panel panel-default">
                     <ul class="list-group">
                         <!--基本信息start-->
-                        <li class="list-group-item con_title" id="mao2">基本信息</li>
+                       <!-- <li class="list-group-item con_title" id="mao2">基本信息</li>
                         <div class="col-sm-12 col-lg-12 mt_10">
-                            <!--申请人信息start-->
+                            &lt;!&ndash;申请人信息start&ndash;&gt;
                             <div class="col-sm-12 col-lg-12 shenXin">
                                 <p class="col-lg-6 col-sm-6"><span class="shenXinSpan">商户名称:</span><input type="text" class="nameIpt" name="name" id="name"></p>
                                 <p class="col-lg-6 col-sm-6"><span class="shenXinSpan">对外联系电话:</span><input type="text" class="nameIpt" id="contactTelNo" name="contactTelNo"></p>
@@ -286,7 +287,7 @@
                                 <div class="clear"></div>
                             </div>
                         </div>
-                        <div class="clear"></div>
+                        <div class="clear"></div>-->
                         <!--基本信息end-->
                         <li class="list-group-item con_title" id="mao2">生成合同所需信息</li>
                         <div class="col-sm-12 col-lg-12 mt_10">
@@ -364,25 +365,27 @@
                                         <option value="1">是</option>
                                         <option value="0" selected="">否</option></select></p>
                                 <div class="clear"></div>
-                                <p class="col-lg-6 col-sm-6"><span class="shenXinSpan">是否能自建门店:</span>
-                                    <select class="selec" style="min-width: 370px" name="createShopFlag" id="createShopFlag">
-                                        <option value="0" selected="">否</option>
-                                        <option value="1">是</option> </select></p>
-                                <p class="col-lg-6 col-sm-6"><span class="shenXinSpan">是否商户扣款:</span>
-                                    <select class="selec" style="min-width: 370px" name="bussinessCustomerDeductionFlag" id="bussinessCustomerDeductionFlag">
-                                        <option value="01" selected="">互动扣款</option>
-                                        <option value="02">资方扣款</option>
-                                        <option value="03">商户扣款</option></select></p>
-                                <div class="clear"></div>
-                                <p class="col-lg-6 col-sm-6"><span class="shenXinSpan">是否强制授权:</span>
-                                    <select class="selec" style="min-width: 370px" name="authFlag" id="authFlag">
-                                        <option value="N" selected="">否</option>
-                                        <option value="Y">是</option> </select></p>
-                                <p class="col-lg-6 col-sm-6"><span class="shenXinSpan">是否能主动还款:</span>
-                                    <select class="selec" style="min-width: 370px" name="paymentMethod" id="paymentMethod">
-                                        <option value="0" selected="">否</option>
-                                        <option value="1">是</option> </select></p>
-                                <div class="clear"></div>
+                                <p class="col-lg-6 col-sm-6"><span class="shenXinSpan">商户邀请码:</span><input type="text" class="nameIpt" name="account" id="yaoqingma"></p>
+                                <!-- <p class="col-lg-6 col-sm-6"><span class="shenXinSpan">是否能自建门店:</span>
+                                     <select class="selec" style="min-width: 370px" name="createShopFlag" id="createShopFlag">
+                                         <option value="0" selected="">否</option>
+                                         <option value="1">是</option> </select></p>
+                                 <p class="col-lg-6 col-sm-6"><span class="shenXinSpan">是否商户扣款:</span>
+                                     <select class="selec" style="min-width: 370px" name="bussinessCustomerDeductionFlag" id="bussinessCustomerDeductionFlag">
+                                         <option value="01" selected="">互动扣款</option>
+                                         <option value="02">资方扣款</option>
+                                         <option value="03">商户扣款</option></select></p>
+                                 <div class="clear"></div>
+                                 <p class="col-lg-6 col-sm-6"><span class="shenXinSpan">是否强制授权:</span>
+                                     <select class="selec" style="min-width: 370px" name="authFlag" id="authFlag">
+                                     <select class="selec" style="min-width: 370px" name="authFlag" id="authFlag">
+                                         <option value="N" selected="">否</option>
+                                         <option value="Y">是</option> </select></p>
+                                 <p class="col-lg-6 col-sm-6"><span class="shenXinSpan">是否能主动还款:</span>
+                                     <select class="selec" style="min-width: 370px" name="paymentMethod" id="paymentMethod">
+                                         <option value="0" selected="">否</option>
+                                         <option value="1">是</option> </select></p>
+                                 <div class="clear"></div>-->
                                 <p class="col-lg-6 col-sm-6"><span class="shenXinSpan">商户标识:</span>
                                     <label><input style="width:20px;" type="checkbox" value="1" name="sourceTpe">教育</label>
                                     <label><input style="width:20px;" type="checkbox" value="2" name="sourceTpe" onclick="rentingHoustChecked(this)">租房</label>
@@ -392,6 +395,7 @@
                                     <label><input style="width:20px;" type="checkbox" value="10" name="sourceTpe">房租月付</label>
 
                                 </p>
+                                <div class="clear"></div>
                                 <p class="col-lg-6 col-sm-6"><span class="shenXinSpan">渠道维护 :</span>
                                     <select class="selec" style="min-width: 370px" name="channelManagerId" id="channelManagerId">
                                         
@@ -441,20 +445,22 @@
                         </div>
                         <div class="clear"></div>
                         <!--配置信息end-->
-                        <li class="list-group-item con_title" id="mao6">资金信息</li>
+                        <li class="list-group-item con_title" id="mao6">客户打款信息</li>
                         <div class="col-sm-12 col-lg-12 mt_10">
                             <div class="col-sm-12 col-lg-12 col-md-12 shenXin">
                                 <p class="col-lg-6 col-sm-6"><span class="shenXinSpan">账户类型:</span>
-                                    <select class="selec" style="min-width: 370px" name="accountType" id="accountType">
+                                    <!--<select class="selec" style="min-width: 370px" name="accountType" id="accountType">
                                         <option value="0">对公</option>
-                                        <option value="1">对私</option></select></p>
+                                        <option value="1">对私</option></select>-->
+                                    对公
+                                </p>
                                 <p class="col-lg-6 col-sm-6"><span class="shenXinSpan">账户名称:</span><input type="text" class="nameIpt" id="comName" name="comName"></p>
                                 <div class="clear"></div>
                                 <p class="col-lg-6 col-sm-6"><span class="shenXinSpan">开户银行:</span><input type="text" class="nameIpt" id="bankName" name="bankName"></p>
                                 <p class="col-lg-6 col-sm-6"><span class="shenXinSpan">银行账号:</span><input type="text" class="nameIpt" id="bankAccountNo" name="bankAccountNo"></p>
                                 <div class="clear"></div>
-                                <p class="col-lg-6 col-sm-6"><span class="shenXinSpan">提前扣款天数:</span><input type="text" class="nameIpt" name="prepaymentDay" id="prepaymentDay"></p>
-                                <p class="col-lg-6 col-sm-6"><span class="shenXinSpan">一次性服务费率:</span><input type="text" class="nameIpt" name="disposableFeeRate" id="disposableFeeRate"></p>
+                                <p class="col-lg-6 col-sm-6"><span class="shenXinSpan">宽限期天数:</span><input type="text" class="nameIpt" name="prepaymentDay" id="prepaymentDay"></p>
+                                <p class="col-lg-6 col-sm-6"><span class="shenXinSpan">机构利率:</span><input type="text" class="nameIpt" name="disposableFeeRate" id="disposableFeeRate"></p>
                                 <div class="clear"></div>
                                 <p class="col-lg-6 col-sm-6"><span class="shenXinSpan">服务费率:</span><input type="text" class="nameIpt" name="serviceFeeRate" id="serviceFeeRate"></p>
                                 <div class="clear"></div>
@@ -462,7 +468,7 @@
                         </div>
                         <div class="clear"></div>
                         
-                        <!--配置信息end-->
+                  <!--      &lt;!&ndash;配置信息end&ndash;&gt;
                         <li class="list-group-item con_title" id="mao6">支付宝信息</li>
                         <div class="col-sm-12 col-lg-12 mt_10">
                             <div class="col-sm-12 col-lg-12 col-md-12 shenXin">
@@ -481,7 +487,7 @@
                             </div>
                         </div>
 
-                        <div class="clear"></div>
+                        <div class="clear"></div>-->
 
                     </ul>
                 </div>
@@ -529,7 +535,15 @@
             <div class="table-responsive">
                 <div id="bizShopList_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer"><div class="top"><div class="clear"></div></div><div id="bizShopList_processing" class="dataTables_processing panel panel-default" style="display: none;">处理中...</div><table id="bizShopList" style="width: 100%;" class="table table-bordered table-striped table-hover bg_wt dataTable no-footer" role="grid" aria-describedby="bizShopList_info">
                     <thead style="border-bottom: 0;background-color: #fff;">
-                    <tr role="row"><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 124px;">商户名称</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 98px;">所在地</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 125px;">业务类型</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 125px;">渠道维护</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 177px;">合作开始日期</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 177px;">合作结束日期</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 126px;">商户状态</th><th class="text-center sorting_disabled" rowspan="1" colspan="1" style="width: 72px;">操作</th></tr>
+                    <tr role="row">
+                        <th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 124px;">商户名称</th>
+                        <th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 98px;">教育机构地址</th>
+                        <th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 125px;">业务类型</th>
+                        <th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 125px;">渠道维护</th>
+                        <th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 177px;">宽限期天数</th>
+                        <th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 177px;">机构利率</th>
+                        <th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 126px;">商户状态</th>
+                        <th class="text-center sorting_disabled" rowspan="1" colspan="1" style="width: 72px;">操作</th></tr>
                     </thead>
                     <tbody><tr class="odd"><td valign="top" colspan="8" class="dataTables_empty">没有符合您搜索条件的信息</td></tr></tbody></table><div class="bottom"><div class="dataTables_info" id="bizShopList_info" role="status" aria-live="polite">显示第 0 至 0 项结果，共 0 项</div><div class="dataTables_length" id="bizShopList_length"><label> <select name="bizShopList_length" aria-controls="bizShopList" class="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> </label></div><div class="dataTables_paginate paging_full_numbers" id="bizShopList_paginate"><ul class="pagination"><li class="paginate_button first disabled" id="bizShopList_first"><a href="javascript:void(0);" aria-controls="bizShopList" data-dt-idx="0" tabindex="0">首页</a></li><li class="paginate_button previous disabled" id="bizShopList_previous"><a href="javascript:void(0);" aria-controls="bizShopList" data-dt-idx="1" tabindex="0">上页</a></li><li class="paginate_button next disabled" id="bizShopList_next"><a href="javascript:void(0);" aria-controls="bizShopList" data-dt-idx="2" tabindex="0">下页</a></li><li class="paginate_button last disabled" id="bizShopList_last"><a href="javascript:void(0);" aria-controls="bizShopList" data-dt-idx="3" tabindex="0">末页</a></li></ul></div><div class="clear"></div></div></div>
             </div>
@@ -728,10 +742,11 @@
                                 "<td>"+_list[i].startTime+"</td>" +
                                 "<td>"+_list[i].endTime+"</td>" +
                                 "<td>"+_list[i].statusName+"</td>" +
+                                "<td>"+_list[i].statusName+"</td>" +
                                 "<td class=' td_align_left'>"+
                                 "<button type='button' class='btn btn-primary btn-sm btn-edit' name='biz-modify'>修改</button>"+
                                 "&nbsp;&nbsp;<button type='button'  class='btn btn-primary btn-sm btn-set ' name='add-case'>配置专案</button>"+
-                                "&nbsp;&nbsp;<button type='button' class='btn btn-primary btn-sm btn-shop' name='add-shop'>配置门店</button>"+
+                                // "&nbsp;&nbsp;<button type='button' class='btn btn-primary btn-sm btn-shop' name='add-shop'>配置门店</button>"+
                                 "&nbsp;&nbsp;<button type='button'  class='btn btn-primary btn-sm btn-shops' name='init-commodity'>初始化商品</button>&nbsp;&nbsp;"+
                                 "</td>" +
                                 "</tr>"
