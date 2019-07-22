@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zr.capital.mapper.CapitalMapper">
+   <!--//    @Update("UPDATE jiuyitobelent SET managementStatus=#{status} WHERE idCode=#{idCard}")
+    Integer updateSignStatus(SignContractVo signContractVo);-->
+    <update id="updateSignStatus" parameterType="com.zr.capital.pojo.SignContractVo">
+        UPDATE
+        jiuyitobelent
+        SET
+        managementStatus=#{status}
+        WHERE
+        idCode=#{idCard}
+    </update>
+
+<!--//    @Select("select idCode from jinjiansource where idCode=#{idCard}")
+    String selectIdCodeFromJinjiansource(String idCard);-->
+    <select id="selectIdCodeFromJinjiansource" parameterType="java.lang.String" resultType="java.lang.String">
+        select
+        idCode
+        from
+        jinjiansource
+        where
+        idCode=#{idCard}
+    </select>
+<!--//    @Select("select idCode from jinjiansource where orderNum=#{orderNumber}")
+    String selectOrderNum(String orderNumber);-->
+    <select id="selectOrderNum" parameterType="java.lang.String" resultType="java.lang.String">
+        select
+        idCode
+        from
+        jinjiansource
+        where
+        orderNum=#{orderNumber}
+    </select>
+
+<!--//    @Update("update jiuyitobelent set managementLoanAmount=#{},managementStatus=#{} where idCode=#{idCode}")
+    Integer updateTobelentList(TobelentListVo tobelentListVo);-->
+    <update id="updateTobelentList" parameterType="com.zr.capital.pojo.TobelentListVo">
+       update
+       jiuyitobelent
+       set
+       managementLoanAmount=#{managementLoanAmount},managementStatus=#{managementStatus}
+       where
+       idCode=#{idCode}
+    </update>
+
+<!--    /**
+    * 验证逾期身份证号和电话是否存在
+    * @param idCode
+    * @param phone
+    * @return
+    */
+    overdueListShowVo overdueVerify(@Param("idCode") String idCode,@Param("phone")  String phone);-->
+    <select id="overdueVerify" resultType="com.zr.capital.pojo.overdueListShowVo">
+        select
+            idCode,phone
+        from
+            overduelist
+        where
+        idCode=#{idCode}
+        and
+        phone=#{phone}
+    </select>
+
+<!--    /**
+    * 查询显示数据
+    * @param overdueListSelectVo
+    * @return
+    */
+    overdueListShowVo overdueFindAll(overdueListSelectVo overdueListSelectVo);-->
+    <select id="overdueFindAll" resultType="com.zr.capital.pojo.overdueListSelectVo" parameterType="com.zr.capital.pojo.overdueListShowVo">
+        select
+        o.id,o.riskId,
+        o.idNo,o.merchant,
+        o.merchant,o.customerName,
+        o.phone,o.applyAmount,
+        o.overdueAmount,o.overduePrincipalInterest,
+        o.overdueCost,o.term,
+        o.lendingTime,o.overdueDay,
+        o.nowOverdueNum,o.dataTime,
+        o.overdueReason,o.createTime,
+        o.createName,o.updateTime,
+        o.updateName,e.businessType,
+        e.orderNum,e.settleTime,
+        e.loanTime,e.managemen,
+        e.channel,e.idCode,
+        e.shenQingAmount,e.shenQingNum,
+        e.qiGongKuan,e.surplusNum,
+        e.yiHuanAmount,e.zhinaAmount,
+        e.penaltyInterest,e.compoundInterest,
+        e.yuQiAmount,e.yuQiDay,
+        e.yuQiPeriods,e.amountOfRefund interest amountOfRefund_interest,
+        e.interestRate,e.merchantTuiDaiYuAmount,
+        e.interestRate,e.merchantTuiDaiYuAmount,
+        e.interestRate,e.merchantTuiDaiYuAmount,
+        e.interestRate,e.merchantTuiDaiYuAmount,
+        e.daiYuTuiZiFangAmount,e.managemenLoanAmount,
+        e.DaiYuLoanAmount,e.status
+        from
+        earliersettlement e
+        join
+        overduelist o
+        on e.idCode=o.idNo
+        where 1=1
+        <if test="nowOverdueNum != null">
+            o.nowOverdueNum=#{nowOverdueNum}
+        </if>
+        <if test="overdueDay != null">
+            o.overdueDay=#{overdueDay}
+        </if>
+        <if test="phone != null and phone != ''">
+            o.phone=#{phone}
+        </if>
+        <if test="idCode != null and idCode != ''">
+            o.IdCode=#{idCode}
+        </if>
+        <if test="overdueAmount != null">
+            o.overdueAmount=#{overdueAmount}
+        </if>
+        <if test="penaltyInterest != null">
+            e.penaltyInterest=#{penaltyInterest}
+        </if>
+        <if test="principalRepayment != null">
+            e.principalRepayment=#{principalRepayment}
+        </if>
+        <if test="interestPayable != null">
+            e.interestPayable=#{interestPayable}
+        </if>
+    </select>
+
+</mapper>
+
+
