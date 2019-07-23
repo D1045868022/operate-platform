@@ -148,7 +148,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: urlPath+'daifangkuan/queryPage',
+                url: urlPath+'Loans/DaiFangKuanqueryPage',
                 dataType: 'JSON',
                 data: JSON.stringify(tmp),
                 contentType: "application/json;charset=utf-8",
@@ -164,16 +164,16 @@
                            _html+="<tr>"+
                            "<td>"+_list[i].oldNumber+"</td>"+
                            "<td>"+_list[i].createTime+"</td>"+
-                           "<td>"+_list[i].channel+"</td>"+
-                           "<td>"+_list[i].channel+"</td>"+
-                           "<td>"+_list[i].channel+"</td>"+
-                           "<td>"+_list[i].channel+"</td>"+
-                           "<td>"+_list[i].channel+"</td>"+
-                           "<td>"+_list[i].channel+"</td>"+
-                           "<td>"+_list[i].channel+"</td>"+
-                           "<td>"+_list[i].channel+"</td>"+
-                           "<td>"+_list[i].channel+"</td>"+
-                           "<td>"+_list[i].channel+"</td>";
+                           "<td>"+_list[i].incomingPartsChannel+"</td>"+
+                           "<td>"+_list[i].applyAmount+"</td>"+
+                           "<td>"+_list[i].applyTerm+"</td>"+
+                           "<td>"+_list[i].periodicContributions+"</td>"+
+                           "<td>"+_list[i].name+"</td>"+
+                           "<td>"+_list[i].idCode+"</td>"+
+                           "<td>"+_list[i].managementLoanAmount+"</td>"+
+                           "<td>"+_list[i].InteractionLoanAmount+"</td>"+
+                           "<td>"+_list[i].status+"</td>"+
+                           "<td>"+"暂无"+"</td>";
                            _html+="<tr/>";
                        }
                        $("#lendingList tbody").html(_html);

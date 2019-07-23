@@ -274,7 +274,7 @@
             // 获取待审批列表
             $.ajax({
                 contentType: 'application/json',
-                url:urlPath+"daishenpi/getUserContactsInfo",
+                url:urlPath+"daishenhe/queryPage",
                 data: JSON.stringify(modeljson),
                 dataType:'json',//服务器返回json格式数据
                 type:'POST',//HTTP请求类型
@@ -286,12 +286,12 @@
                             var _li = "<tr loginid='"+_list[i].id+"'>";
                             _li+="<td>"+_list[i].startTime+"</td>"+
                                 "<td>"+_list[i].name+"</td>"+
-                                "<td>新东方在线教育科技有限公司</td>"+
-                                "<td>教育贷</td>"+
-                                "<td>晋商教育</td>"+
-                                "<td>"+_list[i].statusName+"</td>"+
-                                "<td>江涛</td>"+
-                                "<td>11分钟32秒</td>"+
+                                "<td>"+_list[i].incomingPartsChannel+"</td>"+
+                                "<td>"+_list[i].loanType+"</td>"+
+                                "<td>"+_list[i].loanType+"</td>"+
+                                "<td>"+_list[i].pushStatus+"</td>"+
+                                "<td>"+_list[i].updateTime+"</td>"+
+                                "<td>"+"暂无"+"</td>"+
                                 "<td>" +
                                 "<button type='button' ssid="+_list[i].id+" data-id='6537686126979712001' class='btn btn-primary btn-sm shenpi' name='receiveOrderBtn'>审批</button>&nbsp;&nbsp;&nbsp;&nbsp; <button type='button' data-id='6537686126979712001' class='btn btn-primary btn-sm' name='resetBtn'>重置</button>" +
                                 "</td>"

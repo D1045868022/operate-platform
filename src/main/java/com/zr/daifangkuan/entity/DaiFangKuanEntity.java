@@ -9,13 +9,10 @@ import javax.persistence.Transient;
 import java.util.Date;
 
 /**
- * @authot 谢烽
- * @create 2019 - 06 - 21 - 16:34
+ * @authot 谢烽 这里是新建的pojo
  */
 @Data
-@Entity(name="daifangkuan")
 public class DaiFangKuanEntity {
-
     @Id
     @GeneratedValue
     private Integer id;
@@ -39,6 +36,5 @@ public class DaiFangKuanEntity {
     private String statusName;//资方状态
     @Transient
     private String operation;
-
 
 }

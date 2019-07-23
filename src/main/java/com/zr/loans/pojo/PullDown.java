@@ -1,4 +1,4 @@
-package com.zr.daifangkuan.entity;
+package com.zr.loans.pojo;
 
 import lombok.Data;
 

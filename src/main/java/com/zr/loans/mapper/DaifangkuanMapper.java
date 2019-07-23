@@ -1,7 +1,7 @@
-package com.zr.daifangkuan.mapper;
+package com.zr.loans.mapper;
 
-import com.zr.daifangkuan.entity.DaiFangKuanEntity;
-import com.zr.daifangkuan.entity.DaiFangKuanSelectVo;
+import com.zr.loans.pojo.Loans;
+import com.zr.loans.pojo.DaiFangKuanSelectVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -14,10 +14,10 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface DaiFangKuanMapper{
+public interface DaifangkuanMapper {
 
     //根据条件查询
-    List<DaiFangKuanEntity> findAll(DaiFangKuanSelectVo daiFangKuanSelectVo);
+    List<Loans> findAll(DaiFangKuanSelectVo daiFangKuanSelectVo);
 
     //查询总数量
     Integer queryCount();

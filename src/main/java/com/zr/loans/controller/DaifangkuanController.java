@@ -1,14 +1,17 @@
-package com.zr.daifangkuan.controller;
+package com.zr.loans.controller;
 
-import com.zr.daifangkuan.entity.DaiFangKuanSelectVo;
-import com.zr.daifangkuan.entity.PullDown;
-import com.zr.daifangkuan.service.DaiFangKuanService;
+import com.zr.loans.pojo.DaiFangKuanSelectVo;
+import com.zr.loans.pojo.PullDown;
+import com.zr.loans.service.DaifangkuanService;
 import com.zr.util.AllRecords;
 import com.zr.util.LoansStatusEnum;
 import com.zr.util.ResultVO;
 import com.zr.util.ResultVOBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
@@ -20,16 +23,16 @@ import java.util.List;
  */
 @RestController
 @CrossOrigin
-public class DaiFangKuanController {
+public class DaifangkuanController {
 
     @Autowired
-    private DaiFangKuanService daiFangKuanService;
+    private DaifangkuanService daiFangKuanService;
 
 
     /**
      * 导出
      */
-    @PostMapping("/daifangkuan/InquiryIntroduction")
+   /* @PostMapping("/daifangkuan/InquiryIntroduction")
     public ResultVO exportDFK(HttpServletResponse response,String statusName, String name, Integer phone, String merchant){
         DaiFangKuanSelectVo daiFangKuanSelectVo = new DaiFangKuanSelectVo();
         daiFangKuanSelectVo.setStatusName(statusName);
@@ -37,7 +40,7 @@ public class DaiFangKuanController {
         daiFangKuanSelectVo.setMerchant(merchant);
         daiFangKuanSelectVo.setPhone(phone);
         return daiFangKuanService.exportDFK(response, daiFangKuanSelectVo);
-    }
+    }*/
 
 
     /**
@@ -45,15 +48,15 @@ public class DaiFangKuanController {
      * @param daiFangKuanSelectVo
      * @return
      */
-    @PostMapping("/daifangkuan/queryPage")
-    public ResultVO<AllRecords> DFKqueryPage(@RequestBody DaiFangKuanSelectVo daiFangKuanSelectVo){
+    @PostMapping("/Loans/DaiFangKuanqueryPage")
+    public ResultVO<AllRecords> DaiFangKuanqueryPage(@RequestBody DaiFangKuanSelectVo daiFangKuanSelectVo){
         return daiFangKuanService.queryPage(daiFangKuanSelectVo);
     }
 
     /**
      * 状态下拉框
      */
-    @PostMapping("/daifangkuan/getPullDownList")
+   /* @PostMapping("/daifangkuan/getPullDownList")
     public ResultVO<List<PullDown>> findPullDownList(){
         List<PullDown> dfkStatusEnumList = new ArrayList<>();
         for(int i = 0; i < LoansStatusEnum.values().length; i ++){
@@ -63,6 +66,6 @@ public class DaiFangKuanController {
             dfkStatusEnumList.add(pullDown);
         }
         return ResultVOBuilder.success(dfkStatusEnumList);
-    }
+    }*/
 
 }

@@ -1,13 +1,7 @@
-package com.zr.daifangkuan.entity;
+package com.zr.loans.pojo;
 
 import com.zr.util.PageVo;
 import lombok.Data;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Transient;
-import java.util.Date;
 
 /**
  * @authot 谢烽
@@ -15,10 +9,9 @@ import java.util.Date;
  */
 @Data
 public class DaiFangKuanSelectVo extends PageVo {
-
     private String statusName;//资方状态
-    private Integer status;
     private String  name;//姓名
     private Integer phone;//手机号
     private String  merchant;//商户
+    private final Integer status = 8;
 }

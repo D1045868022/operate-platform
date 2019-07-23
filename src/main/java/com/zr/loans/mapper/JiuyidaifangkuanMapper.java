@@ -1,10 +1,9 @@
-package com.zr.jiuyitobelent.mapper;
+package com.zr.loans.mapper;
 
-import com.zr.earliersettlement.pojo.Riskreserve_Capitalside;
-import com.zr.jiuyitobelent.model.*;
+import com.zr.loans.pojo.JiuYiToBelentSelectVo;
 import com.zr.loans.pojo.Loans;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -12,8 +11,9 @@ import java.util.List;
 /**
  * Created by 86151 on 2019/4/22.
  */
+@Repository
 @Mapper
-public interface JiuYiToBelentMapper {
+public interface JiuyidaifangkuanMapper {
 
     //查询数据库条数
     int queryCount(JiuYiToBelentSelectVo jiuYiToBelentSelectVo);
@@ -21,10 +21,10 @@ public interface JiuYiToBelentMapper {
     //查询数据库数据
     List<Loans> queryPage(JiuYiToBelentSelectVo jiuYiToBelentSelectVo);
 
-    List<JiuYiToBelent> queryByJiuYiToBelentSelectVo(JiuYiToBelentSelectVo jiuYiToBelentSelectVo);
+   /* List<JiuYiToBelent> queryByJiuYiToBelentSelectVo(JiuYiToBelentSelectVo jiuYiToBelentSelectVo);
 
     @Select("select * from riskreserve_capitalside")
-    List<Riskreserve_Capitalside> queryAll();
+    List<Riskreserve_Capitalside> queryAll();*/
    /* //添加8张表
     @Insert("insert into mechant (merchantName,merchantLegalPerson,merchantAddress,merchantDesc,foreignPhone,phone,createTime,createName,updateTime,updateName) value (#{merchantName},#{merchantLegalPerson},#{merchantAddress},#{merchantDesc},#{foreignPhone},#{phone},#{createTime},#{createName},#{updateTime},#{updateName})")
     int addMechant(Mechant mechant);

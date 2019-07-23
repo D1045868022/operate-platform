@@ -205,7 +205,7 @@
 
          $.ajax({
              type: 'POST',
-             url: urlPath+'lending/queryPage',
+             url: urlPath+'/yifangkuan/queryPage',
              dataType: 'JSON',
              data: JSON.stringify(tmp),
              contentType: "application/json;charset=utf-8",
@@ -219,22 +219,22 @@
                      }
                      for(var i = 0;i<_list.length;i++){
                          _html+="<tr>"+
-                             "<td>"+_list[i].fundingParty+"</td>"+
+                             "<td>"+_list[i].management+"</td>"+
                              "<td>"+_list[i].merchant+"</td>"+
-                             "<td>"+_list[i].customerName+"</td>"+
+                             "<td>"+_list[i].name+"</td>"+
                              "<td>"+_list[i].idCode+"</td>"+
-                             "<td>"+_list[i].customerName+"</td>"+
-                             "<td>"+_list[i].applyTime+"</td>"+
-                             "<td>"+_list[i].examineTime+"</td>"+
-                             "<td>"+_list[i].lendingTime+"</td>"+
+                             "<td>"+_list[i].createTime+"</td>"+
+                             "<td>"+_list[i].updateTime+"</td>"+
+                             "<td>"+_list[i].loansTime+"</td>"+
                              "<td>"+_list[i].applyAmount+"</td>"+
                              "<td>"+_list[i].applyTerm+"</td>"+
-                             "<td>"+_list[i].discountMode+"</td>"+
-                             "<td>"+_list[i].graceperiod+"</td>"+
+                             "<td>"+"暂无"+"</td>"+
+                             "<td>"+"暂无"+"</td>"+
                              "<td>"+_list[i].periodicContributions+"</td>"+
                              "<td>"+_list[i].managementLoanAmount+"</td>"+
-                             "<td>"+_list[i].daiyuLoanAmount+"</td>"+
-                             "<td>"+_list[i].loanStatus+"</td>";
+                             "<td>"+"暂无"+"</td>"+
+                             "<td>"+_list[i].status+"</td>"+
+                             "<td>"+"暂无"+"</td>";
                          _html+="<tr/>";
                      }
                      $("#lendingList tbody").html(_html);

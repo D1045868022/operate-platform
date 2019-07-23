@@ -319,7 +319,7 @@
 
         $.ajax({
             type: 'POST',
-            url: 'http://39.97.182.213:8010/loansituation/queryPage',
+            url: urlPath + '/daikuanchaxun/queryPage',
             dataType: 'JSON',
             data: JSON.stringify(tmp),
             contentType: "application/json;charset=utf-8",
@@ -334,19 +334,17 @@
                     }
                     for(var i = 0;i<_list.length;i++){
                         _html+="<tr loginid = "+_list[i].loginId+">"+
-                            "<td>"+_list[i].paymentAccount+"</td>"+
+                            "<td>"+_list[i].merchant+"</td>"+
                             "<td>"+_list[i].name+"</td>"+
                             "<td>"+_list[i].idCode+"</td>"+
-                            "<td>"+_list[i].amountSettlement+"</td>"+
-                            "<td>"+_list[i].amountSettlement+"</td>"+
-                            "<td>"+_list[i].amountSettlement+"</td>"+
-                            "<td>"+_list[i].amountSettlement+"</td>"+
-                            "<td>"+_list[i].amountSettlement+"</td>"+
-                            "<td>"+_list[i].amountSettlement+"</td>"+
-                            "<td>"+_list[i].amountSettlement+"</td>"+
-                            "<td>"+_list[i].amountSettlement+"</td>"+
-                            "<td>"+_list[i].amountSettlement+"</td>"+
-                            "<td>"+_list[i].amountSettlement+"</td>";
+                            "<td>"+_list[i].applyAmount+"</td>"+
+                            "<td>"+_list[i].createTime+"</td>"+
+                            "<td>"+_list[i].applyTerm+"</td>"+
+                            "<td>"+_list[i].applyTerm+"</td>"+
+                            "<td>"+_list[i].managementNum+"</td>"+
+                            "<td>"+_list[i].loanFishStatus+"</td>"+
+                            "<td>"+_list[i].contactNumber+"</td>"+
+                            "<td>"+_list[i].pushStatus+"</td>";
                         _html+="<tr/>";
                     }
                     $("#reviewList tbody").html(_html);
