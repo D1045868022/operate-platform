@@ -1,8 +1,8 @@
 package com.zr.capital.controller;
 
+import com.zr.capital.pojo.OverdueListSelectVo;
 import com.zr.capital.pojo.SignContractVo;
 import com.zr.capital.pojo.TobelentListVo;
-import com.zr.capital.pojo.overdueListSelectVo;
 import com.zr.capital.service.CapitalService;
 import com.zr.util.ResultVO;
 import com.zr.util.ResultVOBuilder;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * 资方向运营后台放松接口
@@ -53,8 +54,13 @@ public class CapitalController {
         return capitalService.tobelentList(tobelentListVo);
     }
 
+    /**
+     * 接收由银行传来的逾期数据
+     * @param overdueListSelectVo
+     * @return
+     */
     @PostMapping("/operate/overdueList")
-    public ResultVO overdueList(@RequestBody overdueListSelectVo overdueListSelectVo){
+    public ResultVO overdueList(@RequestBody List<OverdueListSelectVo> overdueListSelectVo){
         return capitalService.overdueList(overdueListSelectVo);
     }
 

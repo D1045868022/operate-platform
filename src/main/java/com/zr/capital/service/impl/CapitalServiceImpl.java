@@ -3,7 +3,7 @@ package com.zr.capital.service.impl;
 import com.zr.capital.mapper.CapitalMapper;
 import com.zr.capital.pojo.SignContractVo;
 import com.zr.capital.pojo.TobelentListVo;
-import com.zr.capital.pojo.overdueListSelectVo;
+import com.zr.capital.pojo.OverdueListSelectVo;
 import com.zr.capital.pojo.overdueListShowVo;
 import com.zr.capital.service.CapitalService;
 import com.zr.meiju.ManagementStatusEnum;
@@ -13,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class CapitalServiceImpl implements CapitalService {
@@ -62,26 +65,31 @@ public class CapitalServiceImpl implements CapitalService {
     }
 
    /**
-     * 首先验证数据合法性，之后进行查询 在earliersettlement，overduelist
-     * @param overdueListSelectVo
+     * 银行传输过来数据入库
+     * @param OverdueListSelectVoList
      * @return
      */
     @Override
-    public ResultVO overdueList(overdueListSelectVo overdueListSelectVo) {
-        //先查询这条数据存不存在
-        overdueListShowVo overdueListShowVo = capitalMapper.overdueVerify(overdueListSelectVo.getIdCode(),overdueListSelectVo.getPhone());
-        if(overdueListSelectVo == null){
-            return ResultVOBuilder.error("500","您查询的逾期数据不存在");
+    @Transactional
+    public ResultVO overdueList(List<OverdueListSelectVo> OverdueListSelectVoList) {
+        List<String> idCodes = new ArrayList<>();
+        Date nowDate = new Date();
+        for (OverdueListSelectVo overdueListSelectVo:OverdueListSelectVoList){
+            idCodes.add(overdueListSelectVo.getIdCode());
+            overdueListSelectVo.setCreateTime(nowDate);
         }
-        overdueListShowVo =  capitalMapper.overdueFindAll(overdueListSelectVo);
-        Integer row = 0;
-        if(overdueListSelectVo != null){
-            //修改数据
-            row = capitalMapper.addOverdueListMsg(overdueListSelectVo);
+        //根据资方的身份证号查询数据库是否存在数据
+        List<OverdueListSelectVo> overdueListSelectVos = capitalMapper.queryByIdCodes(idCodes);
+        List<String> newIdCodes = new ArrayList<>();
+
+        for (OverdueListSelectVo overdueListSelectVo:overdueListSelectVos){
+            newIdCodes.add(overdueListSelectVo.getIdCode());
         }
-        //新增数据
-        row = capitalMapper.updateOverdueListMsg(overdueListSelectVo);
-        overdueListSelectVo.setReceiveStatus("接收成功");
-        return ResultVOBuilder.success(overdueListShowVo);
+        //如果存在数据，删除掉原有数据
+        capitalMapper.deleteByIdCodes(newIdCodes);
+        //重新插入银行数据
+        capitalMapper.insertOverduList(OverdueListSelectVoList);
+
+        return ResultVOBuilder.success(OverdueListSelectVoList);
     }
 }

@@ -44,31 +44,15 @@
        idCode=#{idCode}
     </update>
 
-<!--    /**
-    * 验证逾期身份证号和电话是否存在
-    * @param idCode
-    * @param phone
-    * @return
-    */
-    overdueListShowVo overdueVerify(@Param("idCode") String idCode,@Param("phone")  String phone);-->
-    <select id="overdueVerify" resultType="com.zr.capital.pojo.overdueListShowVo">
-        select
-            idCode,phone
-        from
-            overduelist
-        where
-        idCode=#{idCode}
-        and
-        phone=#{phone}
-    </select>
+
 
 <!--    /**
     * 查询显示数据
-    * @param overdueListSelectVo
+    * @paOverdueListSelectVoctVo
     * @return
     */
-    overdueListShowVo overdueFindAll(overdueListSelectVo overdueListSelectVo);-->
-    <select id="overdueFindAll" resultType="com.zr.capital.pojo.overdueListSelectVo" parameterType="com.zr.capital.pojo.overdueListShowVo">
+    overdueListShowVo overdueFindOverdueListSelectVocOverdueListSelectVoctVo);-->
+    <!--<select id="overdueFindAll" resultType="com.zr.capital.pojo.OverdueListSelectVo" parameterType="com.zr.capital.pojo.overdueListShowVo">
         select
         o.id,o.riskId,
         o.idNo,o.merchant,
@@ -126,7 +110,27 @@
         <if test="interestPayable != null">
             e.interestPayable=#{interestPayable}
         </if>
+    </select>-->
+    <select id="queryByIdCodes" parameterType="java.util.List" resultType="com.zr.capital.pojo.OverdueListSelectVo">
+        SELECT * FROM overduelist WHERE  idCode IN
+        <foreach collection="list" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
     </select>
+
+    <delete id="deleteByIdCodes" parameterType="java.util.List">
+        DELETE  from overduelist WHERE  idCode IN
+        <foreach collection="list" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </delete>
+
+    <insert id="insertOverduList" parameterType="java.util.List">
+        insert into overduelist (idCode,phone,overdueAmount,createTime,penaltyInterest,principalRepayment,interestPayable) VALUES
+        <foreach collection="list" item="item" open="(" separator="),(" close=")">
+            #{item.idCode},#{item.phone},#{item.overdueAmount},#{item.createTime},#{item.penaltyInterest},#{item.principalRepayment},#{item.interestPayable}
+        </foreach>
+    </insert>
 
 </mapper>
 

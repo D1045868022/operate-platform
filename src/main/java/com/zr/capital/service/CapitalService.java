@@ -2,8 +2,10 @@ package com.zr.capital.service;
 
 import com.zr.capital.pojo.SignContractVo;
 import com.zr.capital.pojo.TobelentListVo;
-import com.zr.capital.pojo.overdueListSelectVo;
+import com.zr.capital.pojo.OverdueListSelectVo;
 import com.zr.util.ResultVO;
+
+import java.util.List;
 
 public interface CapitalService {
 
@@ -12,5 +14,5 @@ public interface CapitalService {
 
     ResultVO tobelentList(TobelentListVo tobelentListVo);
 
-    ResultVO overdueList(overdueListSelectVo overdueListSelectVo);
+    ResultVO overdueList(List<OverdueListSelectVo> overdueListSelectVo);
 }

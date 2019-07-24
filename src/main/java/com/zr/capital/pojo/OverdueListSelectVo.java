@@ -4,12 +4,13 @@ import lombok.Data;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 /**
  * 逾期列表查询
  */
 @Data
-public class overdueListSelectVo {
+public class OverdueListSelectVo {
     @NotNull(message = "逾期期数不能为空")
     private Integer nowOverdueNum;//逾期期数
     @NotNull(message = "天数不能为空")
@@ -26,5 +27,6 @@ public class overdueListSelectVo {
     private Double interestPayable;//应还利息
     @NotNull(message = "逾期金额不能为空")
     private Double overdueAmount;//逾期金额
-    private String receiveStatus;//接收状态
+    private String receiveStatus;//接收状态 ?????此字段哪里来？
+    private Date createTime;
 }

@@ -1,14 +1,14 @@
 package com.zr.capital.mapper;
 
+import com.zr.capital.pojo.OverdueListSelectVo;
 import com.zr.capital.pojo.SignContractVo;
 import com.zr.capital.pojo.TobelentListVo;
-import com.zr.capital.pojo.overdueListSelectVo;
 import com.zr.capital.pojo.overdueListShowVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 @Mapper
@@ -22,27 +22,26 @@ public interface CapitalMapper {
 
     Integer updateTobelentList(TobelentListVo tobelentListVo);
 
-    /**
-     * 验证逾期身份证号和电话是否存在
-     * @param idCode
-     * @param phone
-     * @return
-     */
-    overdueListShowVo overdueVerify(@Param("idCode") String idCode,@Param("phone")  String phone);
+
+    List<OverdueListSelectVo> queryByIdCodes(List<String> idCodes);
+
+    int deleteByIdCodes(List<String> idCodes);
+
+    int insertOverduList(List<OverdueListSelectVo> OverdueListSelectVoList);
 
     /**
      * 查询显示数据
-     * @param overdueListSelectVo
+     * @param OverdueListSelectVo
      * @return
      */
-    overdueListShowVo overdueFindAll(overdueListSelectVo overdueListSelectVo);
+//    overdueListShowVo overdueFindAll(OverdueListSelectVo OverdueListSelectVo);
 
     /**
      *
-     * @param overdueListSelectVo
+     * @param OverdueListSelectVo
      * @return
      */
-    Integer addOverdueListMsg(overdueListSelectVo overdueListSelectVo);
+    Integer addOverdueListMsg(OverdueListSelectVo OverdueListSelectVo);
 
-    Integer updateOverdueListMsg(overdueListSelectVo overdueListSelectVo);
+    Integer updateOverdueListMsg(OverdueListSelectVo OverdueListSelectVo);
 }
