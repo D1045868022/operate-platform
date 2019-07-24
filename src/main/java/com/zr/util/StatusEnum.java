@@ -4,26 +4,36 @@ import lombok.Getter;
 
 /**
  * 状态枚举，对应各自的状态
+ * 正常状态0
+ * 填写完机构确认 1  机构取消2              取消可以修改
+ * 运营后台审核  审核成功3  审核不成功4  打回为5       5修改  4为作废
+ * 银行审核 审核通过 6 审核不通过7    审核不通过作废
+ * 银行签约 签约通过 8 签约不通过9   签约不通过作废
+ * 银行放款  放款成功10  放款不成功11   ？
+ * 学生还款 还款中为12  已还完13    已还完改每个表中的payoffStatus为已还完
+ * 逾期状态 14
+ * 提前还清状态 15     改每个表中的payoffStatus为已还完
+ * 退款状态 16        改每个表中的payoffstatus为退款状态
  */
 @Getter
 public enum StatusEnum {
     ZHENGCHANGZHUANGTAI("正常状态",0),
-    JIGOUQUEREN("正常状态",1),
-    JIGOUQUXIAO("正常状态",2),
-    SHENHECHENGGONG("正常状态",3),
-    SHENHEBUCHENGGONG("正常状态",4),
-    DAHUI("正常状态",5),
-    SHENHETONGGUO("正常状态",6),
-    SHENHEBUTONGGUO("正常状态",7),
-    QIANYUETONGGUO("正常状态",8),
-    QIANYUEBUTONGGUO("正常状态",9),
-    FANGKUANCHENGGONG("正常状态",10),
-    FANGKUANBUCHNEGGONG("正常状态",11),
-    HUNAKUANZHONG("正常状态",12),
-    YIHUANWAN("正常状态",13),
-    YUQIZHUANGTAI("正常状态",14),
-    TIQIANHUANQINGZHUANGTAI("正常状态",15),
-    TUIKUANZHUANGTAI("正常状态",16);
+    JIGOUQUEREN("机构确认",1),
+    JIGOUQUXIAO("机构取消",2),
+    SHENHECHENGGONG("审核成功",3),
+    SHENHEBUCHENGGONG("审核不成功",4),
+    DAHUI("打回",5),
+    SHENHETONGGUO("审核通过",6),
+    SHENHEBUTONGGUO("审核不通过",7),
+    QIANYUETONGGUO("签约通过",8),
+    QIANYUEBUTONGGUO("签约不通过",9),
+    FANGKUANCHENGGONG("放款成功",10),
+    FANGKUANBUCHNEGGONG("放款不成功",11),
+    HUNAKUANZHONG("放款中",12),
+    YIHUANWAN("已还完",13),
+    YUQIZHUANGTAI("逾期状态",14),
+    TIQIANHUANQINGZHUANGTAI("提前还清状态",15),
+    TUIKUANZHUANGTAI("退款状态",16);
 
 
     private String statusName;
