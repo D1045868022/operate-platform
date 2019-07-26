@@ -56,7 +56,7 @@ public class DaifangkuanController {
     /**
      * 状态下拉框
      */
-   /* @PostMapping("/daifangkuan/getPullDownList")
+    @PostMapping("/daifangkuan/getPullDownList")
     public ResultVO<List<PullDown>> findPullDownList(){
         List<PullDown> dfkStatusEnumList = new ArrayList<>();
         for(int i = 0; i < LoansStatusEnum.values().length; i ++){
@@ -66,6 +66,6 @@ public class DaifangkuanController {
             dfkStatusEnumList.add(pullDown);
         }
         return ResultVOBuilder.success(dfkStatusEnumList);
-    }*/
+    }
 
 }

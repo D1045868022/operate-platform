@@ -9,12 +9,15 @@ import com.zr.mechant.service.MechantService;
 import com.zr.util.AllRecords;
 import com.zr.util.ResultVO;
 import com.zr.util.ResultVOBuilder;
+import com.zr.xinshenstatistics.util.ResultBuildVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -34,7 +37,7 @@ public class MechantServiceimpl implements MechantService {
         int count = mechantMapper.queryCount(mechantSelectVo);
         //2.查询具体数据信息
         List<MechantInfo> mechantInfos = mechantMapper.queryPage(mechantSelectVo);
-        for (MechantInfo me : mechantInfos) {
+        /*for (MechantInfo me : mechantInfos) {
             if (me.getStatus()!=null&&!StringUtils.isEmpty(me.getStatus())){
                 if (me.getStatus()==0){
                     me.setStatusName(StatusEnum.WEIQIYONG.getStatusName());
@@ -44,7 +47,7 @@ public class MechantServiceimpl implements MechantService {
                     me.setStatusName(StatusEnum.YIDAOQI.getStatusName());
                 }
             }
-        }
+        }*/
         //3.new AllRecords给allRecordes赋值
         AllRecords allRecords = new AllRecords();
         allRecords.setTotalNumber(count);
@@ -61,15 +64,63 @@ public class MechantServiceimpl implements MechantService {
     @Override
     @Transactional
     public ResultVO addMechant(MechantAddVo mechantAddVo) {
+        //查询验证码是否存在
+        Mechant mechant1 = mechantMapper.queryMeChantInvitationcode(mechantAddVo.getMechantInvitationcode());
+        if(mechant1 != null){
+            return ResultVOBuilder.error("500","该邀请码已经存在，请选择别的重试");
+        }
         Mechant mechant = new Mechant();
        // Mechant_Pic mp = new Mechant_Pic();
         Mechant_Configure mc = new  Mechant_Configure();
        // Mechant_SpeedProgress ms = new Mechant_SpeedProgress();
         Merchant_Capital mca = new Merchant_Capital();
-        Mechant_ZhiFuBao mz = new Mechant_ZhiFuBao();
+//        Mechant_ZhiFuBao mz = new Mechant_ZhiFuBao();
+
         Mechant_Generatinginformation mg = new Mechant_Generatinginformation();
+        //验证商户名称是否具有唯一性
+        mechant =  mechantMapper.queryMechantName(mechantAddVo.getMerchantName());
+        if(mechant != null){
+            return ResultVOBuilder.error("500","商户名称重复，请确认后重新输入或者联系客服");
+        }
+        Date date = new Date();
+        mechantAddVo.setCreateName("谢烽");
+        mechantAddVo.setCreateTime(date);
+        mechantAddVo.setUpdateName("谢烽");
+        mechantAddVo.setUpdateTime(date);
+        //先插入商户表
+        mechant = new Mechant();
+        BeanUtils.copyProperties(mechantAddVo,mechant);
+        Integer id =  mechantMapper.addMechant(mechant);
+        if(id == 0){
+            return ResultVOBuilder.error("500","添加失败，请稍后重试");
+        }
+        mc.setMechantId(id);
+        mca.setMechantId(id);
+        //插入配置信息
+        BeanUtils.copyProperties(mechantAddVo,mc);
+        Integer row = mechantMapper.addMc(mc);
+        if(row == 0){
+            return ResultVOBuilder.error("500","添加失败，请重试，如果重试无果，请联系客服");
+        }
+        //插入合同信息
+        BeanUtils.copyProperties(mechantAddVo,mca);
+        row = mechantMapper.addMca(mca);
+        if(row == 0){
+            return ResultVOBuilder.error("500","添加失败，请重试，如果重试无果，请联系客服");
+        }
+        //批量插入图片信息
+        List<Mechant_Pic> mechantPicList = new ArrayList<>();
+        for (Mechant_Pic mechantPic : mechantAddVo.getMechantPicList()){
+            mechantPic.setMechantId(id);
+            mechantPicList.add(mechantPic);
+        }
+        row = mechantMapper.addMp(mechantPicList);
+        if(row == 0){
+            return ResultVOBuilder.error("500","添加失败，请重试，如果重试无果，请联系客服");
+        }
+
      //   Mechant_Other mo = new Mechant_Other();
-        BeanUtils.copyProperties(mechantAddVo, mechant);
+/*        BeanUtils.copyProperties(mechantAddVo, mechant);
         int i = mechantMapper.addMechant(mechant);
         if(i==0){
             return ResultVOBuilder.error("500","添加失败，请检查您的信息");
@@ -95,11 +146,11 @@ public class MechantServiceimpl implements MechantService {
 
         mechantMapper.addMp(mechantAddVo.getMechantPicList());
         mechantMapper.addMc(mc);
-        mechantMapper.addMs(mechantAddVo.getMechantSpeedProgressList());
+//        mechantMapper.addMs(mechantAddVo.getMechantSpeedProgressList());
         mechantMapper.addMca(mca);
         mechantMapper.addMg(mg);
-        mechantMapper.addMz(mz);
-        mechantMapper.addMo(mechantAddVo.getMechantOtherList());
+        mechantMapper.addMz(mz);*/
+//        mechantMapper.addMo(mechantAddVo.getMechantOtherList());
 
         return ResultVOBuilder.success(mechantAddVo);
     }
@@ -108,7 +159,7 @@ public class MechantServiceimpl implements MechantService {
     @Transactional
     //修改
     public ResultVO updateMechant(MechantUpdateVo mechantUpdateVo) {
-        Mechant mechant1 =  mechantMapper.queryMechantById(mechantUpdateVo.getId());
+        Mechant mechant1 =  mechantMapper.queryMechantName(mechantUpdateVo.getMerchantName());
 
         if (mechant1 == null){
           return ResultVOBuilder.error("您要修改的数据不存在！","500");
@@ -117,30 +168,30 @@ public class MechantServiceimpl implements MechantService {
         Mechant mechant = new Mechant();
         Mechant_Configure mechant_configure = new  Mechant_Configure();
         Mechant_Pic mechant_pic = new Mechant_Pic();
-        Mechant_SpeedProgress mechant_speedprogress = new Mechant_SpeedProgress();
+//        Mechant_SpeedProgress mechant_speedprogress = new Mechant_SpeedProgress();
 
         Mechant_Generatinginformation mechant_generatinginformation=new Mechant_Generatinginformation();
-        Mechant_Other mechant_other=new Mechant_Other();
-        Mechant_ZhiFuBao mechant_zhiFuBao=new Mechant_ZhiFuBao();
+//        Mechant_Other mechant_other=new Mechant_Other();
+//        Mechant_ZhiFuBao mechant_zhiFuBao=new Mechant_ZhiFuBao();
         Merchant_Capital merchant_capital=new Merchant_Capital();
 
 
         BeanUtils.copyProperties(mechantUpdateVo,mechant);
         BeanUtils.copyProperties(mechantUpdateVo, mechant_pic);
         BeanUtils.copyProperties(mechantUpdateVo, mechant_configure);
-        BeanUtils.copyProperties(mechantUpdateVo, mechant_speedprogress);
+//        BeanUtils.copyProperties(mechantUpdateVo, mechant_speedprogress);
         BeanUtils.copyProperties(mechantUpdateVo, mechant_generatinginformation);
-        BeanUtils.copyProperties(mechantUpdateVo, mechant_other);
-        BeanUtils.copyProperties(mechantUpdateVo, mechant_zhiFuBao);
+//        BeanUtils.copyProperties(mechantUpdateVo, mechant_other);
+//        BeanUtils.copyProperties(mechantUpdateVo, mechant_zhiFuBao);
         BeanUtils.copyProperties(mechantUpdateVo, merchant_capital);
 
         mechantMapper.updateMechant(mechant);
         mechantMapper.updataMp(mechant_configure);
         mechantMapper.updatePicList(mechantUpdateVo.getMechantPicList());
-        mechantMapper.updateSpeedProgressList(mechantUpdateVo.getMechant_speedProgressList());
+//        mechantMapper.updateSpeedProgressList(mechantUpdateVo.getMechant_speedProgressList());
         mechantMapper.updateMg(mechant_generatinginformation);
-        mechantMapper.updateOtherList(mechantUpdateVo.getMechant_otherList());
-        mechantMapper.updateMz(mechant_zhiFuBao);
+//        mechantMapper.updateOtherList(mechantUpdateVo.getMechant_otherList());
+//        mechantMapper.updateMz(mechant_zhiFuBao);
         mechantMapper.updateMcp(merchant_capital);
 
         return ResultVOBuilder.success(mechantUpdateVo);
@@ -161,12 +212,12 @@ public class MechantServiceimpl implements MechantService {
 
         }
         MechantUpdateVo mechantUpdateVo=mechantMapper.queryMechantAllById(id);
-        List<Mechant_Other> mechant_othersList = mechantMapper.queryOtherByMid(id);
+     /*   List<Mechant_Other> mechant_othersList = mechantMapper.queryOtherByMid(id);
         List<Mechant_Pic> mechant_pics = mechantMapper.queryPicByMid(id);
         List<Mechant_SpeedProgress> mechant_speedProgresses = mechantMapper.querySpeedProgressByMid(id);
         mechantUpdateVo.setMechant_otherList(mechant_othersList);
-        mechantUpdateVo.setMechant_speedProgressList(mechant_speedProgresses);
-        mechantUpdateVo.setMechantPicList(mechant_pics);
+        mechantUpdateVo.setMechant_speedProgressList(mechant_speedProgresses);*/
+//        mechantUpdateVo.setMechantPicList(mechant_pics);
         return ResultVOBuilder.success(mechantUpdateVo);
     }
 

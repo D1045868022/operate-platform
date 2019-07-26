@@ -1,5 +1,6 @@
 package com.zr.loans.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.GeneratedValue;
@@ -14,33 +15,37 @@ import java.util.Date;
 @Data
 public class Loans {
 
-    private Integer id;
-    private Double InteractionLoanAmount;//互动放款金额
-    private Integer applyAmount;//申请金额
-    private Integer applyTerm;//申请期限
-    private Integer incomingPartsChannel;//进件渠道
-    private String createName;//创建人
-    private Date createTime;//创建时间
-    private String idCode;//身份证号
-    private Double managementLoanAmount;//资方放款金额
-    private String merchant;//商户
+    private Integer loginId;//登录loginid
+    private Integer payOffStatus;//是否已经还完的状态
+    private Integer amountSettlements;//结款金额
+    private String paymentAccount;//收款账户
+    private String startTime;//起止时间
+    private String firstPayMentDate;//首次还款日
     private String name;//客户姓名
-    private Integer oldNumber;//订单编号
-    private Double periodicContributions;//期供款
-    private Integer phone;//电话
-    private Integer management;//资方
-    private Integer status;//资方状态 已放款、已拒绝、打款失败
-    private String statusName;//资方状态 已放款、已拒绝、打款失败
-    private String managementNum;//资方申请编号
-    private Integer loanFishStatus;//贷鱼状态
-    private Integer contactNumber;//联系电话
-    private Date incomingPartsTime;//进件时间
-    private Integer signatureStatus;//签章状态
-    private Date letterTrialTime;//信审日期
+    private String idCode;//身份证号
+    private String payMentDate;//还款日
+    private Integer paymentCycle;//借款期限
+    private String backBank;//默认还款银行
+    private String agreement;//授权协议
+    private Integer myCourse;//我的课程——借款用途
+    private String orderNum;//订单号
+    private Integer status;//16个状态
+    private String createName;//创建人
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date createTime;//创建时间
     private String updateName;//修改人
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;//修改时间
+    private Double refundAmount;//退还金额
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date loansTime;//放款时间
     private Integer pushStatus;//推送状态
     private Integer managementStatus;//推送状态
     private Integer loanType;//贷款类型
+    private String managementNum;//资方申请编号
+    private Double periodicContributions;//期供款
+    private Integer contactNumber;//联系电话
+    private Date letterTrialTime;//信审日期
+    private Double capitalNum;//资方放款金额
+
 }

@@ -1,6 +1,7 @@
 package com.zr.mechant.mapper;
 import com.zr.mechant.model.*;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ import java.util.List;
  * Created by 86151 on 2019/4/22.
  */
 @Mapper
+@Repository
 public interface MechantMapper {
 
     //查询数据库条数
@@ -17,14 +19,14 @@ public interface MechantMapper {
     //查询数据库数据
     List<MechantInfo> queryPage(MechantSelectVo mechantSelectVo);
     //添加8张表
-    @Insert("insert into mechant (merchantName,merchantLegalPerson,merchantAddress,merchantDesc,foreignPhone,phone,createTime,createName,updateTime,updateName) value (#{merchantName},#{merchantLegalPerson},#{merchantAddress},#{merchantDesc},#{foreignPhone},#{phone},#{createTime},#{createName},#{updateTime},#{updateName})")
+    @Insert("insert into mechant (mechantInvitationcode,merchantName,merchantLegalPerson,merchantAddress,merchantDesc,foreignPhone,phone,createTime,createName,updateTime,updateName) value (#{mechantInvitationcode},#{merchantName},#{merchantLegalPerson},#{merchantAddress},#{merchantDesc},#{foreignPhone},#{phone},#{createTime},#{createName},#{updateTime},#{updateName})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     int addMechant(Mechant mechant);
 
     int addMp(List<Mechant_Pic> mp);
 
-   @Insert("insert into mechant_configure (mechanismType,landingAccount,landingPassword,type,isStore,isCreateStore,channelMaintenance,isAddHousingResources,isDeduction,isGrantAuthorization,isActiveRepayment,education,renting,digital,blueWaterSource,huaBei,medicalBeauty,monthlyRentPayment,apartmentType)" +
-                                   " value(#{mechanismType},#{landingAccount},#{landingPassword},#{type},#{isStore},#{isCreateStore},#{channelMaintenance},#{isAddHousingResources},#{isDeduction},#{isGrantAuthorization},#{isActiveRepayment},#{education},#{renting},#{digital},#{blueWaterSource},#{huaBei},#{medicalBeauty},#{monthlyRentPayment},#{apartmentType}) ")
+   @Insert("insert into mechant_configure (mechantaccount,mechantpassword,mechanismType,landingAccount,landingPassword,type,isStore,isCreateStore,channelMaintenance,isAddHousingResources,isDeduction,isGrantAuthorization,isActiveRepayment,education,renting,digital,blueWaterSource,huaBei,medicalBeauty,monthlyRentPayment,apartmentType)" +
+                                   " value(#{mechantaccount},#{mechantpassword},#{mechanismType},#{landingAccount},#{landingPassword},#{type},#{isStore},#{isCreateStore},#{channelMaintenance},#{isAddHousingResources},#{isDeduction},#{isGrantAuthorization},#{isActiveRepayment},#{education},#{renting},#{digital},#{blueWaterSource},#{huaBei},#{medicalBeauty},#{monthlyRentPayment},#{apartmentType}) ")
     int addMc(Mechant_Configure mc);
 
     int addMs(List<Mechant_SpeedProgress> ms);
@@ -48,7 +50,7 @@ public interface MechantMapper {
     Mechant queryMechantById(Integer id);
 
     //修改
-    @Update("update mechant set merchantName=#{merchantName},merchantLegalPerson=#{merchantLegalPerson},phone=#{phone},foreignPhone=#{foreignPhone},merchantDesc=#{merchantDesc},merchantAddress=#{merchantAddress} where id=#{id}")
+    @Update("update mechant set mechantInvitationcode=#{mechantInvitationcode},merchantName=#{merchantName},merchantLegalPerson=#{merchantLegalPerson},phone=#{phone},foreignPhone=#{foreignPhone},merchantDesc=#{merchantDesc},merchantAddress=#{merchantAddress} where id=#{id}")
     int updateMechant(Mechant mechant);
     @Update("update mechant_configure set mechanismType=#{mechanismType},isAddHousingResources=#{isAddHousingResources},channelMaintenance=#{channelMaintenance},medicalBeauty=#{medicalBeauty},huaBei=#{huaBei},blueWaterSource=#{blueWaterSource},digital=#{digital},renting=#{renting},education=#{education},isActiveRepayment=${isActiveRepayment},isGrantAuthorization=#{isGrantAuthorization},isDeduction=#{isDeduction},isCreateStore=#{isCreateStore},isStore=#{isStore},type=#{type},landingPassword=#{landingPassword},landingAccount=#{landingAccount} where mechant_id=#{id}")
     int updataMp(Mechant_Configure mechant_configure);
@@ -70,18 +72,18 @@ public interface MechantMapper {
     int updateMcp(Merchant_Capital merchant_capital);
 
     //修改之前的查询数据
-    @Select("SELECT \n" +
-            "m.id,m.merchantName,m.merchantLegalPerson,m.merchantAddress,m.merchantDesc,m.foreignPhone,m.phone,\n" +
-            "g.bankCard,g.affiliatedBank,g.mailbox,g.province,g.jointLineNumber,g.lenderName,g.lenderAddress,g.lenderPhone,g.bankCity,\n" +
-            "o.landingAccount,o.landingPassword,o.type,o.isStore,o.isCreateStore,o.isDeduction,o.isGrantAuthorization,o.isActiveRepayment,o.education,\n" +
-            "o.renting,o.digital,o.blueWaterSource,o.huaBei,o.medicalBeauty,o.channelMaintenance,o.channelMaintenance,o.isAddHousingResources,o.mechanismType,\n" +
-            "c.accountType,c.openBank,c.bankAccount,c.advanceDays,c.oneRate,c.rate,\n" +
-            "z.zhifubaoAccount,z.zhifubaoPid\n" +
-            "FROM mechant m \n" +
-            "LEFT JOIN mechant_capital c ON m.id=c.mechant_id \n" +
-            "LEFT JOIN mechant_configure o ON m.id=o.mechant_id\n" +
-            "LEFT JOIN mechant_generatinginformation g ON m.id=g.mechant_id\n" +
-            "LEFT JOIN mechant_zhifubao z ON m.id=z.mechant_id\n" +
+    @Select("SELECT " +
+            "m.id,m.merchantName,m.merchantLegalPerson,m.merchantAddress,m.merchantDesc,m.foreignPhone,m.phone," +
+            "g.bankCard,g.affiliatedBank,g.mailbox,g.province,g.jointLineNumber,g.lenderName,g.lenderAddress,g.lenderPhone,g.bankCity," +
+            "o.landingAccount,o.landingPassword,o.type,o.isStore,o.isCreateStore,o.isDeduction,o.isGrantAuthorization,o.isActiveRepayment,o.education," +
+            "o.renting,o.digital,o.blueWaterSource,o.huaBei,o.medicalBeauty,o.channelMaintenance,o.channelMaintenance,o.isAddHousingResources,o.mechanismType," +
+            "c.accountType,c.openBank,c.bankAccount,c.advanceDays,c.oneRate,c.rate," +
+            "z.zhifubaoAccount,z.zhifubaoPid" +
+            "FROM mechant m " +
+            "LEFT JOIN mechant_capital c ON m.id=c.mechant_id" +
+            "LEFT JOIN mechant_configure o ON m.id=o.mechant_id" +
+            "LEFT JOIN mechant_generatinginformation g ON m.id=g.mechant_id" +
+            "LEFT JOIN mechant_zhifubao z ON m.id=z.mechant_id" +
             "WHERE m.id=#{id}")
     MechantUpdateVo queryMechantAllById(Integer id);
 
@@ -94,5 +96,9 @@ public interface MechantMapper {
     @Select("select startTime,endTime from mechant_pic where mechant_id=#{mid}")
     List<Mechant_Pic> queryPicByMid(Integer mid);
 
+    @Select("select merchantName from mechant where merchantName=#{merchantName}")
+    Mechant queryMechantName(String merchantName);
 
+    @Select("select mechantInvitationcode from mechant where mechantInvitationcode=#{mechantInvitationcode}")
+    Mechant queryMeChantInvitationcode(String mechantInvitationcode);
 }

@@ -12,6 +12,7 @@ public class MechantInfo  {
     private Integer id;
     private  String merchantName;//商户名称
     private String  merchantAddress;//商户地址
+
     private Integer maintenanceChannel;//维护渠道
     //private 业务类型
     private Date startTime;
@@ -19,5 +20,6 @@ public class MechantInfo  {
     private Integer status;
     private String statusName;
     private Integer mechantId;//外键
+    private Integer businessType;//业务类型
 
 }

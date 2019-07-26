@@ -3,35 +3,31 @@
 <mapper namespace="com.zr.loans.mapper.YifangkuanMapper">
     <select id="queryPage" parameterType="com.zr.loans.pojo.YifangkuanSelectVo" resultType="com.zr.loans.pojo.Loans">
         select
-          management,merchant,
-          name,idCode,
-          createTime,letterTrialTime,
-          loansTime,applyAmount,
-          applyTerm,periodicContributions,
-          managementLoanAmount,loanFishStatus
-        from
-        loans
+        p.name,m.businessType,
+        p.updateName,p.status
+        FROM paydivide p join mechant m
+        on p.mechant_id=m.id
         where  1=1
         <if test="status != null">
             status=#{status}
         </if>
-        <if test="letterTrialTimeStart != null">
+<!--        <if test="letterTrialTimeStart != null">
             letterTrialTime>#{letterTrialTimeStart}
         </if>
         <if test="letterTrialTimeEnd != null">
             #{letterTrialTimeEnd}>letterTrialTime
-        </if>
+        </if>-->
         <if test="merchant != null and merchant != ''">
-            merchant=#{merchant}
+            m.merchantName=#{merchant}
         </if>
-        <if test="management != null">
+<!--        <if test="management != null">
             management=#{management}
-        </if>
+        </if>-->
         <if test="idCode != null and idCode != ''">
-            idCode=#{idCode}
+            p.idCode=#{idCode}
         </if>
         <if test="name != null and name != ''">
-            name=#{name}
+            p.name=#{name}
         </if>
         <if test="loansTime != null">
             loansTime=#{loansTime}
@@ -42,30 +38,30 @@
     <!--总条数-->
     <select id="queryCount" parameterType="com.zr.loans.pojo.YifangkuanSelectVo" resultType="java.lang.Integer">
         select
-        count(id)
-        from
-        loans
+        count(p.id)
+        FROM paydivide p join mechant m
+        on p.mechant_id=m.id
         where  1=1
         <if test="status != null">
             status=#{status}
         </if>
-        <if test="letterTrialTimeStart != null">
-            letterTrialTime>#{letterTrialTimeStart}
-        </if>
-        <if test="letterTrialTimeEnd != null">
-            #{letterTrialTimeEnd}>letterTrialTime
-        </if>
+        <!--        <if test="letterTrialTimeStart != null">
+                    letterTrialTime>#{letterTrialTimeStart}
+                </if>
+                <if test="letterTrialTimeEnd != null">
+                    #{letterTrialTimeEnd}>letterTrialTime
+                </if>-->
         <if test="merchant != null and merchant != ''">
-            merchant=#{merchant}
+            m.merchantName=#{merchant}
         </if>
-        <if test="management != null">
-            management=#{management}
-        </if>
+        <!--        <if test="management != null">
+                    management=#{management}
+                </if>-->
         <if test="idCode != null and idCode != ''">
-            idCode=#{idCode}
+            p.idCode=#{idCode}
         </if>
         <if test="name != null and name != ''">
-            name=#{name}
+            p.name=#{name}
         </if>
         <if test="loansTime != null">
             loansTime=#{loansTime}
