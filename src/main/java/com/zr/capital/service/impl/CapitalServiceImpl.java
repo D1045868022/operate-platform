@@ -89,7 +89,6 @@ public class CapitalServiceImpl implements CapitalService {
         capitalMapper.deleteByIdCodes(newIdCodes);
         //重新插入银行数据
         capitalMapper.insertOverduList(OverdueListSelectVoList);
-
         return ResultVOBuilder.success(OverdueListSelectVoList);
     }
 }
