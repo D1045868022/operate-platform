@@ -1,7 +1,10 @@
 package com.zr.mechant.model;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.NotBlank;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
@@ -11,7 +14,7 @@ import java.util.List;
 @Data
 public class MechantUpdateVo {
     //主表mechant
-    private  Integer id;
+    /*private  Integer id;
     private  String  merchantName;
     private String merchantLegalPerson;
     private String merchantAddress;
@@ -82,6 +85,54 @@ public class MechantUpdateVo {
     //private String pic;
     private List<Mechant_Other> mechant_otherList;
 
+    private Date createTime;
+    private String createName;
+    private Date updateTime;
+    private String updateName;*/
+
+    private String bankCard;//银行卡号
+    private String lenderName;//出借人姓名
+    private String affiliatedBank;//所属银行或支行
+    private String lenderAddress;//出借人地址
+    private String mailbox;//出借人邮箱
+    private String lenderPhone;//出借人手机号
+    private String province;//开户行所在省
+    private String bankCity;//开户行所在市
+    private String jointLineNumber;//开户行银联卡号
+
+    //合同信息
+    @Valid
+    private List<Mechant_Pic> mechantPicList;//合同信息list
+
+    //配置信息
+    private String mechantaccount;//商户登录账号
+    private String mechantpassword;//商户登录密码
+    private Integer type;//商户类型名称
+    private Integer isStore;//是否有门店
+    private Integer isDeduction;//商户标识
+    //    @NotNull(message = "至少要勾选一项")
+//    private List<Integer> deductionList;//商户标识多选框
+    private Integer channelMaintenance;//渠道维护 商务姓名
+
+
+    //客户打款信息
+    private Integer accountType;//账户类型 直接对应 对公
+    private String accountName;//账户名称
+    private String openBank;//开户银行
+    private String bankAccount;//银行账号
+    private Integer advanceDays;//宽限期天数
+    private String oneRate;//机构利率
+    private String rate;//费率
+
+    //商户信息录入
+    private Integer id;
+    private String merchantName;
+    private String merchantLegalPerson;
+    private String merchantAddress;
+    private String merchantDesc;
+    private String foreignPhone;
+    private String phone;
+    private String mechantInvitationcode;//商户邀请码，四位不重复数字
     private Date createTime;
     private String createName;
     private Date updateTime;

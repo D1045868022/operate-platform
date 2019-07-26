@@ -1,6 +1,7 @@
 package com.zr.mechant.model;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * Created by Administrator on 2019/6/3.
@@ -28,6 +29,8 @@ public class Mechant_Configure {
     private Integer isAddHousingResources;
     private  Integer  mechanismType;
     private Integer mechantId;//外键
+    private String mechantaccount;//商户登录账号
+    private String mechantpassword;//商户登录密码
 
 
 }

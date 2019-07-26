@@ -1,6 +1,7 @@
 package com.zr.mechant.model;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.NotBlank;
 
 import java.util.Date;
 
@@ -9,18 +10,24 @@ import java.util.Date;
  */
 @Data
 public class Mechant {
-
     private Integer id;
-    //@NotBlank(message = "商户名称不能为空")
-    private  String  merchantName;
+    private String  merchantName;
     private String merchantLegalPerson;
     private String merchantAddress;
     private String merchantDesc;
-    private Integer foreignPhone;
-    private Integer phone;
+    private String foreignPhone;
+    private String phone;
     private Date createTime;
     private String createName;
     private Date updateTime;
     private String updateName;
+    private Integer businessType;
+    private String mechantInvitationcode;
+    private Integer isornocontract;
+    private Integer setlimitMoney;
+
+
+
+
 
 }

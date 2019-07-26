@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public interface DaifangkuanService {
     //导出
-    ResultVO exportDFK(HttpServletResponse response, DaiFangKuanSelectVo daiFangKuanSelectVo);
+//    ResultVO exportDFK(HttpServletResponse response, DaiFangKuanSelectVo daiFangKuanSelectVo);
 
     //分页
     ResultVO<AllRecords> queryPage(DaiFangKuanSelectVo daiFangKuanSelectVo);

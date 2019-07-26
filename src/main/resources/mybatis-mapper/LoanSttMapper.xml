@@ -3,14 +3,12 @@
 <mapper namespace="com.zr.loans.mapper.LoansituationMapper">
     <select id="queryPage" parameterType="com.zr.loans.pojo.LoansituationSelectVo" resultType="com.zr.loans.pojo.Loans">
         select
-        merchant,name,
-        idCode,applyAmount,
-        createTime,applyTerm,
-        loansTime,managementNum,
-        loanFishStatus,contactNumber,
-        pushStatus
+        m.merchantName,p.name,p.idCode,
+        p.amountSettlements,p.paymentCycle,
+        p.loansTime,p.managementNum,status
         from
-        loans
+        paydivide p join mechant m
+        on p.mechant_id=m.id
         where  1=1
         <if test="idCode != null and idCode != ''">
             and idCode = #{idCode}
@@ -22,29 +20,29 @@
             and contactNumber = #{contactNumber}
         </if>
         <if test="merchant != null and merchant != ''">
-            and merchant = #{merchant}
+            and merchantName = #{merchant}
         </if>
-        <if test="management != null">
+<!--        <if test="management != null">
             and management = #{management}
-        </if>
+        </if>-->
         <if test="managementNum != null and managementNum != ''">
             and managementNum = #{managementNum}
         </if>
-        <if test="loanFishStatus != null ">
+<!--        <if test="loanFishStatus != null ">
             and loanFishStatus = #{loanFishStatus}
-        </if>
-        <if test="pushStatus != null ">
+        </if>-->
+<!--        <if test="pushStatus != null ">
             and pushStatus = #{pushStatus}
-        </if>
+        </if>-->
         <if test="incomingPartsChannel != null ">
             and incomingPartsChannel = #{incomingPartsChannel}
         </if>
-        <if test="incomingPartsTimeStart !=null">
+<!--        <if test="incomingPartsTimeStart !=null">
             and createTime>#{incomingPartsTimeStart}
         </if>
         <if test="incomingPartsTimeEnd != null ">
             and #{incomingPartsTimeEnd}>createTime
-        </if>
+        </if>-->
         <if test="letterTrialTimeStart != null ">
             and letterTrialTime>#{letterTrialTimeStart}
         </if>
@@ -60,9 +58,10 @@
     <!--总条数-->
     <select id="queryCount" parameterType="com.zr.loans.pojo.LoansituationSelectVo" resultType="java.lang.Integer">
         select
-            count(id)
+            count(p.id)
         from
-        loans
+        paydivide p join mechant m
+        on p.mechant_id=m.id
         where  1=1
         <if test="idCode != null and idCode != ''">
             and idCode = #{idCode}
@@ -74,40 +73,37 @@
             and contactNumber = #{contactNumber}
         </if>
         <if test="merchant != null and merchant != ''">
-            and merchant = #{merchant}
+            and merchantName = #{merchant}
         </if>
-        <if test="management != null">
-            and management = #{management}
-        </if>
+        <!--        <if test="management != null">
+                    and management = #{management}
+                </if>-->
         <if test="managementNum != null and managementNum != ''">
             and managementNum = #{managementNum}
         </if>
-        <if test="loanFishStatus != null ">
-            and loanFishStatus = #{loanFishStatus}
-        </if>
-        <if test="pushStatus != null ">
-            and pushStatus = #{pushStatus}
-        </if>
-        <if test="incomingPartsChannel != null">
+        <!--        <if test="loanFishStatus != null ">
+                    and loanFishStatus = #{loanFishStatus}
+                </if>-->
+        <!--        <if test="pushStatus != null ">
+                    and pushStatus = #{pushStatus}
+                </if>-->
+        <if test="incomingPartsChannel != null ">
             and incomingPartsChannel = #{incomingPartsChannel}
         </if>
-        <if test="incomingPartsTimeStart != ''">
-            and createTime>#{incomingPartsTimeStart}
-        </if>
-        <if test="incomingPartsTimeEnd != '' ">
-            and #{incomingPartsTimeEnd}>createTime
-        </if>
-        <if test="letterTrialTimeStart != '' ">
+        <!--        <if test="incomingPartsTimeStart !=null">
+                    and createTime>#{incomingPartsTimeStart}
+                </if>
+                <if test="incomingPartsTimeEnd != null ">
+                    and #{incomingPartsTimeEnd}>createTime
+                </if>-->
+        <if test="letterTrialTimeStart != null ">
             and letterTrialTime>#{letterTrialTimeStart}
         </if>
-        <if test="letterTrialTimeEnd != '' ">
+        <if test="letterTrialTimeEnd != null ">
             and #{letterTrialTimeEnd}>letterTrialTime
         </if>
         <if test="signatureStatus != null ">
             and signatureStatus = #{signatureStatus}
-        </if>
-        <if test="status != null ">
-            or status = 6
         </if>
     </select>
  </mapper>

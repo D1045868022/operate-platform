@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zr.loans.mapper.DaishenheMapper">
+    <select id="queryPage" parameterType="com.zr.loans.pojo.DaishenheSelectVo" resultType="com.zr.loans.pojo.Loans">
+        select
+        p.createTime,p.name,m.businessType,p.updateName
+        from
+        paydivide p join mechant m on p.mechant_id=m.id
+        where  1=1
+        <if test="LoanType != null">
+            and m.businessType = #{LoanType}
+        </if>
+        <if test=" name != null and name != ''">
+            and p.name = #{name}
+        </if>
+<!--        <if test=" incomingPartsChannel != null ">
+            and incomingPartsChannel = #{incomingPartsChannel}
+        </if>
+        <if test="management != null">
+            and management = #{management}
+        </if>-->
+        <if test="status != null ">
+            and p.status = #{status}
+        </if>
+        limit #{offset},#{pageSize}
+    </select>
+
+    <!--总条数-->
+    <select id="queryCount" parameterType="com.zr.loans.pojo.DaishenheSelectVo" resultType="java.lang.Integer">
+        select
+        count(p.id)
+        from
+        paydivide p join mechant m on p.mechant_id=m.id
+        where  1=1
+        <if test="LoanType != null">
+            and m.businessType = #{LoanType}
+        </if>
+        <if test=" name != null and name != ''">
+            and p.name = #{name}
+        </if>
+        <!--        <if test=" incomingPartsChannel != null ">
+                    and incomingPartsChannel = #{incomingPartsChannel}
+                </if>
+                <if test="management != null">
+                    and management = #{management}
+                </if>-->
+        <if test="status != null ">
+            and p.status = #{status}
+        </if>
+    </select>
+ </mapper>
+
+

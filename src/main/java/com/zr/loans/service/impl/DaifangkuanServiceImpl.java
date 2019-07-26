@@ -32,7 +32,7 @@ public class DaifangkuanServiceImpl implements DaifangkuanService {
     /**
      * 导出
      */
-    @Override
+ /*   @Override
     public ResultVO exportDFK(HttpServletResponse response, DaiFangKuanSelectVo daiFangKuanSelectVo) {
         //从数据库中查询将要导出的数据
         List<Loans> loansList = daiFangKuanMapper.findAll(daiFangKuanSelectVo);
@@ -62,7 +62,7 @@ public class DaifangkuanServiceImpl implements DaifangkuanService {
         }
 
         return null;
-    }
+    }*/
 
     //分页查询
     @Override
@@ -81,7 +81,7 @@ public class DaifangkuanServiceImpl implements DaifangkuanService {
     }
 
     //非通用方法
-    private void writeDataToExcel(InputStream in, String sheet1, List<Loans> loansList, ServletOutputStream out) throws IOException {
+  /*  private void writeDataToExcel(InputStream in, String sheet1, List<Loans> loansList, ServletOutputStream out) throws IOException {
         //POI读取模板
         XSSFWorkbook wb = new XSSFWorkbook(in);
         //读取sheet1中的数据
@@ -94,10 +94,10 @@ public class DaifangkuanServiceImpl implements DaifangkuanService {
         wb.write(out);
         //关闭POI方法
         wb.close();
-    }
+    }*/
 
     //插入excel表中项目信息
-    private void toResultListValueInfo(Sheet sheet, List<Loans> loansList) {
+    /*private void toResultListValueInfo(Sheet sheet, List<Loans> loansList) {
         //从第五行开始赋值
         int row_column = 4;
         //遍历数据集合
@@ -131,5 +131,5 @@ public class DaifangkuanServiceImpl implements DaifangkuanService {
 //            POIClass.toCellValue(row, 11, loans.getOperation() + "");
             row_column ++;
         }
-    }
+    }*/
 }

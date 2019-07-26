@@ -2,17 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zr.mechant.mapper.MechantMapper">
     <select id="queryPage" parameterType="com.zr.mechant.model.MechantSelectVo" resultType="com.zr.mechant.model.MechantInfo">
-        select a.merchantName,a.merchantAddress,b.channelMaintenance,c.startTime,c.endTime,d.status,a.id
-        FROM mechant a LEFT JOIN mechant_configure b ON a.merchantName = b.landingAccount
-        LEFT JOIN mechant_pic c ON a.id = c.mechant_id
-        LEFT JOIN mechant_speedprogress d ON a.id = d.mechant_id
-        <if test="merchantName!=null and merchantName!=''">
+        select
+        m.merchantName,m.merchantAddress,
+        m.businessType,
+        co.channelMaintenance,ca.advanceDays,
+        ca.oneRate,p.status
+        from
+        mechant m
+        join  mechant_configure co
+        on m.id=co.mechant_id
+        join mechant_capital ca
+        on m.id=ca.mechant_id
+        join userlogin u
+        on m.mechantInvitationcode=u.invitationCode
+        join paydivide p
+        on p.loginId=p.loginId
+        where 1=1
+        <if test="merchantName != null and merchantName != ''">
             and merchantName=#{merchantName}
         </if>
-        <if test="channelMaintenance!=null and channelMaintenance!=''">
+        <if test="channelMaintenance != null">
             and channelMaintenance=#{channelMaintenance}
         </if>
-        <if test="status!=null">
+        <if test="status != null">
             and status=#{status}
         </if>
         limit #{offset},#{pageSize}
@@ -20,15 +32,26 @@
 
     <!--总条数-->
     <select id="queryCount" parameterType="com.zr.mechant.model.MechantSelectVo" resultType="java.lang.Integer">
-        select count(*)
-    FROM mechant WHERE 1=1
-        <if test="merchantName!=null and merchantName!=''">
+        select
+        count(p.id)
+        from
+        mechant m
+        join  mechant_configure co
+        on m.id=co.mechant_id
+        join mechant_capital ca
+        on m.id=ca.mechant_id
+        join userlogin u
+        on m.mechantInvitationcode=u.invitationCode
+        join paydivide p
+        on p.loginId=p.loginId
+        where 1=1
+        <if test="merchantName != null and merchantName != ''">
             and merchantName=#{merchantName}
         </if>
-        <if test="channelMaintenance!=null and channelMaintenance!=''">
+        <if test="channelMaintenance != null">
             and channelMaintenance=#{channelMaintenance}
         </if>
-        <if test="status!=null">
+        <if test="status != null">
             and status=#{status}
         </if>
     </select>
