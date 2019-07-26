@@ -11,10 +11,10 @@ import javax.validation.constraints.NotNull;
 @Data
 public class SignContractVo {
 
-    @NotBlank(message = "身份证号码不能为空能够")
+//    @NotBlank(message = "身份证号码不能为空能够")
     private String idCard;//身份证号码
 
-    @NotNull(message = "签约状态不能为空能够")
+//    @NotNull(message = "签约状态不能为空能够")
     private Boolean status;//签约状态
 
 }
