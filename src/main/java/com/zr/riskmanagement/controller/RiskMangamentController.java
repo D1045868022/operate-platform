@@ -1,6 +1,6 @@
 package com.zr.riskmanagement.controller;
 
-import com.zr.earliersettlement.pojo.XiaLaVo;
+
 import com.zr.meiju.StatusMerchant;
 import com.zr.riskmanagement.pojo.RiskReserveAddVo;
 import com.zr.riskmanagement.pojo.RiskReserveSelectVo;
@@ -8,6 +8,7 @@ import com.zr.riskmanagement.service.RiskMangamentService;
 import com.zr.util.AllRecords;
 import com.zr.util.ResultVO;
 import com.zr.util.ResultVOBuilder;
+import com.zr.util.XiaLaVo;
 import com.zr.xinshenstatistics.util.ResultVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -47,8 +48,8 @@ public class RiskMangamentController {
         List<XiaLaVo> xiaLaVoList = new ArrayList<>();
         for (int i = 0; i< StatusMerchant.values().length; i++){
             XiaLaVo xiaLaVo = new XiaLaVo();
-            xiaLaVo.setKey(i);
-            xiaLaVo.setValue(StatusMerchant.getStatusName(i));
+            xiaLaVo.setValue(i);
+            xiaLaVo.setLabel(StatusMerchant.getStatusName(i));
             xiaLaVoList.add(xiaLaVo);
         }
         return ResultVOBuilder.success(xiaLaVoList);
