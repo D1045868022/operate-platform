@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zr.tuihuo.mapper.TuiHuoMapper">
+
+    <select id="queryPage" parameterType="com.zr.tuihuo.pojo.TuiHuoSelectVo"
+            resultType="com.zr.tuihuo.pojo.TuiHuo">
+        SELECT paymentAccount,name,refundAmount,createTime,updateTime,status
+        from paydivide
+        <where>
+            <if test="paymentAccount!=null and paymentAccount!=''">
+                and paymentAccount=#{paymentAccount}
+            </if>
+            <if test="name!=null and name!=''">
+                and name=#{name}
+            </if>
+            <if test="status!=null ">
+                and status=#{status}
+            </if>
+                and status = 10 or status =12
+        </where>
+        limit #{offset},#{pageSize}
+    </select>
+    <select id="queryCount" parameterType="com.zr.tuihuo.pojo.TuiHuoSelectVo"
+            resultType="java.lang.Integer">
+        select count(*)
+        FROM paydivide
+        <where>
+            <if test="paymentAccount!=null and paymentAccount!=''">
+                and paymentAccount=#{paymentAccount}
+            </if>
+            <if test="name!=null and name!=''">
+                and name=#{name}
+            </if>
+            <if test="status!=null ">
+                and status=#{status}
+            </if>
+              and status = 10 or status =12
+        </where>
+    </select>
+</mapper>
+
+

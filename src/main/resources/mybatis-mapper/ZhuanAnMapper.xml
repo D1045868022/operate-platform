@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zr.zhuanan.mapper.ZhuanAnMapper">
+
+    <delete id="deleteDistributionScheme" parameterType="java.util.List">
+    delete from project where managementProjectCode in
+    <foreach collection="list" item="item" open="(" separator="),(" close=")">
+        #{item.managementProjectCode}
+    </foreach>
+    </delete>
+
+    <insert id="addDistributionScheme" parameterType="java.util.List">
+        insert into project (projectName,accountingFees,accountingName,businessDiscountRate,
+        customerYearRate,quota,paymentMethod,
+        term,managementProjectCode,managementName,profitSource,receiveStatus)
+        values
+        <foreach collection="list" item="item" open="(" separator="),(" close=")">
+            #{item.projectName}, #{item.accountingFees},#{item.accountingName},#{item.businessDiscountRate},
+            #{item.customerYearRate},#{item.quota},#{item.paymentMethod},
+            #{item.term},#{item.managementProjectCode}
+            #{item.managementName},#{item.profitSource},#{item.receiveStatus}
+        </foreach>
+    </insert>
+
+</mapper>
+
+

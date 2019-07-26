@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zr.pikou.mapper.ApprovalMapper">
+    <!--分页查询数据-->
+    <select id="queryPage" parameterType="com.zr.pikou.pojo.ApprovalSelectVo"
+            resultType="com.zr.pikou.pojo.Approval">
+        SELECT
+        createTime,loanContractNum,customerName,
+        idCode,deductible,reimbursementAccountOpeningBank,
+        paymentAccount,issuanceOfWithholdingTime,deductionResults
+        FROM approval
+        <where>
+            <if test="loanContractNum!=null and loanContractNum!=''">
+                and loanContractNum=#{loanContractNum}
+            </if>
+            <if test="customerName!=null and customerName!=''">
+                and customerName=#{customerName}
+            </if>
+            <if test="idCode!=null and idCode!=''">
+                and idCode=#{idCode}
+            </if>
+            <if test="paymentAccount!=null and paymentAccount!=''">
+                and paymentAccount=#{paymentAccount}
+            </if>
+            <if test="createTime!=null and createTime!=''">
+                and createTime=#{createTime}
+            </if>
+            <if test="deductionResults!=null">
+                and deductionResults=#{deductionResults}
+            </if>
+            <if test="approvalChannel!=null and approvalChannel!=''">
+                and approvalChannel=#{approvalChannel}
+            </if>
+            <if test="isApproval!=null">
+                and isApproval=#{isApproval}
+            </if>
+            and status=0
+        </where>
+        limit #{offset},#{pageSize}
+    </select>
+
+    <!--总条数-->
+    <select id="queryCount" parameterType="com.zr.pikou.pojo.ApprovalSelectVo"
+            resultType="java.lang.Integer">
+        select count(*)
+        FROM approval
+        <where>
+            <if test="loanContractNum!=null and loanContractNum!=''">
+                and loanContractNum=#{loanContractNum}
+            </if>
+            <if test="customerName!=null and customerName!=''">
+                and customerName=#{customerName}
+            </if>
+            <if test="idCode!=null and idCode!=''">
+                and idCode=#{idCode}
+            </if>
+            <if test="paymentAccount!=null and paymentAccount!=''">
+                and paymentAccount=#{paymentAccount}
+            </if>
+            <if test="createTime!=null and createTime!=''">
+                and createTime=#{createTime}
+            </if>
+            <if test="deductionResults!=null">
+                and deductionResults=#{deductionResults}
+            </if>
+            <if test="approvalChannel!=null and approvalChannel!=''">
+                and approvalChannel=#{approvalChannel}
+            </if>
+            <if test="isApproval!=null">
+                and isApproval=#{isApproval}
+            </if>
+            and status=0
+        </where>
+    </select>
+
+    <select id="queryBankApprovalByCodes" parameterType="java.util.List"  resultType="com.zr.pikou.pojo.ApprovalShowVo">
+        SELECT loanContractNum FROM approval WHERE status =0 and loanContractNum in
+        <foreach collection="list" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+
+
+    </select>
+
+    <insert id="insert" parameterType="java.util.List">
+        insert into approval (customerName,loanContractNum,idCode,deductible,reimbursementAccountOpeningBank,
+        paymentAccount,issuanceOfWithholdingTime,deductionResults,deductionStatus)
+        values
+        <foreach collection="list" item="item" open="(" separator="),(" close=")">
+            #{item.customerName}, #{item.loanContractNum},#{item.idCode},#{item.deductible},
+            #{item.reimbursementAccountOpeningBank},#{item.paymentAccount},#{item.issuanceOfWithholdingTime},
+            #{item.deductionResults},#{item.deductionStatus}
+        </foreach>
+    </insert>
+    <update id="updateStatus" parameterType="java.util.List">
+        update  approval set status=1 where loanContractNum in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+           #{item.loanContractNum}
+        </foreach>
+    </update>
+
+
+
+    <!--分页查询数据-->
+    <select id="queryBySelectPage" parameterType="com.zr.pikou.pojo.QueryBySelectVo"
+            resultType="com.zr.pikou.pojo.Approval">
+        SELECT
+        createTime,loanContractNum,customerName,
+        idCode,deductible,issuanceOfWithholdingTime,deductionResults
+        FROM approval
+        <where>
+            <if test="loanContractNum!=null and loanContractNum!=''">
+                and loanContractNum=#{loanContractNum}
+            </if>
+            <if test="deductionResults!=null">
+                and deductionResults=#{deductionResults}
+            </if>
+            and status=0 or status=1
+        </where>
+        limit #{offset},#{pageSize}
+    </select>
+
+    <!--总条数-->
+    <select id="queryBySelectCount" parameterType="com.zr.pikou.pojo.QueryBySelectVo"
+            resultType="java.lang.Integer">
+        select count(*)
+        FROM approval
+        <where>
+            <if test="loanContractNum!=null and loanContractNum!=''">
+                and loanContractNum=#{loanContractNum}
+            </if>
+            <if test="deductionResults!=null">
+                and deductionResults=#{deductionResults}
+            </if>
+            and status=0 or status=1
+        </where>
+    </select>
+</mapper>
+

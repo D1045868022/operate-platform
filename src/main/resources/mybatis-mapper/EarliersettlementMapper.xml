@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zr.earliersettlement.mapper.EarliersettlementMapper">
+    <select id="queryPage" parameterType="com.zr.earliersettlement.pojo.EarliersettlementSelectVo" resultType="com.zr.earliersettlement.pojo.Earliersettlement">
+        select e.shenQingAmount,e.orderNum,e.idCode,phone,e.serviceCharge,e.penaltyInterest,e.orderStatus,
+        e.createTime,e.createName,e.updateTime,e.updateName ,rc.capitalSide,p.name
+        from earliersettlement e LEFT JOIN riskreserve_capitalside rc ON e.capitalName = rc.capitalSide
+        LEFT JOIN paydivide p on p.idCode= e.idCode
+        <where>
+            <if test="idCode!=null and idCode!=''">
+                and e.idCode =#{idCode}
+            </if>
+
+            <if test="phone!=null and phone!=''">
+                and e.phone =#{phone}
+            </if>
+
+            <if test="name!=null and name!=''">
+                and p.name =#{name}
+            </if>
+
+            <if test="orderStatus!=null">
+                and e.orderStatus =#{orderStatus}
+            </if>
+            <if test="capitalSide!=null and capitalSide!=''">
+                and rc.capitalSide =#{capitalSide}
+            </if>
+        </where>
+        limit #{offset},#{pageSize}
+    </select>
+
+    <!--总条数-->
+    <select id="queryCount" parameterType="com.zr.earliersettlement.pojo.EarliersettlementSelectVo" resultType="java.lang.Integer">
+        select count(*)
+        FROM earliersettlement
+        <where>
+            <if test="idCode!=null and idCode!=''">
+                and e.idCode =#{idCode}
+            </if>
+
+            <if test="phone!=null and phone!=''">
+                and e.phone =#{phone}
+            </if>
+
+            <if test="name!=null and name!=''">
+                and p.name =#{name}
+            </if>
+
+            <if test="orderStatus!=null">
+                and e.orderStatus =#{orderStatus}
+            </if>
+            <if test="capitalSide!=null and capitalSide!=''">
+                and rc.capitalSide =#{capitalSide}
+            </if>
+        </where>
+    </select>
+    <select id="queryByIdCodes" parameterType="java.util.List" resultType="com.zr.earliersettlement.pojo.EarliersettlementShowVo">
+        SELECT idCode FROM earliersettlement WHERE idCode in
+        <foreach collection="list" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </select>
+    <insert id="insertEarliersettlement" parameterType="java.util.List">
+        insert into earliersettlement (shenQingAmount,orderNum,idCode,phone,serviceCharge,
+        penaltyInterest,orderStatus)
+        values
+        <foreach collection="list" item="item" open="(" separator="),(" close=")">
+            #{item.shenQingAmount}, #{item.orderNum},#{item.idCode},#{item.phone},
+            #{item.serviceCharge},#{item.penaltyInterest},#{item.orderStatus}
+        </foreach>
+    </insert>
+    <delete id="deleteEarliersettlement" parameterType="java.util.List">
+    delete from earliersettlement where idCode in
+    <foreach collection="list" item="item" open="(" separator="),(" close=")">
+        #{item.idCode}
+    </foreach>
+    </delete>
+
+    <select id="queryBySelectVo" parameterType="com.zr.earliersettlement.pojo.EarliersettlementSelectVo"
+            resultType="com.zr.earliersettlement.pojo.Earliersettlement">
+        select shenQingAmount,orderNum,idCode,phone,serviceCharge,penaltyInterest,orderStatus
+        FROM earliersettlement
+        <where>
+            <if test="shenQingAmount!=null ">
+                and shenQingAmount =#{shenQingAmount}
+            </if>
+
+            <if test="orderNum!=null and orderNum!=''">
+                and orderNum =#{orderNum}
+            </if>
+
+            <if test="idCode!=null and idCode!=''">
+                and idCode =#{idCode}
+            </if>
+            <if test="phone!=null and phone!=''">
+                and phone =#{phone}
+            </if>
+
+            <if test="serviceCharge!=null ">
+                and serviceCharge =#{serviceCharge}
+            </if>
+
+            <if test="penaltyInterest!=null">
+                and penaltyInterest =#{penaltyInterest}
+            </if>
+            <if test="orderStatus!=null ">
+                and orderStatus =#{orderStatus}
+            </if>
+        </where>
+    </select>
+</mapper>
+
