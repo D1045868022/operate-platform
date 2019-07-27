@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zr.yuqiliebiao.mapper.YuqiMapper">
+    <select id="queryPage" parameterType="com.zr.yuqiliebiao.pojo.Overduelist"
+            resultType="com.zr.yuqiliebiao.pojo.Overduelist">
+        select
+        m.merchantName,
+        o.phone,
+        o.overdueAmount,
+        o.idCode
+        p.name
+        FROM overduelist o
+        LEFT JOIN  mechant m on o.phone = m.phone
+        LEFT JOIN  paydivide p on p.idCode = o.idCode
+        <where>
+            <if test="idCode!=null and idCode!=''">
+            and o.idCode=#{idCode}
+        </if>
+        <if test="phone!=null and phone !=''">
+            and o.phone=#{phone}
+        </if>
+        <if test="name!=null and name !=''">
+            and m.name=#{name}
+        </if>
+            <if test="merchantName!=null and merchantName !=''">
+                and m.merchantName=#{merchantName}
+            </if>
+        </where>
+        limit #{offset},#{pageSize}
+    </select>
+
+    <!--总条数-->
+    <select id="queryCount" parameterType="com.zr.yuqiliebiao.pojo.OverduelistVo" resultType="java.lang.Integer">
+        select count(o.id)
+        FROM overduelist o
+        LEFT JOIN  mechant m on o.phone = m.phone
+        <where>
+            <if test="idCode!=null and idCode!=''">
+                and o.idCode=#{idCode}
+            </if>
+            <if test="phone!=null and phone !=''">
+                and o.phone=#{phone}
+            </if>
+            <if test="name!=null and name !=''">
+                and m.name=#{name}
+            </if>
+            <if test="merchantName!=null and merchantName !=''">
+                and m.merchantName=#{merchantName}
+            </if>
+        </where>
+    </select>
+
+
+    <select id="queryByIdCodes" parameterType="java.util.List" resultType="com.zr.yuqiliebiao.pojo.OverduelistVo">
+        SELECT * FROM overduelist WHERE  idCode IN
+        <foreach collection="list" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </select>
+
+    <delete id="deleteByIdCodes" parameterType="java.util.List">
+        DELETE  from overduelist WHERE  idCode IN
+        <foreach collection="list" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </delete>
+
+    <insert id="insertOverduList" parameterType="java.util.List">
+        insert into overduelist (idCode,phone,overdueAmount,createTime,penaltyInterest,principalRepayment,interestPayable) VALUES
+        <foreach collection="list" item="item" open="(" separator="),(" close=")">
+            #{item.idCode},#{item.phone},#{item.overdueAmount},#{item.createTime},#{item.penaltyInterest},#{item.principalRepayment},#{item.interestPayable}
+        </foreach>
+    </insert>
+    <select id="queryBySelectVo" parameterType="com.zr.xuezhu.overdue.pojo.OverdueSelectVo" resultType="com.zr.xuezhu.overdue.pojo.OverdueSelectVo">
+        select
+        p.name
+        m.merchantName,
+        o.phone,
+        o.overdueAmount,
+        o.idCode
+        FROM overduelist o
+        LEFT JOIN  mechant m on o.phone = m.phone
+        LEFT JOIN  paydivide p on p.idCode = o.idCode
+        <where>
+            <if test="idCode!=null and idCode!=''">
+                and o.idCode=#{idCode}
+            </if>
+            <if test="phone!=null and phone !=''">
+                and o.phone=#{phone}
+            </if>
+            <if test="name!=null and name !=''">
+                and m.name=#{name}
+            </if>
+            <if test="merchantName!=null and merchantName !=''">
+                and m.merchantName=#{merchantName}
+            </if>
+        </where>
+    </select>
+</mapper>
+
+
