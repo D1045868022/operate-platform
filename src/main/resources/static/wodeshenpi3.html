@@ -291,15 +291,15 @@
                         var _list = res.data.dataList;
                         for(var i = 0;i<_list.length;i++){
                             var _li = "<tr loginid='"+_list[i].id+"'>";
-                            _li+="<td>"+_list[i].startTime+"</td>"+
+                            _li+="<td>"+_list[i].createTime+"</td>"+
                                 "<td>"+_list[i].name+"</td>"+
-                                "<td>"+_list[i].incomingPartsChannel+"</td>"+
-                                "<td>"+_list[i].loanType+"</td>"+
-                                "<td>"+_list[i].management+"</td>"+
-                                "<td>"+_list[i].pushStatus+"</td>"+
+                                "<td>"+_list[i].paymentAccount+"</td>"+
+                                "<td>"+_list[i].businessTypeName+"</td>"+
+                                "<td>"+"工商银行"+"</td>"+
+                                "<td>"+_list[i].pushStatusName+"</td>"+
                                 "<td>"+_list[i].updateName +"</td>"+
                                 "<td>"+"暂无"+"</td>"+
-                                "<td>"+_list[i].status+"</td>"+
+                                "<td>"+_list[i].statusName+"</td>"+
                                 "<td>" +
                                 "<button type='button' onclick='managerApproveClick(&quot;6537686126979712001&quot;)' class='btn btn-primary btn-sm'>详情</button>" +
                                 "</td>"

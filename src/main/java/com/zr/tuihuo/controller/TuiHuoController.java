@@ -1,7 +1,6 @@
 package com.zr.tuihuo.controller;
 
 
-import com.zr.meiju.ReturnHandlingEnum;
 import com.zr.tuihuo.pojo.TuiHuoSelectVo;
 import com.zr.tuihuo.pojo.TuiHuoShowVo;
 import com.zr.tuihuo.service.TuiHuoService;
@@ -44,9 +43,12 @@ public class TuiHuoController {
         return tuiHuoService.updateTuiHuo(tuiHuoShowVo);
 
     }
-    /**
+/*
+    */
+/**
      * 状态下拉框
-     */
+     *//*
+
     @PostMapping("returnHandling/getPullDownList")
     public ResultVO<List<XiaLaVo>> queryXiaLa(){
         List<XiaLaVo> xiaLaVoList = new ArrayList<>();
@@ -60,6 +62,7 @@ public class TuiHuoController {
         }
         return ResultVOBuilder.success(xiaLaVoList);
     }
+*/
 
 
 }

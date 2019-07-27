@@ -4,9 +4,13 @@ import com.zr.loans.mapper.WodeshenpiMapper;
 import com.zr.loans.pojo.Loans;
 import com.zr.loans.pojo.WodeshenpiSelectVo;
 import com.zr.loans.service.WodeshenpiService;
+import com.zr.meiju.DaiKuanEnum;
+import com.zr.meiju.EnquiryStatus;
+import com.zr.meiju.TuiHuoEnum;
 import com.zr.util.AllRecords;
 import com.zr.util.ResultVO;
 import com.zr.util.ResultVOBuilder;
+import com.zr.util.StatusEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +25,12 @@ public class WodeshenpiServiceImpl implements WodeshenpiService {
     public ResultVO<AllRecords> queryPage(WodeshenpiSelectVo wodeshenpiSelectVo) {
         //查询数据
         List<Loans> loansituationList = wodeshenpiMapper.queryPage(wodeshenpiSelectVo);
+            for(Loans loans:loansituationList){
+                loans.setStatusName(StatusEnum.getstatusName(loans.getStatus()));
+                loans.setBusinessTypeName(DaiKuanEnum.getName(loans.getBusinessType()));
+                loans.setPushStatusName(EnquiryStatus.getName(loans.getPushStatus()));
+            }
+
 
         //查询数量
         int count =  wodeshenpiMapper.queryCount(wodeshenpiSelectVo);

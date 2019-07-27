@@ -30,6 +30,7 @@ public class Loans {
     private Integer myCourse;//我的课程——借款用途
     private String orderNum;//订单号
     private Integer status;//16个状态
+    private String statusName;//16个状态
     private String createName;//创建人
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;//创建时间
@@ -40,8 +41,10 @@ public class Loans {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date loansTime;//放款时间
     private Integer pushStatus;//推送状态
+    private String pushStatusName;//推送名称
     private Integer managementStatus;//推送状态
-    private Integer loanType;//贷款类型
+    private Integer businessType;//贷款类型
+    private String businessTypeName;//贷款名称
     private String managementNum;//资方申请编号
     private Double periodicContributions;//期供款
     private Integer contactNumber;//联系电话

@@ -284,13 +284,13 @@
                         var _list = res.data.dataList;
                         for(var i = 0;i<_list.length;i++){
                             var _li = "<tr loginid='"+_list[i].id+"'>";
-                            _li+="<td>"+_list[i].startTime+"</td>"+
+                            _li+="<td>"+_list[i].createTime+"</td>"+
                                 "<td>"+_list[i].name+"</td>"+
-                                "<td>"+_list[i].incomingPartsChannel+"</td>"+
-                                "<td>"+_list[i].loanType+"</td>"+
-                                "<td>"+_list[i].loanType+"</td>"+
-                                "<td>"+_list[i].pushStatus+"</td>"+
-                                "<td>"+_list[i].updateTime+"</td>"+
+                                "<td>"+_list[i].paymentAccount+"</td>"+
+                                "<td>"+_list[i].businessTypeName+"</td>"+
+                                "<td>"+"工商银行"+"</td>"+
+                                "<td>"+_list[i].pushStatusName+"</td>"+
+                                "<td>"+_list[i].updateName+"</td>"+
                                 "<td>"+"暂无"+"</td>"+
                                 "<td>" +
                                 "<button type='button' ssid="+_list[i].id+" data-id='6537686126979712001' class='btn btn-primary btn-sm shenpi' name='receiveOrderBtn'>审批</button>&nbsp;&nbsp;&nbsp;&nbsp; <button type='button' data-id='6537686126979712001' class='btn btn-primary btn-sm' name='resetBtn'>重置</button>" +

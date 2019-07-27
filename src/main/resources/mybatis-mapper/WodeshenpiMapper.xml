@@ -5,8 +5,13 @@
 
     <select id="queryPage" parameterType="com.zr.loans.pojo.WodeshenpiSelectVo" resultType="com.zr.loans.pojo.Loans">
         select
-        p.name,m.businessType,
-        p.updateName,p.status
+        p.name,
+        m.businessType,
+        p.createTime,
+        p.paymentAccount,
+        p.updateName,
+        p.status,
+        p.pushStatus
         FROM paydivide p join mechant m
         on p.mechant_id=m.id
         WHERE 1=1
