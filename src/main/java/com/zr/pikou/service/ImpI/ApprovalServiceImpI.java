@@ -90,6 +90,8 @@ public class ApprovalServiceImpI implements ApprovalService {
         for (Approval approval:approvalList){
             Integer deductionResults = approval.getDeductionResults()==true?0:1;
             approval.setStatusName(StatusEnum.getName(deductionResults));
+            //给银行卡赋值中文
+            approval.setBankName(BankCardEnum.getName(approval.getReimbursementAccountOpeningBank()));
         }
         //查询数量
         int count = approvalMapper.queryBySelectCount(queryBySelectVo);

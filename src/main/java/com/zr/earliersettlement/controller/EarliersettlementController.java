@@ -34,7 +34,7 @@ public class EarliersettlementController {
     /**
      * 分页查询
      */
-    @PostMapping("earliersettlement/queryPage")
+    @PostMapping("/earliersettlement/queryPage")
     public ResultVO<AllRecords> queryPage(@RequestBody EarliersettlementSelectVo earliersettlementSelectVo){
         return earliersettlementService.queryPage(earliersettlementSelectVo);
     }
@@ -42,7 +42,7 @@ public class EarliersettlementController {
     /**
      * 业务类型的枚举
      */
-    @GetMapping("earliersettlement/businessType")
+    @GetMapping("/earliersettlement/businessType")
     public ResultVO<List<XiaLaVo>> queryBusinessType(){
 
         List<XiaLaVo> xiaLaVoList = new ArrayList<>();
@@ -58,7 +58,7 @@ public class EarliersettlementController {
     /**
      * 状态下拉框
      */
-    @GetMapping("earliersettlement/xiala")
+    @GetMapping("/earliersettlement/xiala")
     public ResultVO<List<XiaLaVo>> queryXiaLa(){
 
         List<XiaLaVo> xiaLaVoList = new ArrayList<>();
@@ -72,7 +72,7 @@ public class EarliersettlementController {
     }
 
     //    资方状态----下拉
-    @PostMapping("earliersettlement/queryAll")
+    @PostMapping("/earliersettlement/queryAll")
     public ResultVO queryAll(){
         return earliersettlementService.queryAll();
     }

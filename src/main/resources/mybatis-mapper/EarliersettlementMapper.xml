@@ -11,20 +11,23 @@
                 and e.idCode =#{idCode}
             </if>
 
+            <if test="orderNum!=null and orderNum!=''">
+                and e.orderNum =#{orderNum}
+            </if>
             <if test="phone!=null and phone!=''">
                 and e.phone =#{phone}
             </if>
 
-            <if test="name!=null and name!=''">
+          <!--  <if test="name!=null and name!=''">
                 and p.name =#{name}
-            </if>
+            </if>-->
 
             <if test="orderStatus!=null">
                 and e.orderStatus =#{orderStatus}
             </if>
-            <if test="capitalSide!=null and capitalSide!=''">
+           <!-- <if test="capitalSide!=null and capitalSide!=''">
                 and rc.capitalSide =#{capitalSide}
-            </if>
+            </if>-->
         </where>
         limit #{offset},#{pageSize}
     </select>
@@ -32,26 +35,29 @@
     <!--总条数-->
     <select id="queryCount" parameterType="com.zr.earliersettlement.pojo.EarliersettlementSelectVo" resultType="java.lang.Integer">
         select count(*)
-        FROM earliersettlement
+        FROM earliersettlement e
         <where>
             <if test="idCode!=null and idCode!=''">
                 and e.idCode =#{idCode}
+            </if>
+            <if test="orderNum!=null and orderNum!=''">
+                and e.orderNum =#{orderNum}
             </if>
 
             <if test="phone!=null and phone!=''">
                 and e.phone =#{phone}
             </if>
 
-            <if test="name!=null and name!=''">
+          <!--  <if test="name!=null and name!=''">
                 and p.name =#{name}
             </if>
-
+-->
             <if test="orderStatus!=null">
                 and e.orderStatus =#{orderStatus}
             </if>
-            <if test="capitalSide!=null and capitalSide!=''">
+           <!-- <if test="capitalSide!=null and capitalSide!=''">
                 and rc.capitalSide =#{capitalSide}
-            </if>
+            </if>-->
         </where>
     </select>
     <select id="queryByIdCodes" parameterType="java.util.List" resultType="com.zr.earliersettlement.pojo.EarliersettlementShowVo">

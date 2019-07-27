@@ -82,44 +82,60 @@
         </ol>
         <div id="loanDetail" class="col-lg-12 col-md-12 col-sm-12">
             <div class="col-lg-3 col-md-3 col-sm-3"><span class="wd_60">身份证号&nbsp;&nbsp;</span><input type="text" id="idCardNo"></div>
-            <div class="col-lg-3 col-md-3 col-sm-3"><span class="wd_60">姓名&nbsp;&nbsp;</span><input type="text" id="idName"></div>
-            <div class="col-lg-3 col-md-3 col-sm-3"><span class="wd_60">渠道名称&nbsp;&nbsp;</span><input type="text" id="bcName"></div>
+            <div class="col-lg-3 col-md-3 col-sm-3"><span class="wd_60">银行订单号&nbsp;&nbsp;</span><input type="text" id="idName"></div>
+            <!--<div class="col-lg-3 col-md-3 col-sm-3"><span class="wd_60">渠道名称&nbsp;&nbsp;</span><input type="text" id="bcName"></div>
             <div class="col-lg-3 col-md-3 col-sm-3"><span class="wd_60">业务类型&nbsp;&nbsp;</span>
                 <select id="sourceType">
-                   <!-- <option value="">-&#45;&#45;请选择-&#45;&#45;</option>
+                   &lt;!&ndash; <option value="">-&#45;&#45;请选择-&#45;&#45;</option>
                     <option value="1">教育</option>
                     <option value="2">租房</option>
                     <option value="4">数码</option>
-                    <option value="3">碧水源</option>-->
+                    <option value="3">碧水源</option>&ndash;&gt;
                 </select>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-3"><span class="wd_60">贷款状态&nbsp;&nbsp;</span>
-                <select id="loanStatus">
+            </div>-->
 
+            <div class="col-lg-3 col-md-3 col-sm-3"><span class="wd_60">联系方式&nbsp;&nbsp;</span>
+                <input type="text" id="phoneNo"></div>
+            <div class="col-lg-3 col-md-3 col-sm-3"><span class="wd_60">订单状态&nbsp;&nbsp;</span>
+                <select id="loanStatus">
                 </select>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-3"><span class="wd_60">联系方式&nbsp;&nbsp;</span><input type="text" id="phoneNo"></div>
-            <div class="col-lg-3 col-md-3 col-sm-3"><span class="wd_60">放款时间(开始)&nbsp;&nbsp;</span><input type="text" id="lendingDateStart" value="" placeholder="请选择时间" readonly=""></div>
-            <div class="col-lg-3 col-md-3 col-sm-3"><span class="wd_60">放款时间(结束)&nbsp;&nbsp;</span><input type="text" id="lendingDateEnd" value="" placeholder="请选择时间" readonly=""></div>
-            <div class="col-lg-3 col-md-3 col-sm-3"><span class="wd_60">资方&nbsp;&nbsp;</span><select id="fundSource">
-                <!--<option value="">请选择</option><option value="1">北银</option><option value="14">91金融</option><option value="13">沃付分期</option><option value="22">医美</option><option value="30">苏宁</option><option value="100">mini循环贷</option><option value="3">海尔教育</option><option value="4">安信小贷</option><option value="5">百度</option><option value="7">海尔租房</option><option value="8">华融</option><option value="11">贷鱼教育</option><option value="15">湖北消费金融</option><option value="16">91旺财</option><option value="18">晋商租房</option><option value="17">晋商教育</option>-->
+            <!--<div class="col-lg-3 col-md-3 col-sm-3"><span class="wd_60">放款时间(开始)&nbsp;&nbsp;</span>
+                <input type="text" id="lendingDateStart" value="" placeholder="请选择时间" readonly=""></div>
+            <div class="col-lg-3 col-md-3 col-sm-3"><span class="wd_60">放款时间(结束)&nbsp;&nbsp;
+            </span><input type="text" id="lendingDateEnd" value="" placeholder="请选择时间" readonly=""></div>-->
+            <!--<div class="col-lg-3 col-md-3 col-sm-3"><span class="wd_60">资方&nbsp;&nbsp;</span><select id="fundSource">
+                &lt;!&ndash;<option value="">请选择</option><option value="1">北银</option><option value="14">91金融</option><option value="13">沃付分期</option><option value="22">医美</option><option value="30">苏宁</option><option value="100">mini循环贷</option><option value="3">海尔教育</option><option value="4">安信小贷</option><option value="5">百度</option><option value="7">海尔租房</option><option value="8">华融</option><option value="11">贷鱼教育</option><option value="15">湖北消费金融</option><option value="16">91旺财</option><option value="18">晋商租房</option><option value="17">晋商教育</option>&ndash;&gt;
             </select></div>
             <div class="col-lg-3 col-md-3 col-sm-3 c13"><span class="wd_60">结清日期(开始)&nbsp;&nbsp;</span><input type="text" id="applyDateStart" value="2019-05-20 00:00:00" placeholder="请选择时间" readonly=""></div>
             <div class="col-lg-3 col-md-3 col-sm-3 c13"><span class="wd_60">结清日期(结束)&nbsp;&nbsp;</span><input type="text" id="applyDateEnd" value="2019-05-20 23:59:59" placeholder="请选择时间" readonly=""></div>
             <div class="col-lg-3 col-md-3 col-sm-3">
 
-            </div>
+            </div>-->
             <div class="col-lg-3 col-md-3 col-sm-3 ta_r">
                 <button class="btn btn-primary btn-sm search_btn" type="button" id="btn-search">查询</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <button class="btn btn-primary btn-sm search_btn mr_25" type="button" id="btn-export" onclick="exportResult();">导出</button>
+                <button class="btn btn-primary btn-sm search_btn mr_25" type="button" id="btn-export" onclick="exportExcel();">导出</button>
             </div>
             <div class="clear"></div>
         </div>
         <div class="table-responsive">
-            <div id="lendingList_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer"><div class="top"><div class="clear"></div></div><div id="lendingList_processing" class="dataTables_processing panel panel-default" style="display: none;">处理中...</div><table id="lendingList" style="overflow: auto; width: 2998px;" class="table table-bordered table-striped table-hover bg_wt dataTable no-footer" role="grid" aria-describedby="lendingList_info">
+            <div id="lendingList_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                <div class="top"><div class="clear"></div></div>
+                <div id="lendingList_processing" class="dataTables_processing panel panel-default" style="display: none;">处理中...</div>
+                <table id="lendingList" style="overflow: auto; width: 1139px;"
+                       class="table table-bordered table-striped table-hover bg_wt dataTable no-footer" role="grid"
+                       aria-describedby="lendingList_info">
                 <thead style="border-bottom: 0;background-color: #fff;">
-                <tr role="row"><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 94px;">业务类型</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 94px;">订单编号</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 94px;">结清日期</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 94px;">放款日期</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 53px;">资方</th><th class="text-center fs_13 sorting_disabled" style="width: 120px" rowspan="1" colspan="1">渠道</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 94px;">客户姓名</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 114px;">身份证号码</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 94px;">申请金额</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 94px;">申请期数</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 73px;">期供款</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 94px;">剩余期数</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 115px;">已还款金额</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 73px;">滞纳金</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 53px;">罚息</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 53px;">复利</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 115px;">逾期管理费</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 94px;">逾期天数</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 94px;">逾期期数</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 115px;">退贴息金额</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 53px;">利率</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 177px;">商户应退贷鱼金额</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 177px;">贷鱼应退资方金额</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 136px;">资方放款金额</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 136px;">贷鱼放款金额</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 54px;">状态</th></tr>
+                <tr role="row">
+                    <th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 171px;">银行订单号</th>
+                    <th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 171px;">结清金额</th>
+                    <th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 171px;">身份证号</th>
+                    <th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 171px;">手机号</th>
+                    <th class="text-center fs_13 sorting_disabled" style="width: 171px" rowspan="1" colspan="1">手续费</th>
+                    <th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 171px;">罚息</th>
+                    <th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 171px;">订单状态</th>
+                </tr>
                 </thead>
                 <tbody>
                 </tbody>
@@ -153,13 +169,16 @@
                 _list = res.data;
                 $.each(_list,function(index,ele){
 
-                    var optionTd = $("<option></option>").attr("value",ele.key).append(ele.value)
+                    var optionTd = $("<option></option>").attr("value",ele.value).append(ele.label);
 
                     $("#sourceType").append(optionTd)
                 })
             }
         })
     })
+    function exportExcel(){
+        $.get(urlPath+"/earliersettlement/master");
+    }
     $(function(){
         $.ajax({
             type: 'get',
@@ -169,7 +188,7 @@
             success: function (res) {
                 _list = res.data;
                 $.each(_list,function(index,ele){
-                    var optionTd = $("<option></option>").attr("value",ele.key).append(ele.value)
+                    var optionTd = $("<option></option>").attr("value",ele.value).append(ele.label);
                     $("#loanStatus").append(optionTd)
                 })
             }
@@ -202,29 +221,22 @@
         if(_page!=""){
             var tmp={
                 "idCode":idCode,
-                "customerName":customerName,
-                "channelName":channelName,
-                "businessType":businessType,
-                "statusName":statusName,
+                "orderNum":customerName,
+                "orderStatusName":statusName,
                 "phone":phone,
-                "managemen":managemen,
                 "pageIndex":_page,
                 "pageSize":1
             };
         }else{
             var tmp={
                 "idCode":idCode,
-                "customerName":customerName,
-                "channelName":channelName,
-                "businessType":businessType,
-                "statusName":statusName,
+                "orderNum":customerName,
+                "orderStatusName":statusName,
                 "phone":phone,
-                "managemen":managemen,
                 "pageIndex":0,
                 "pageSize":1
             };
         }
-
 
         $.ajax({
             type: 'POST',
@@ -242,33 +254,15 @@
                     }
                     for(var i = 0;i<_list.length;i++){
                         _html+="<tr>"+
-                            "<td>"+_list[i].businessType+"</td>"+
                             "<td>"+_list[i].orderNum+"</td>"+
-                            "<td>"+_list[i].settleTime+"</td>"+
-                            "<td>"+_list[i].loanTime+"</td>"+
-                            "<td>"+_list[i].managemen+"</td>"+
-                            "<td>"+_list[i].channel+"</td>"+
-                            "<td>"+_list[i].customerName+"</td>"+
-                            "<td>"+_list[i].idCode+"</td>"+
                             "<td>"+_list[i].shenQingAmount+"</td>"+
-                            "<td>"+_list[i].shenQingNum+"</td>"+
-                            "<td>"+_list[i].qiGongKuan+"</td>"+
-                            "<td>"+_list[i].surplusNum+"</td>"+
-                            "<td>"+_list[i].yiHuanAmount+"</td>"+
-                            "<td>"+_list[i].zhinaAmount+"</td>"+
+                            "<td>"+_list[i].idCode+"</td>"+
+                            "<td>"+_list[i].phone+"</td>"+
+                            "<td>"+_list[i].serviceCharge+"</td>"+
                             "<td>"+_list[i].penaltyInterest+"</td>"+
-                            "<td>"+_list[i].compoundInterest+"</td>"+
-                            "<td>"+_list[i].yuQiAmount+"</td>"+
-                            "<td>"+_list[i].yuQiDay+"</td>"+
-                            "<td>"+_list[i].yuQiPeriods+"</td>"+
-                            "<td>"+_list[i].amountOfRefundinterest+"</td>"+
-                            "<td>"+_list[i].interestRate+"</td>"+
-                            "<td>"+_list[i].merchantTuiDaiYuAmount+"</td>"+
-                            "<td>"+_list[i].daiYuTuiZiFangAmount+"</td>"+
-                            "<td>"+_list[i].managemenLoanAmount+"</td>"+
-                            "<td>"+_list[i].DaiYuLoanAmount+"</td>"+
-                            "<td>"+_list[i].statusName+"</td>";
-                        _html+="<tr/>";
+                            "<td>"+_list[i].orderStatusName+"</td>";
+
+                        _html+="</tr>";
                     }
                     $("#lendingList tbody").html(_html);
 

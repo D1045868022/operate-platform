@@ -62,7 +62,7 @@ public class ApprovalController {
     /**
      * 是否可批扣下拉框
      */
-    @GetMapping("/pikouDropdownBox")
+    @GetMapping("/pikou/isApprovalSpinner")
     public ResultVO<List<XiaLaVo>> queryZhiYe(){
         List<XiaLaVo> xiaLaVoList = new ArrayList<>();
         IsApprovalEnum[] arr = IsApprovalEnum.values();

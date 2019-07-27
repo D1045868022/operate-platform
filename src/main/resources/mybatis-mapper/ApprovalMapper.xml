@@ -28,6 +28,7 @@
             <if test="deductionResults!=null">
                 and deductionResults=#{deductionResults}
             </if>
+
             <if test="approvalChannel!=null and approvalChannel!=''">
                 and approvalChannel=#{approvalChannel}
             </if>
@@ -105,15 +106,21 @@
     <select id="queryBySelectPage" parameterType="com.zr.pikou.pojo.QueryBySelectVo"
             resultType="com.zr.pikou.pojo.Approval">
         SELECT
-        createTime,loanContractNum,customerName,
+        createTime,loanContractNum,customerName,reimbursementAccountOpeningBank,paymentAccount,
         idCode,deductible,issuanceOfWithholdingTime,deductionResults
         FROM approval
         <where>
             <if test="loanContractNum!=null and loanContractNum!=''">
                 and loanContractNum=#{loanContractNum}
             </if>
+            <if test="paymentAccount!=null and paymentAccount!=''">
+                and paymentAccount=#{paymentAccount}
+            </if>
             <if test="deductionResults!=null">
                 and deductionResults=#{deductionResults}
+            </if>
+            <if test="reimbursementAccountOpeningBank!=null">
+                and reimbursementAccountOpeningBank=#{reimbursementAccountOpeningBank}
             </if>
             and status=0 or status=1
         </where>
@@ -131,6 +138,12 @@
             </if>
             <if test="deductionResults!=null">
                 and deductionResults=#{deductionResults}
+            </if>
+            <if test="paymentAccount!=null and paymentAccount!=''">
+                and paymentAccount=#{paymentAccount}
+            </if>
+            <if test="reimbursementAccountOpeningBank!=null">
+                and reimbursementAccountOpeningBank=#{reimbursementAccountOpeningBank}
             </if>
             and status=0 or status=1
         </where>

@@ -89,20 +89,20 @@
             </ol>
             <div id="loanDetail" class="col-lg-12 col-md-12 col-sm-12">
 
-                <div class="col-lg-3 col-md-3 col-sm-3"><span class="wd_60">流水号&nbsp;&nbsp;</span><input type="text" id="thdSeq"></div>
+               <!-- <div class="col-lg-3 col-md-3 col-sm-3"><span class="wd_60">流水号&nbsp;&nbsp;</span><input type="text" id="thdSeq"></div>-->
                 <div class="col-lg-3 col-md-3 col-sm-3"><span class="wd_60">合同号&nbsp;&nbsp;</span><input type="text" id="loanContNo"></div>
-                <div class="col-lg-3 col-md-3 col-sm-3"><span class="wd_60">交易日期&nbsp;&nbsp;</span><input type="text" id="applyDateStart2" value="2019-05-22" placeholder="请选择时间" readonly=""></div>
-                <div class="col-lg-3 col-md-3 col-sm-3"><span class="wd_60">批扣状态&nbsp;&nbsp;</span>
+                <div class="col-lg-3 col-md-3 col-sm-3"><span class="wd_60">交易日期&nbsp;&nbsp;</span><input type="text" id="applyDateStart2" value="2019-05-22" placeholder="请选择时间" ></div>
+            <!--    <div class="col-lg-3 col-md-3 col-sm-3"><span class="wd_60">批扣状态&nbsp;&nbsp;</span>
                     <select id="paySts" name="deductionStatus">
                        <option value="">-&#45;&#45;请选择-&#45;&#45;</option>
-                        <!--<option value="00">待发送</option>
+                        &lt;!&ndash;<option value="00">待发送</option>
                        <option value="02">扣款中</option>
                        <option value="03">代扣成功</option>
                        <option value="04">代扣失败</option>
                        <option value="05">JD签约中</option>
                        <option value="06">JD签约失败</option>
-                       <option value="07">JD签约成功</option>-->
-                    </select></div>
+                       <option value="07">JD签约成功</option>&ndash;&gt;
+                    </select></div>-->
                 <div class="col-lg-3 col-md-3 col-sm-3">
 
                 </div>
@@ -112,10 +112,35 @@
                 <div class="clear"></div>
             </div>
             <div class="table-responsive">
-                <div id="sendDetailList_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer"><div class="top"><div class="clear"></div></div><div id="sendDetailList_processing" class="dataTables_processing panel panel-default" style="display: none;">处理中...</div>
+                <div id="sendDetailList_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer"><div class="top"><div class="clear"></div>
+                </div><div id="sendDetailList_processing" class="dataTables_processing panel panel-default" style="display: none;">处理中...</div>
                     <table id="sendDetailList" style="width: 100%;" class="table table-bordered table-striped table-hover bg_wt dataTable no-footer" role="grid" aria-describedby="sendDetailList_info">
                         <thead style="border-bottom: 0;background-color: #fff;">
-                            <tr role="row"><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 144px;">代扣流水号</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 72px;">生成日期</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 144px;">贷款合同号</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 52px;">客户姓名</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 136px;">证件号</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 42px;">应扣款</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 121px;">发出代扣时间</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 121px;">收到代扣时间</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 53px;">扣款状态</th><th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 105px;">扣款结果</th></tr>
+                            <tr role="row">
+                                <th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 134px;">
+                                    贷款合同号
+                                </th>
+                                <th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 40px;">
+                                    客户姓名
+                                </th>
+                                <th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 127px;">
+                                    证件号
+                                </th>
+                                <th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 46px;">
+                                    应扣款
+                                </th>
+                                <th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 68px;">
+                                    还款账户开户行
+                                </th>
+                                <th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 134px;">
+                                    还款账号
+                                </th>
+                                <th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 99px;">
+                                    发出代扣时间
+                                </th>
+                                <th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 73px;">
+                                    扣款结果
+                                </th>
                         </thead>
                         <tbody id="tbody"><!--<tr role="row" class="odd"><td>6536635612895642625</td><td>2019-05-22</td><td>6460777522599560193</td><td>秦文进</td><td>140931199412020039</td><td>1680</td><td>2019-5-22 12:16:15</td><td>2019-5-22 12:16:15</td><td>601</td><td></td></tr><tr role="row" class="even"><td>6536636411239465985</td><td>2019-05-22</td><td>6460777522599560193</td><td>秦文进</td><td>140931199412020039</td><td>1680</td><td>2019-5-22 12:19:25</td><td>2019-5-22 12:19:37</td><td>还款成功</td><td>微信支付还款成功</td></tr><tr role="row" class="odd"><td>6536649002816898049</td><td>2019-05-22</td><td>6473880122542785537</td><td>叶锦程</td><td>35021219931112202X</td><td>448.5</td><td>2019-5-22 01:09:27</td><td>2019-5-22 01:09:35</td><td>还款成功</td><td>微信支付还款成功</td></tr><tr role="row" class="even"><td>6536700731679835137</td><td>2019-05-22</td><td>6427755259014153217</td><td>张科举</td><td>370681198711080627</td><td>750</td><td>2019-5-22 04:35:00</td><td>2019-5-22 04:35:12</td><td>还款成功</td><td>微信支付还款成功</td></tr><tr role="row" class="odd"><td>6536735460554703873</td><td>2019-05-22</td><td>6473010528211960833</td><td>李强</td><td>510521198909165858</td><td>830</td><td>2019-5-22 06:53:00</td><td>2019-5-22 06:53:15</td><td>还款成功</td><td>微信支付还款成功</td></tr><tr role="row" class="even"><td>6536736976896263169</td><td>2019-05-22</td><td>6482431810675409921</td><td>姜竹杰</td><td>371624199910063676</td><td>198</td><td>2019-5-22 06:59:02</td><td>2019-5-22 06:59:14</td><td>还款成功</td><td>微信支付还款成功</td></tr><tr role="row" class="odd"><td>6536750015741690881</td><td>2019-05-22</td><td>6418031609719555073</td><td>周海洋</td><td>420528199608312516</td><td>373.5</td><td>2019-5-22 07:50:51</td><td>2019-5-22 07:50:59</td><td>还款成功</td><td>微信支付还款成功</td></tr><tr role="row" class="even"><td>6536756915908641793</td><td>2019-05-22</td><td>6483708982639723521</td><td>蔡杰伟</td><td>441522199801097973</td><td>253.83</td><td>2019-5-22 08:18:16</td><td>2019-5-22 08:20:06</td><td>还款成功</td><td>微信支付还款成功</td></tr><tr role="row" class="odd"><td>6536760974875034625</td><td>2019-05-22</td><td>6525905482204316673</td><td>苏世豪</td><td>362301199609180011</td><td>1848</td><td>2019-5-22 08:34:24</td><td>2019-5-22 08:34:33</td><td>还款成功</td><td>微信支付还款成功</td></tr><tr role="row" class="even"><td>6536762150563611649</td><td>2019-05-22</td><td>6516895933963174913</td><td>马倩</td><td>430304198509122069</td><td>1497</td><td>2019-5-22 08:39:04</td><td>2019-5-22 08:39:12</td><td>还款成功</td><td>微信支付还款成功</td></tr>-->
 
@@ -290,7 +315,7 @@
 
     })
 
-    /* 查询所有下拉框 */
+   /* /!* 查询所有下拉框 *!/
     function queryDeductionStatusAll() {
         $.ajax({
             type: 'GET',
@@ -307,7 +332,7 @@
                 })
             }
         })
-    }
+    }*/
 
     /*多条件分页查询*/
     function queryBySelect(pageIndex) {
@@ -320,7 +345,7 @@
         var pageSize = 4; // 每页记录数
         var tmp={
             "thdSeq":daiKouNum,
-            "loanContNo":daiKuanHetongNum,
+            "loanContractNum":daiKuanHetongNum,
             "applyDateStart2":createTime,
             "deductionStatus":deductionStatus,
             "pageIndex":pageIndex,
@@ -346,16 +371,14 @@
 
                     for(var i = 0;i<_list.length;i++){
                         _html+="<tr>"+
-                            "<td>"+_list[i].daiKouNum+"</td>"+
-                            "<td>"+_list[i].createTime+"</td>"+
-                            "<td>"+_list[i].daiKuanHetongNum+"</td>"+
-                            "<td>"+_list[i].customerName+"</td>"+
-                            "<td>"+_list[i].idCode+"</td>"+
-                            "<td>"+_list[i].deductible+"</td>"+
-                            "<td>"+_list[i].issuanceOfWithholdingTime+"</td>"+
-                            "<td>"+_list[i].deductionTimeReceived+"</td>"+
-                            "<td>"+_list[i].deductionStatusName+"</td>"+
-                            "<td>"+_list[i].deductionResultsName+"</td>";
+                        "<td>" + _list[i].loanContractNum + "</td>" +
+                        "<td>" + _list[i].customerName + "</td>" +
+                        "<td>" + _list[i].idCode + "</td>" +
+                        "<td>" + _list[i].deductible + "</td>" +
+                        "<td>" + _list[i].bankName + "</td>" +
+                        "<td>" + _list[i].paymentAccount + "</td>" +
+                        "<td>" + _list[i].issuanceOfWithholdingTime + "</td>" +
+                        "<td>" + _list[i].statusName + "</td>";
                         _html+="<tr/>";
                     }
                     $("#tbody").html(_html);
@@ -372,9 +395,24 @@
     $("#btn-search").on("click",function(){
         queryBySelect(1)
     })
-
     //分页点击事件
-    /*$(".common_page").on("click","a",function(){
+    $(".btn-search").on("click", "a", function () {
+        console.log($(this));
+        $(this).addClass("active");
+        $(this).siblings().removeClass("active");
+        var _index = parseInt($(this).attr("page"));
+        if (_index == 1) {
+            $(".prev_page").attr("disabled", "disabled");
+        } else {
+            $(".prev_page").attr("page", _index - 1);
+            $(".last_page").attr("page", _index + 1);
+        }
+        var _page = $(this).attr("page");
+        _search(_page)
+    })
+
+   /* //分页点击事件
+    $(".common_page").on("click","a",function(){
         $(this).addClass("active");
         $(this).siblings().removeClass("active");
         var _index = parseInt($(this).attr("page"));

@@ -79,7 +79,7 @@ public ResultVO<AllRecords> queryPage(@RequestBody TenantSelectVo tenantSelectVo
 //2.从数据库中查询出将要导出的数据
 //3.把从数据库中查询出的数据赋值给导出模板
 //4.对需要转化的数据进行转化
-//5.在浏览器生成一个文件
+//5.在浏览器生成一个文件  
 @GetMapping("tenant/master")
 public ResultVO exportTenantExcel(HttpServletResponse resp,String merchant,Date startTime,Date endTime ) throws Exception{
     TenantSelectVo tenantSelectVo=new TenantSelectVo();
