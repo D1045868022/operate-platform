@@ -2,6 +2,7 @@ package com.zr.bangka.mapper;
 
 
 import com.zr.bangka.pojo.*;
+import com.zr.earliersettlement.pojo.Earliersettlement;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -49,6 +50,8 @@ public interface BangKaMapper {
     int deleteYinHang(YinHangVo yinHangVo);
 
     int addYinHang(YinHangVo yinHangVo);
+
+    List<BangKaVo> queryBySelectVo(BangKaSelectVo bangKaSelectVo);
 }
 
 

@@ -10,7 +10,7 @@ public class BangKaVo {
 
     private Integer id;// 绑卡Id
 
-    private  String ustomerName;//客户名称
+    private  String customerName;//客户名称
 
     private  String phone;//预留手机号
 
@@ -18,7 +18,7 @@ public class BangKaVo {
 
     private  Integer bankCardType;//银行卡类型
 
-    private  String BankTypeName;//银行卡类型名字
+    private  String bankTypeName;//银行卡类型名字
 
     private  String idCode;//身份证号
 

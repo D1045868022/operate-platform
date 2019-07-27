@@ -16,7 +16,7 @@ public class BangKaSelectVo extends PageVo {
 
     private  Integer bankCardType;//银行卡类型
 
-    private  String BankTypeName;//银行卡类型名字
+    private  String bankTypeName;//银行卡类型名字
 
     private Boolean cardStatus;//卡状态
 

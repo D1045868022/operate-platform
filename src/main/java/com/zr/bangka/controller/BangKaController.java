@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -71,4 +72,24 @@ public class BangKaController {
     public ResultVO yinhang(@RequestBody YinHangVo yinHangVo){
         return bangKaService.yinhang(yinHangVo);
     }
+    /**  导出
+     1.定义一个导出模板
+     2.从数据库中查询出将要导出的数据
+     3.把从数据库中查询出的数据赋值给导出模板
+     4.对需要转化的数据进行转化
+     5.在浏览器生成一个文件*/
+    @GetMapping("/bangka/master")
+    public ResultVO exportExcel(HttpServletResponse resp,  String customerName, String phone,
+                                String bankCard, Integer bankCardType, Integer yanZhengStatus, Boolean cardStatus) throws Exception{
+        BangKaSelectVo bangKaSelectVo = new BangKaSelectVo();
+        bangKaSelectVo.setCustomerName(customerName);
+        bangKaSelectVo.setPhone(phone);
+        bangKaSelectVo.setBankCard(bankCard);
+        bangKaSelectVo.setBankCardType(bankCardType);
+        bangKaSelectVo.setYanZhengStatus(yanZhengStatus);
+        bangKaSelectVo.setCardStatus(cardStatus);
+        return bangKaService.exportExcel(resp,bangKaSelectVo);
+    }
 }
+
+
