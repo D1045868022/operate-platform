@@ -100,5 +100,34 @@
             #{item.name}, #{item.bankCardAccount},#{item.idCode}
         </foreach>
     </insert>
+
+    <select id="queryBySelectVo" parameterType="com.zr.bangka.pojo.BangKaSelectVo"
+            resultType="com.zr.bangka.pojo.BangKaVo">
+        select customerName,phone ,bankCard,bankCardType,
+        cardStatus,yanZhengStatus
+        FROM bangka
+
+        <where>
+
+        <if test="customerName!=null and customerName!=''">
+            and customerName =#{customerName}
+        </if>
+
+        <if test="bankCard!=null and bankCard!=''">
+            and bankCard =#{bankCard}
+        </if>
+        <if test="phone!=null and phone!=''">
+            and phone =#{phone}
+        </if>
+
+        <if test="cardStatus!=null ">
+            and cardStatus =#{cardStatus}
+        </if>
+
+        <if test="yanZhengStatus!=null">
+            and yanZhengStatus =#{yanZhengStatus}
+        </if>
+    </where>
+    </select>
 </mapper>
 

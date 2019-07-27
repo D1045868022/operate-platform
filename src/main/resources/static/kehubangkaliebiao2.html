@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>客户绑卡页面</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/base.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/layer.css" rel="stylesheet">
+    <script src="js/main.js"></script>
+
+    <link href="css/pagination.css" rel="stylesheet">
+    <link href="css/bootstrap-datetimepicker.css" rel="stylesheet">
+    <link href="css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="css/jedate.css" rel="stylesheet">
+    <style>
+        #loanDetail{
+            background-color: #fff;
+            margin-bottom: 15px;
+        }
+        #loanDetail p{
+            padding-left:0 ;
+            padding-right: 0;
+            margin: 6px 0 ;
+        }
+        #loanDetail .wd_60{
+            display: inline-block;
+            width: 102px;
+            text-align: right;
+            font-size: 12px;
+            font-family: "微软雅黑";
+        }
+        #loanDetail .c13 .wd_60{
+            float: left;
+            margin-top: 5px;
+        }
+        #loanDetail .c13 input{
+            float: left;
+            font-size: 12px;
+            font-family: "微软雅黑";
+        }
+        #loanDetail .col-lg-3 ,#loanDetail .c13{
+            margin:5px 0;
+            padding-left:5px;
+            padding-right: 5px;
+        }
+
+        #loanDetail select option{
+            font-size: 12px;
+            font-family: "微软雅黑";
+        }
+        .search_btn {
+            font-size: 12px;
+            background-color: #09C;
+            padding: 5px 16px;
+            margin-top: 3px;
+            margin-bottom: 5px;
+        }
+        .ta_r{
+            text-align: right;
+        }
+        .mr_25{
+            margin-right: 25px;
+        }
+        .cardSelect{
+            border: 1px solid #ddd;
+            height: 25px;
+            width: 150px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content1" href="">
+    <div class="hui"><img src="images/ajax-loader.gif"></div>
+    <div class="content">
+        <!--面包屑导航start-->
+        <ol class="breadcrumb">
+            <li class="active">客户绑卡列表查询</li>
+        </ol>
+        <div id="loanDetail" class="col-lg-12 col-md-12 col-sm-12">
+            <div class="col-lg-3 col-md-3 col-sm-3"><span class="wd_60">客户名称&nbsp;&nbsp;</span><input type="text" id="idCardNo"></div>
+            <div class="col-lg-3 col-md-3 col-sm-3"><span class="wd_60">预留手机号&nbsp;&nbsp;</span><input type="text" id="idName"></div>
+            <div class="col-lg-3 col-md-3 col-sm-3"><span class="wd_60">银行卡号&nbsp;&nbsp;</span>
+                <input type="text" id="phoneNo"></div>
+            <div class="col-lg-3 col-md-3 col-sm-3"><span class="wd_60">验证状态&nbsp;&nbsp;</span>
+                <select id="loanStatus">
+                </select>
+            </div>
+			 <div class="col-lg-3 col-md-3 col-sm-3"><span class="wd_60">卡状态&nbsp;&nbsp;</span>
+                <select id="lcol-lg-3 col-md-3 col-sm-3oanStatus1">
+                </select>
+            </div>
+		 
+            <div class="col-lg-3 col-md-3 col-sm-3 ta_r">
+                <button class="btn btn-primary btn-sm search_btn" type="button" id="btn-search">查询</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button class="btn btn-primary btn-sm search_btn mr_25" type="button" id="btn-export" onclick="exportExcel();">导出</button>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="table-responsive">
+            <div id="lendingList_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                <div class="top"><div class="clear"></div></div>
+                <div id="lendingList_processing" class="dataTables_processing panel panel-default" style="display: none;">处理中...</div>
+                <table id="lendingList" style="overflow: auto; width: 1139px;"
+                       class="table table-bordered table-striped table-hover bg_wt dataTable no-footer" role="grid"
+                       aria-describedby="lendingList_info">
+                <thead style="border-bottom: 0;background-color: #fff;">
+                <tr role="row">
+                    <th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 171px;">客户姓名</th>
+                    <th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 171px;">手机号</th>
+                    <th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 171px;">银行卡号</th>
+                    <th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 171px;">银行卡类型</th>
+                    <th class="text-center fs_13 sorting_disabled" style="width: 171px" rowspan="1" colspan="1">验证状态</th>
+                    <th class="text-center fs_13 sorting_disabled" rowspan="1" colspan="1" style="width: 171px;">卡状态</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            </div>
+            <div class="bottom">
+                <div class="dataTables_info" id="bizList_info" role="status" aria-live="polite">
+
+                </div>
+                <div class="common_page"></div>
+
+                <div class="clear"></div>
+            </div>
+        </div>
+        <!--正文内容end-->
+    </div>
+    </div>
+</body>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/jedate.min.js"></script>
+    <script src="js/common.js"></script>
+<script>
+    function exportExcel(){
+        $.get(urlPath+"/bangka/master");
+    }
+
+    function _search(_page) {
+        var customerName,phone,businessType,status,phone,managemen,pageIndex,pageSize;
+        idCode = $("#idCardNo").val();
+        customerName = $("#idName").val();
+        channelName = $("#bcName").val();
+        businessType = $("#sourceType").val();
+        statusName = $("#loanStatus").val();
+        statusName = $("#loanStatus1").val();
+        phone = $("#phoneNo").val();
+        managemen = $("#fundSource").val();
+        if(_page!=""){
+            var tmp={
+                "customerName":idCode,
+                "phone":customerName,
+                "bankCard":statusName,
+                "bankTypeName":phone,
+                "yanZhengStatusName":phone,
+                "cardStatusName":phone,
+                "pageIndex":_page,
+                "pageSize":1
+            };
+        }else{
+            var tmp={
+                "customerName":idCode,
+                "phone":customerName,
+                "bankCard":statusName,
+                "bankTypeName":phone,
+                "yanZhengStatusName":phone,
+                "cardStatusName":phone,
+                "pageIndex":0,
+                "pageSize":1
+            };
+        }
+
+
+
+        $.ajax({
+            type: 'POST',
+            url: urlPath+'bangka/queryPage',
+            dataType: 'JSON',
+            data: JSON.stringify(tmp),
+            contentType: "application/json;charset=utf-8",
+            success: function (res) {
+                _list = res.data.dataList;
+                var _html = "";
+                if(res.success){
+                    $("#bizList_info").html("当前是第"+res.data.pageIndex+"页，共"+res.data.totalPage+"页")
+                    if(_list.length>0){
+                        page(2,1);
+                    }
+                    for(var i = 0;i<_list.length;i++){
+                        _html+="<tr>"+
+                            "<td>"+_list[i].customerName+"</td>"+
+                            "<td>"+_list[i].phone+"</td>"+
+                            "<td>"+_list[i].bankCard+"</td>"+
+                            "<td>"+_list[i].bankTypeName+"</td>"+
+                            "<td>"+_list[i].yanZhengStatusName+"</td>"+
+                            "<td>"+_list[i].cardStatusName+"</td>";
+                        _html+="</tr>";
+                    }
+                    $("#lendingList tbody").html(_html);
+
+                }else{
+                    console.log(res.errorMessage);
+                }
+            }
+        })
+    }
+    _search()
+
+    //分页点击事件
+    $(".common_page").on("click","a",function(){
+        console.log($(this));
+        $(this).addClass("active");
+        $(this).siblings().removeClass("active");
+        var _index = parseInt($(this).attr("page"));
+        if(_index==1){
+            $(".prev_page").attr("disabled","disabled");
+        }else{
+            $(".prev_page").attr("page",_index-1);
+            $(".last_page").attr("page",_index+1);
+        }
+        var _page = $(this).attr("page");
+        _search(_page)
+    })
+
+    //多条件查询点击事件
+    $("#btn-search").on("click",function(){
+        _search()
+    })
+</script>
+</html>

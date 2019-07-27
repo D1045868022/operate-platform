@@ -8,6 +8,7 @@ import com.zr.bangka.pojo.YinHangVo;
 import com.zr.util.AllRecords;
 import com.zr.util.ResultVO;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 public interface BangKaService {
@@ -22,4 +23,6 @@ public interface BangKaService {
     ResultVO send(BangKaShowVo bangKaShowVo);
 
     ResultVO yinhang(YinHangVo yinHangVo);
+
+    ResultVO exportExcel(HttpServletResponse resp, BangKaSelectVo bangKaSelectVo) throws Exception;
 }
