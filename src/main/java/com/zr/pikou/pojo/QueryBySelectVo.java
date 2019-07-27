@@ -31,6 +31,12 @@ public class QueryBySelectVo extends PageVo {
 
         private Integer status;
 
+    private Integer reimbursementAccountOpeningBank;//还款账户开户行
+
+    private String paymentAccount;//还款银行账号
+
+    private String BankName;//还款账户开户行名称
+
 }
 
 

@@ -9,8 +9,6 @@ import com.zr.earliersettlement.pojo.Riskreserve_Capitalside;
 import com.zr.earliersettlement.service.EarliersettlementService;
 import com.zr.meiju.OrderNumEnum;
 import com.zr.util.*;
-import com.zr.xinshenstatistics.util.ResultBuildVo;
-import com.zr.xinshenstatistics.util.ResultVo;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -97,7 +95,7 @@ public class EarliersettlementServiceImpl implements EarliersettlementService {
         //给输出文件设置名称
         POIClass.toPackageOs(response, "提前结清模板");
         //读取模板中的数据
-        InputStream in = ExportUtil.toPackageIn("/提前结清.xlsx");
+        InputStream in = ExportUtil.toPackageIn("templates/提前结清.xlsx");
         //根据模板的数据、把查询出来的数据给摸版SHeet1组中的数据赋值、把excel输出到浏览器上
         writeDataToExcel(in, "Sheet1", earliersettlementList, out);
         if (in != null) {
