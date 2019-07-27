@@ -71,7 +71,7 @@
             #{item.idCode},#{item.phone},#{item.overdueAmount},#{item.createTime},#{item.penaltyInterest},#{item.principalRepayment},#{item.interestPayable}
         </foreach>
     </insert>
-    <select id="queryBySelectVo" parameterType="com.zr.xuezhu.overdue.pojo.OverdueSelectVo" resultType="com.zr.xuezhu.overdue.pojo.OverdueSelectVo">
+    <select id="queryBySelectVo" parameterType="com.zr.yuqiliebiao.pojo.Overduelist" resultType="com.zr.yuqiliebiao.pojo.Overduelist">
         select
         p.name
         m.merchantName,
