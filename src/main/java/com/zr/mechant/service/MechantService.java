@@ -16,7 +16,7 @@ public interface MechantService {
 
 
     ResultVO<AllRecords> queryPage(MechantSelectVo mechantSelectVo);
-    ResultVO addMechant(MechantAddVo mechantAddVo);
+    ResultVO addMechant(MechantAddVo mechantAddVo)throws Exception;
     ResultVO updateMechant(MechantUpdateVo mechantUpdateVo);
     ResultVO queryMechantAll(Integer id);
 

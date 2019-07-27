@@ -18,22 +18,26 @@ public interface MechantMapper {
 
     //查询数据库数据
     List<MechantInfo> queryPage(MechantSelectVo mechantSelectVo);
-    //添加8张表
-    @Insert("insert into mechant (mechantInvitationcode,merchantName,merchantLegalPerson,merchantAddress,merchantDesc,foreignPhone,phone,createTime,createName,updateTime,updateName) value (#{mechantInvitationcode},#{merchantName},#{merchantLegalPerson},#{merchantAddress},#{merchantDesc},#{foreignPhone},#{phone},#{createTime},#{createName},#{updateTime},#{updateName})")
+
+    @Insert("insert into mechant (merchantName,merchantLegalPerson,merchantAddress,merchantDesc,foreignPhone,phone," +
+            "businessType,mechantInvitationcode,isornocontract,setlimitMoney,status,bankCard,affiliatedBank,mailbox," +
+            "province,jointLineNumber,LenderName,lenderAddress,lenderPhone,bankCity,mechanismType,mechantaccount,mechantpassword," +
+            "isStore,education,renting,digital,blueWaterSource,huaBei,monthlyRentPayment,maintenancestaff,accountType,accountName" +
+            ",openBank,bankAccount,advanceDays,oneRate,rate,createTime,createName,updateTime,updateName) value " +
+            "(#{merchantName},#{merchantLegalPerson},#{merchantAddress},#{merchantDesc},#{foreignPhone}," +
+            "#{phone},#{businessType},#{mechantInvitationcode},#{isornocontract},#{setlimitMoney},#{status},#{bankCard},#{affiliatedBank},#{mailbox},#{province}," +
+            "#{jointLineNumber},#{LenderName},#{lenderAddress},#{lenderPhone},#{bankCity},#{mechanismType},#{mechantaccount},#{mechantpassword},#{isStore}," +
+            "#{education}," +
+            "#{renting},#{digital},#{blueWaterSource},#{huaBei},#{monthlyRentPayment},#{maintenancestaff},#{accountType}" +
+            ",#{accountName},#{openBank},#{bankAccount},#{advanceDays}," +
+            "#{oneRate},#{rate},#{createTime},#{createName},#{updateTime},#{updateName})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
-    int addMechant(Mechant mechant);
+    int addMechant(MechantAddVo mechantAddVo);
 
     int addMp(List<Mechant_Pic> mp);
 
-   @Insert("insert into mechant_configure (mechantaccount,mechantpassword,mechanismType,landingAccount,landingPassword,type,isStore,isCreateStore,channelMaintenance,isAddHousingResources,isDeduction,isGrantAuthorization,isActiveRepayment,education,renting,digital,blueWaterSource,huaBei,medicalBeauty,monthlyRentPayment,apartmentType)" +
-                                   " value(#{mechantaccount},#{mechantpassword},#{mechanismType},#{landingAccount},#{landingPassword},#{type},#{isStore},#{isCreateStore},#{channelMaintenance},#{isAddHousingResources},#{isDeduction},#{isGrantAuthorization},#{isActiveRepayment},#{education},#{renting},#{digital},#{blueWaterSource},#{huaBei},#{medicalBeauty},#{monthlyRentPayment},#{apartmentType}) ")
-    int addMc(Mechant_Configure mc);
 
     int addMs(List<Mechant_SpeedProgress> ms);
-
-    @Insert("insert into mechant_capital (accountType,accountName,openBank,bankAccount,advanceDays,oneRate,rate)" +
-            " value(#{accountType},#{accountName},#{openBank},#{bankAccount},#{advanceDays},#{oneRate},#{rate}) ")
-    int addMca(Merchant_Capital mca);
 
     @Insert("insert into mechant_generatinginformation (bankCard,affiliatedBank,mailbox,province,jointLineNumber,LenderName,lenderAddress,lenderPhone,bankCity,createTime,createName,updateTime,updateName)" +
             " value(#{bankCard},#{affiliatedBank},#{mailbox},#{province},#{jointLineNumber},#{lenderName},#{lenderAddress},#{lenderPhone},#{bankCity},#{createTime},#{createName},#{updateTime},#{updateName}) ")
@@ -43,7 +47,6 @@ public interface MechantMapper {
             " value(#{zhifubaoAccount},#{zhifubaoPid}) ")
     int addMz(Mechant_ZhiFuBao mz);
 
-    int addMo( List<Mechant_Other> mo);
 
     //根据id查询
     @Select("select merchantName from mechant where id=#{id}")

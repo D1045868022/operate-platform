@@ -22,6 +22,6 @@ public class Mechant_Pic {
 //    @NotNull(message = "结束时间不能为空")
 //    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date  endTime;
-    private Integer picId;
+    private String picId;
     private Integer mechantId;//外键
 }

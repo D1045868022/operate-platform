@@ -63,5 +63,8 @@ public class CapitalController {
     public ResultVO overdueList(@RequestBody List<OverdueListSelectVo> overdueListSelectVo){
         return capitalService.overdueList(overdueListSelectVo);
     }
+    /**
+     * 逾期列表分页查询
+     */
 
 }

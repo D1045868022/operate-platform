@@ -18,10 +18,10 @@ public class SendRepaymentMessage {
 
     private Integer numberOfPeriods;
 
-    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "Asia/Shanghai")
     private Date deductionDate;
 
-    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "Asia/Shanghai")
     private Date deliveryTime;
 
     private Integer sendingStatus;

@@ -9,7 +9,7 @@ import java.util.Date;
 @Data
 public class SendMessageSelectVo extends PageVo {
 
-    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "Asia/Shanghai")
     private Date deliveryTime;
 
 }

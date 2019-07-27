@@ -13,6 +13,27 @@ import java.util.List;
  */
 @Data
 public class MechantAddVo {
+    //商户信息录入
+    private Integer id;
+    @NotBlank(message = "商户名称不能为空")
+    private String merchantName;
+    @NotBlank(message = "商户法人不能为空")
+    private String merchantLegalPerson;
+    @NotBlank(message = "商户地址不能为空")
+    private String merchantAddress;
+    @NotBlank(message = "商户描述不能为空")
+    private String merchantDesc;
+    @NotBlank(message = "对外电话不能为空")
+    private String foreignPhone;
+    @NotBlank(message = "电话不能为空")
+    private String phone;
+
+    @NotBlank(message = "商户邀请码不能为空")
+    private String mechantInvitationcode;//商户邀请码，四位不重复数字
+    private String businessType;//业务类型
+    private String setlimitMoney;//设置上限金额
+    private String status;//商户状态
+
     //生成合同信息
     @NotNull(message = "请填写卡号")
     private String bankCard;//银行卡号
@@ -45,11 +66,14 @@ public class MechantAddVo {
     private Integer type;//商户类型名称
     @NotNull(message = "是否有门店不能为空")
     private Integer isStore;//是否有门店
-    private Integer isDeduction;//商户标识
-//    @NotNull(message = "至少要勾选一项")
-//    private List<Integer> deductionList;//商户标识多选框
-    @NotNull(message = "至少要选择一个")
-    private Integer channelMaintenance;//渠道维护 商务姓名
+    @NotNull(message = "渠道维护不能为空")
+    private Integer maintenancestaff;//渠道维护 商务姓名
+    private Integer education;//教育
+    private Integer renting;//租房
+    private Integer digital;//数码
+    private Integer blueWaterSource;//碧水源
+    private Integer huaBei;//花呗',
+    private Integer monthlyRentPayment;//房租月付
 
 
     //客户打款信息
@@ -67,22 +91,7 @@ public class MechantAddVo {
     @NotBlank(message = "费率不能为空")
     private String rate;//费率
 
-    //商户信息录入
-    private Integer id;
-    @NotBlank(message = "商户名称不能为空")
-    private String merchantName;
-    @NotBlank(message = "商户法人不能为空")
-    private String merchantLegalPerson;
-    @NotBlank(message = "商户地址不能为空")
-    private String merchantAddress;
-    @NotBlank(message = "商户描述不能为空")
-    private String merchantDesc;
-    @NotBlank(message = "对外电话不能为空")
-    private String foreignPhone;
-    @NotBlank(message = "电话不能为空")
-    private String phone;
-    @NotBlank(message = "商户邀请码不能为空")
-    private String mechantInvitationcode;//商户邀请码，四位不重复数字
+
     private Date createTime;
     private String createName;
     private Date updateTime;

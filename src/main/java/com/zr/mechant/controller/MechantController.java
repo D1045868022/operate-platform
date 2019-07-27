@@ -44,7 +44,7 @@ public class MechantController {
      */
     @PostMapping("mechantCategory/add")
 
-    public ResultVO addMechant(@RequestBody @Valid MechantAddVo mechantAddVo, BindingResult bindingResult) {
+    public ResultVO addMechant(@RequestBody @Valid MechantAddVo mechantAddVo, BindingResult bindingResult)throws Exception{
         if (bindingResult.hasErrors()) {
             return ResultVOBuilder.error(bindingResult.getFieldError().getDefaultMessage(), "500");
         }

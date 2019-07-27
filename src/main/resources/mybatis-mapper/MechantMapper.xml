@@ -2,48 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zr.mechant.mapper.MechantMapper">
     <select id="queryPage" parameterType="com.zr.mechant.model.MechantSelectVo" resultType="com.zr.mechant.model.MechantInfo">
-        select
-        m.merchantName,m.merchantAddress,
-        m.businessType,
-        co.channelMaintenance,ca.advanceDays,
-        ca.oneRate,p.status
-        from
-        mechant m
-        join  mechant_configure co
-        on m.id=co.mechant_id
-        join mechant_capital ca
-        on m.id=ca.mechant_id
-        join userlogin u
-        on m.mechantInvitationcode=u.invitationCode
-        join paydivide p
-        on p.loginId=p.loginId
+        select m.*,ms.mainStaff maintenancestaffName from mechant m LEFT JOIN maintenancestaff ms ON  m.maintenancestaff = ms.id
         where 1=1
         <if test="merchantName != null and merchantName != ''">
-            and merchantName=#{merchantName}
+            and m.merchantName=#{merchantName}
         </if>
         <if test="channelMaintenance != null">
-            and channelMaintenance=#{channelMaintenance}
+            and m.channelMaintenance=#{channelMaintenance}
         </if>
         <if test="status != null">
-            and status=#{status}
+            and m.status=#{status}
         </if>
         limit #{offset},#{pageSize}
     </select>
 
     <!--总条数-->
     <select id="queryCount" parameterType="com.zr.mechant.model.MechantSelectVo" resultType="java.lang.Integer">
-        select
-        count(p.id)
-        from
-        mechant m
-        join  mechant_configure co
-        on m.id=co.mechant_id
-        join mechant_capital ca
-        on m.id=ca.mechant_id
-        join userlogin u
-        on m.mechantInvitationcode=u.invitationCode
-        join paydivide p
-        on p.loginId=p.loginId
+        select count(id) from mechant
         where 1=1
         <if test="merchantName != null and merchantName != ''">
             and merchantName=#{merchantName}
@@ -58,15 +33,9 @@
 
     <!--批量添加-->
     <insert id="addMp" parameterType="java.util.List">
-        insert into mechant_Pic (startTime,endTime) VALUES
+        insert into mechant_Pic (startTime,endTime,picId) VALUES
         <foreach collection="list" item="item" open="(" separator="),(" close=")">
-            #{item.startTime},#{item.endTime}
-        </foreach>
-    </insert>
-    <insert id="addMo" parameterType="java.util.List">
-        insert into mechant_Other (pic) VALUES
-        <foreach collection="list" item="item" open="(" separator="),(" close=")">
-            #{item.pic}
+            #{item.startTime},#{item.endTime},#{item.picId}
         </foreach>
     </insert>
 
