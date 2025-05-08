@@ -64,7 +64,7 @@
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
-			<version>3.16-beta2</version>
+			<version>5.4.0</version>
 		</dependency>
 		<!-- jstl -->
 		<dependency>
@@ -89,7 +89,7 @@
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
-			<version>3.16-beta2</version>
+			<version>5.4.0</version>
 		</dependency>
 
 		<dependency>
@@ -141,7 +141,7 @@
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
-			<version>3.16-beta2</version>
+			<version>5.4.0</version>
 		</dependency>
 
 		<dependency>
@@ -187,7 +187,7 @@
 	<dependency>
 		<groupId>org.apache.poi</groupId>
 		<artifactId>poi-ooxml</artifactId>
-		<version>3.16-beta2</version>
+		<version>5.4.0</version>
 	</dependency>
 	<dependency>
 		<groupId>org.projectlombok</groupId>
